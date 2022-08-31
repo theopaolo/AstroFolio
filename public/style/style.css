@@ -1,0 +1,18 @@
+/* Register our custom font family and tell the browser where to find it. */
+@font-face {
+  font-family: 'Fragment sans';
+  src: url('/fonts/ppfragment-sansregular-webfont.woff') format('woff'),
+       url('/fonts/ppfragment-sansregular-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fragment glare';
+  src: url('/fonts/ppfragment-glareregular-webfont.woff') format('woff'),
+       url('/fonts/ppfragment-glareregular-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

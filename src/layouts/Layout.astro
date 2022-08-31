@@ -11,9 +11,10 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="./style/style.css">
 		<title>{title}</title>
 	</head>
-	<body class="container mx-auto">
+	<body class="2xl:container 2xl:mx-auto py-4 md:mx-4 mx-2 ">
 		<slot />
 	</body>
 </html>
