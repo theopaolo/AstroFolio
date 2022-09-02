@@ -1,6 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Project from '../components/Project.astro';
+import gsImg from '../images/green-shoots.png';
+import wppImg from '../images/worldpressphoto2021.png';
+import nhImg from '../images/nicolasherman.png';
+import skpImg from '../images/saffronkitchenproject.png';
+
 ---
 
 <Layout title="Théo Paolo Goedert">
@@ -18,21 +23,25 @@ import Project from '../components/Project.astro';
 					href="http://green-shoots.eu/"
 					title="2022 - GreenShoots"
 					body="Online exhibition for 2019 photo contest"
+          image= {gsImg}
 				/>
 				<Project
 					href="https://worldpressphoto2021.org/"
 					title="2021- WorldPressPhoto"
 					body="Online exhibition for 2019 photo contest"
+          image={wppImg}
 				/>
 				<Project
 					href="http://nicolashermann.com/"
 					title="2022 - Nicola Hermann Portfolio"
 					body="Inmersive expérience for a photographer portfolio"
+          image={nhImg}
 				/>
 				<Project
 					href="https://www.saffronkitchenproject.org/"
 					title="2021 - Saffron Kitchen Project colorfull website"
 					body="Colorfull website for an NGO helping migrants in Grece"
+          image={skpImg}
 				/>
 			</ul>
 		</section>
