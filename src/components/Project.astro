@@ -11,9 +11,9 @@ export interface Props {
 const { href, title, body, image} = Astro.props;
 ---
 
-<li class="border-b border-black hover:bg-stone-900 hover:text-white p-1">
+<li class="border-b border-black">
 	<a class="project items-center" href={href} target="_blank">
-		<div class="cover mr-4" >
+		<div class="cover" >
 			<Image src={image} height={100} alt={title} aspectRatio="16:9"/>
 		</div>
 		<div class="description py-8">

@@ -31,5 +31,6 @@
 
 .project:hover .cover{
   transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  flex-basis: 200px;
+  flex-basis: 180px;
+  margin-right: 1rem;
 }
