@@ -9,48 +9,74 @@ import skpImg from '../images/saffronkitchenproject.png';
 ---
 
 <Layout title="Théo Paolo Goedert">
-	<main>
-		<h1 class="text-dynamicxl mb-12 font-serif">Bonjour, moi c’est Théo Paolo, développeur et designer web.</h1>
 
-		<p class="mb-6 text-dynamic">Dans l'union code et design j'entretiens une dynamique de compétences techniques, formelles et conceptuelles qui alimentent mes collaborations professionnelles.</p>
-		<p class="mb-12 text-dynamic">J'aime donner formes aux envies ou besoins  d'indépendants, artistes, PME, association et institutions.</p>
+  <header class="max-w-screen-lg mb-24">
+    <h1 class="text-dynamicxl mb-12 font-serif">Bonjour, moi c’est Théo Paolo, développeur et designer web.</h1>
+    <p class="mb-6 text-dynamic">Dans l'union code et design j'entretiens une dynamique de compétences techniques, formelles et conceptuelles qui alimentent mes collaborations professionnelles.</p>
+    <p class="text-dynamic">J'aime donner formes aux envies ou besoins  d'indépendants, artistes, PME, association et institutions.</p>
+  </header>
 
+  <main>
+    <section  class="mb-24">
     <h2 class="mb-8 text-dynamicl font-serif">Project récents</h2>
-		<section  class="mb-8">
+      <ul role="list" class="flex flex-col border-t border-black">
+          <Project
+            href="https://www.saffronkitchenproject.org/"
+            title="2021 - Saffron Kitchen Project"
+            body="Site web coloré pour une ONG qui propose des solutions afin d'aider des communautés vulnérables en Grèce."
+            image={skpImg}
+          />
+          <Project
+            href="http://green-shoots.eu/"
+            title="2022 - GreenShoots"
+            body="Site web eco-conçu pour des initiatives environnementales soutenant la mise en œuvre du Green Deal européen"
+            image= {gsImg}
+          />
+          <Project
+            href="https://worldpressphoto2021.org/"
+            title="2021- WorldPressPhoto"
+            body="Exposition en ligne pour le concours WorldPressPhoto 2019."
+            image={wppImg}
+          />
+          <Project
+            href="http://nicolashermann.com/"
+            title="2022 - Nicola Hermann Portfolio"
+            body="Expérience immersive en webgl pour le portfolio du photographe Nicolas Herman"
+            image={nhImg}
+          />
+        </ul>
+      </section>
+      </main>
 
-			<ul role="list" class="flex flex-col border-t border-black">
-				<Project
-					href="http://green-shoots.eu/"
-					title="2022 - GreenShoots"
-					body="Online exhibition for 2019 photo contest"
-          image= {gsImg}
-				/>
-				<Project
-					href="https://worldpressphoto2021.org/"
-					title="2021- WorldPressPhoto"
-					body="Online exhibition for 2019 photo contest"
-          image={wppImg}
-				/>
-				<Project
-					href="http://nicolashermann.com/"
-					title="2022 - Nicola Hermann Portfolio"
-					body="Inmersive expérience for a photographer portfolio"
-          image={nhImg}
-				/>
-				<Project
-					href="https://www.saffronkitchenproject.org/"
-					title="2021 - Saffron Kitchen Project colorfull website"
-					body="Colorfull website for an NGO helping migrants in Grece"
-          image={skpImg}
-				/>
-			</ul>
-		</section>
+		<footer class="flex flex-wrap border-t border-black pt-4">
+      <section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+        <p class="text-2xl font-serif">Expertises</p>
+        <ul>
+          <li>Direction artistique de projets web.</li>
+          <li>Développement et design web créatif.</li>
+          <li>Eco-conception de site web.</li>
+        </ul>
+      </section>
 
-		<div>
-			<p class="text-2xl font-serif">Me contacter</p>
-			<a href="https://twitter.com/theo_goedert" target="_blank">twitter</a>
-			<a href="https://www.instagram.com/theogoedert/" target="_blank">instagram</a>
-			<p class="text-base">Actuellement disponible pour des missions pédagogique et professionels.</p>
-		</div>
-	</main>
+      <section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+        <p class="text-2xl font-serif">Stack</p>
+        <ul>
+          <li>JS frameworks : Vue.js, Nuxt, Svelte</li>
+          <li>Créative tools : Threejs, Webgl, P5js</li>
+          <li>Static site generators : 11ty, Astro</li>
+          <li>CMS's: Kirby, Strapi, Prismic, Netlify cms</li>
+        </ul>
+      </section>
+      <section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+        <p class="text-2xl font-serif">Intérêts</p>
+        <p>Design spéculatif et science fiction, L’arts numérique, DJ’ing en live et sur radiozai.com, Photographie
+        </p>
+      </section>
+			<section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+        <p class="text-2xl font-serif">Me contacter</p>
+        <a href="https://twitter.com/theo_goedert" target="_blank">twitter</a>
+        <a href="https://www.instagram.com/theogoedert/" target="_blank">instagram</a>
+        <p class="text-base">Actuellement disponible pour des missions pédagogique et professionels.</p>
+      </section>
+		</footer>
 </Layout>
