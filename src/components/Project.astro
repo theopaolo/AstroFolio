@@ -12,8 +12,8 @@ const { href, title, body, image} = Astro.props;
 ---
 
 <li class="border-b border-black">
-	<a class="project items-center" href={href} target="_blank">
-		<div class="cover mr-4" >
+	<a class="project items-center md:flex" href={href} target="_blank">
+		<div class="cover mr-4 mt-4 md:mt-0" >
 			<Image src={image} height={100} alt={title} aspectRatio="16:9"/>
 		</div>
 		<div class="description py-8">

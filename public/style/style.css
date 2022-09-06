@@ -19,7 +19,6 @@
 
 .project {
   transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  display: flex;
   flex-direction: row;
 }
 
