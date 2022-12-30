@@ -5,7 +5,6 @@ import gsImg from '../images/green-shoots.png';
 import wppImg from '../images/worldpressphoto2021.png';
 import nhImg from '../images/nicolasherman.png';
 import skpImg from '../images/saffronkitchenproject.png';
-
 ---
 
 <Layout title="Théo Paolo Goedert">
@@ -13,13 +12,15 @@ import skpImg from '../images/saffronkitchenproject.png';
   <header class="max-w-screen-lg mb-24">
     <h1 class="text-dynamicxl mb-12 font-serif">Bonjour, moi c’est Théo Paolo, développeur et designer web.</h1>
     <p class="mb-6 text-dynamic">Dans l'union code et design j'entretiens une dynamique de compétences techniques, formelles et conceptuelles qui alimentent mes collaborations professionnelles.</p>
-    <p class="text-dynamic">J'aime donner forme aux envies ou besoins  d'indépendants, artistes, PME, associations et institutions.</p>
+    <p class="text-dynamic mb-12">J'aime donner forme aux envies ou besoins  d'indépendants, artistes, PME, associations et institutions.</p>
+    <p>Disponible pour du consulting et des missions courtes.</p>
+    <button></button>
   </header>
 
   <main>
     <section  class="mb-24">
     <h2 class="mb-8 text-dynamicl font-serif">Projets récents</h2>
-      <ul role="list" class="flex flex-col border-t border-black">
+      <ul role="list" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Project
             href="https://www.saffronkitchenproject.org/"
             title="2021 - Saffron Kitchen Project"
@@ -48,8 +49,8 @@ import skpImg from '../images/saffronkitchenproject.png';
       </section>
       </main>
 
-		<footer class="flex flex-wrap border-t border-black pt-8">
-      <section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+		<footer class="grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 border-t border-black pt-8">
+      <section class="w-full mb-8">
         <p class="text-2xl font-serif">Expertises</p>
         <ul>
           <li>Direction artistique de projets web</li>
@@ -58,7 +59,7 @@ import skpImg from '../images/saffronkitchenproject.png';
         </ul>
       </section>
 
-      <section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+      <section class="w-full mb-8">
         <p class="text-2xl font-serif">Stack</p>
         <ul>
           <li>JS frameworks : Vue.js, Nuxt, Alpine.js</li>
@@ -67,16 +68,66 @@ import skpImg from '../images/saffronkitchenproject.png';
           <li>CMS's : Kirby, Strapi, Prismic, Netlify cms</li>
         </ul>
       </section>
-      <section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+      <section class="w-full mb-8">
         <p class="text-2xl font-serif">Intérêts</p>
         <p>Design spéculatif et science-fiction, l'Art numérique, DJ’ing en live et sur radiozai.com, photographie
         </p>
       </section>
-			<section class="w-full lg:w-1/3 2xl:w-1/4 mb-8">
+			<section class="w-full mb-8">
         <p class="text-2xl font-serif">Me contacter</p>
         <a href="https://twitter.com/theo_goedert" target="_blank">Twitter</a>
         <a href="https://www.instagram.com/theogoedert/" target="_blank">Instagram</a>
         <p class="text-base mt-4">Actuellement disponible pour des missions pédagogiques et professionelles</p>
       </section>
 		</footer>
+
+    <script>
+      import { animate, stagger, inView} from "motion"
+
+      const animeProp = {
+        transform: ["translateX(100px)", "translateX(0px)"],
+        opacity: 1
+      }
+      const animeOptions = {
+        duration: 3,
+        easing: [0.165, 0.84, 0.44, 1],
+        delay: stagger(0.2),
+      }
+
+      animate(
+        'header *',
+        animeProp,
+        animeOptions
+      )
+
+      inView('main', ({ target }) => {
+        animate(
+        target.querySelectorAll("ul .card-container"),
+          {
+            opacity: 1,
+            transform: ["translateX(100px)", "translateX(0px)"],
+          },
+          {
+            delay: stagger(0.2),
+            duration: 0.8,
+            easing: [.445, .05, .55, .95]
+          }
+        )
+      })
+
+      inView('footer', ({ target }) => {
+        animate(
+        target.querySelectorAll("footer section"),
+          {
+            opacity: 1,
+            transform: ["translateX(100px)", "translateX(0px)"],
+          },
+          {
+            delay: stagger(0.2),
+            duration: 0.8,
+            easing: [.445, .05, .55, .95]
+          }
+        )
+      })
+    </script>
 </Layout>

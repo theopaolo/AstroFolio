@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components';
+import { Picture } from '@astrojs/image/components';
 
 export interface Props {
 	title: string;
@@ -11,18 +11,19 @@ export interface Props {
 const { href, title, body, image} = Astro.props;
 ---
 
-<li class="border-b border-black">
-	<a class="project items-center md:flex" href={href} target="_blank">
-		<div class="cover mr-4 mt-4 md:mt-0" >
-			<Image src={image} height={100} alt={title} aspectRatio="16:9"/>
+<li class="rounded-lg card-container">
+	<a class="project items-center relative block" href={href} target="_blank">
+		<div class="cover rounded-lg card-front" >
+			<Picture src={image} alt={title} widths={[200, 400, 600]} fit="cover" sizes="(max-width: 767px) 100vw, 736px" aspectRatio="1:1"/>
 		</div>
-		<div class="description py-8">
-			<h3 class="text-2xl">
+		<div class="description p-4 rounded-lg card-back bg-black text-white">
+			<h3 class="text-4xl mb-4">
 				{title}
 			</h3>
-			<p class="text-base">
+			<p class="text-2xl mb-4">
 				{body}
 			</p>
+			<button>Visiter</button>
 		</div>
 	</a>
 </li>
