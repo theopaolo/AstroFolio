@@ -57,6 +57,13 @@ cubic-bezier(0.455, 0.03, 0.515, 0.955)
   transform: translateX(-100%) rotateY(-180deg);
 }
 
+/* .card-container:hover .cover,
+.card-container:focus-within .cover {
+  filter: blur(64px);
+  scale: 1.5;
+} */
+
+
 .card-front,
 .card-back {
   top: 0;
@@ -117,11 +124,6 @@ cubic-bezier(0.455, 0.03, 0.515, 0.955)
 .card-container:focus-within .card-back button {
   transition-delay: .8s;
   opacity: 1;
-}
-
-.card-back button:hover {
-  color: #000;
-  background-color: #FFF;
 }
 
 footer section {
