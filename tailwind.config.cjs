@@ -11,6 +11,8 @@ module.exports = {
         fluidxl: ['clamp(2.5rem, 10vw, 4.5rem)', '1'],
         fluidl: ['clamp(1.25rem, 10vw, 3rem)', '1'],
         fluidbase: ['clamp(1rem, 10vw, 2.25rem)', '1.2'],
+        fluidsm: ['clamp(1rem, 10vw, 1.25rem)', '1.2'],
+
       },
     },
 	},

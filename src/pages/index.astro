@@ -6,7 +6,7 @@ import ProjecstList from '../components/ProjectsList.astro'
 
 <Layout title="Théo Paolo Goedert" description="Théo Goedert fait des choses en web et code avec un passion pour l'art et la tech.">
 
-  <header class="grid grid h-screen">
+  <header class="grid col-span-full md:col-span-6">
     <h1 class="text-fluidbase font-serif mb-4">Bonjour, moi c’est Théo, développeur et designer web.</h1>
     <section class="flex flex-col justify-end">
       <p class="text-lg">Dans l'union code et design j'entretiens une dynamique de compétences techniques, formelles et conceptuelles qui alimentent mes collaborations professionnelles.</p>
@@ -14,20 +14,20 @@ import ProjecstList from '../components/ProjectsList.astro'
     </section>
   </header>
 
-  <main>
-    <section  class="mb-8">
-      <nav class="flex gap-8">
-        <HeaderLink href="/blog" class="text-fluidbase">Journal</HeaderLink>
-      </nav>
-    </section>
+  <nav class="flex gap-4 col-span-full md:col-span-1 md:col-end-12">
+    <HeaderLink href="/" class="text-fluidsm">Index</HeaderLink>
+    <HeaderLink href="/blog" class="text-fluidsm">Journal</HeaderLink>
+    <HeaderLink href="/about" class="text-fluidsm">About</HeaderLink>
+  </nav>
 
+  <main class="col-span-full mt-8">
     <section>
-      <h2 class="mb-8 text-fluidbase font-serif">Sélection de projets</h2>
+      <h2 class="mb-8 text-fluidbase font-serif text-center">Sélection de projets</h2>
       <ProjecstList>
     </section>
   </main>
 
-    <footer class="grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 border-t border-black pt-8 mt-24">
+    <footer class="col-span-full grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 border-t border-black pt-8 mt-24">
       <article class="w-full mb-4">
         <p class="text-xl font-serif">Expertises</p>
         <ul>
@@ -63,7 +63,7 @@ import ProjecstList from '../components/ProjectsList.astro'
 
       const animeProp = {
         opacity: 1,
-        transform: ['translateY(64px)', 'translateY(0px)']
+        // transform: ['translateY(64px)', 'translateY(0px)']
       }
       const animeOptions = {
         duration: 3,
