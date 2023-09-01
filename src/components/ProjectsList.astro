@@ -1,0 +1,41 @@
+---
+import Project from './Project.astro';
+import gsImg from '../assets/images/green-shoots.png';
+import wppImg from '../assets/images/worldpressphoto2021.png';
+import nhImg from '../assets/images/nicolasherman.png';
+import skpImg from '../assets/images/saffronkitchenproject.png';
+import esaaixImg from '../assets/images/esaaix.png';
+---
+<ul role="list" class="relative w-full grid grid-cols-3 gap-4">
+<!-- <ul role="list" class="relative w-full flex gap-4 overflow-x-auto snap-x"> -->
+    <Project
+      href="https://www.saffronkitchenproject.org/"
+      title="2021 - Saffron Kitchen Project"
+      body="Site web coloré pour une ONG qui propose des solutions afin d'aider des communautés vulnérables en Grèce"
+      image={skpImg}
+    />
+    <Project
+      href="https://worldpressphoto2021.org/"
+      title="2021- WorldPressPhoto"
+      body="Exposition en ligne pour le concours WorldPressPhoto 2019"
+      image={wppImg}
+    />
+    <Project
+      href="http://green-shoots.eu/"
+      title="2022 - GreenShoots"
+      body="Site web eco-conçu pour des initiatives environnementales soutenant la mise en œuvre du Green Deal européen"
+      image= {gsImg}
+    />
+    <Project
+      href="http://nicolashermann.com/"
+      title="2022 - Nicola Hermann Portfolio"
+      body="Expérience immersive en webgl pour le portfolio du photographe Nicolas Herman"
+      image={nhImg}
+    />
+    <Project
+      href="http://esaaix.fr"
+      title="2021 - ESAAIX"
+      body="Site et webdesign pour l'École d'Art d'Aix-en-Provence"
+      image={esaaixImg}
+    />
+  </ul>

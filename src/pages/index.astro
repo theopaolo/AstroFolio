@@ -1,81 +1,61 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Project from '../components/Project.astro';
-import gsImg from '../images/green-shoots.png';
-import wppImg from '../images/worldpressphoto2021.png';
-import nhImg from '../images/nicolasherman.png';
-import skpImg from '../images/saffronkitchenproject.png';
+import HeaderLink from '../components/HeaderLink.astro';
+import ProjecstList from '../components/ProjectsList.astro'
 ---
 
-<Layout title="Théo Paolo Goedert">
+<Layout title="Théo Paolo Goedert" description="Théo Goedert fait des choses en web et code avec un passion pour l'art et la tech.">
 
-  <header class="max-w-screen-lg container mx-auto mb-12 md:mb-44 mt-12 md:mt-32">
-    <h1 class="text-dynamicxl mb-12 md:mb-32 font-serif">Bonjour, moi c’est Théo, développeur et designer web.</h1>
-    <p class="text-2xl md:text-dynamic mb-6">Dans l'union code et design j'entretiens une dynamique de compétences techniques, formelles et conceptuelles qui alimentent mes collaborations professionnelles.</p>
-    <p class="text-2xl md:text-dynamic mb-12">J'aime donner forme aux envies ou besoins  d'indépendants, artistes, PME, associations et institutions.</p>
+  <header class="grid grid h-screen">
+    <h1 class="text-fluidbase font-serif mb-4">Bonjour, moi c’est Théo, développeur et designer web.</h1>
+    <section class="flex flex-col justify-end">
+      <p class="text-lg">Dans l'union code et design j'entretiens une dynamique de compétences techniques, formelles et conceptuelles qui alimentent mes collaborations professionnelles.</p>
+      <p class="text-lg">J'aime donner forme aux envies ou besoins  d'indépendants, artistes, PME, associations et institutions.</p>
+    </section>
   </header>
 
   <main>
-    <section  class="mb-16 md:mb-24 md:mb-44">
-    <h2 class="mb-8 text-dynamicl font-serif">Projets récents</h2>
-      <ul role="list" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Project
-            href="https://www.saffronkitchenproject.org/"
-            title="2021 - Saffron Kitchen Project"
-            body="Site web coloré pour une ONG qui propose des solutions afin d'aider des communautés vulnérables en Grèce"
-            image={skpImg}
-          />
-          <Project
-            href="https://worldpressphoto2021.org/"
-            title="2021- WorldPressPhoto"
-            body="Exposition en ligne pour le concours WorldPressPhoto 2019"
-            image={wppImg}
-          />
-          <Project
-            href="http://green-shoots.eu/"
-            title="2022 - GreenShoots"
-            body="Site web eco-conçu pour des initiatives environnementales soutenant la mise en œuvre du Green Deal européen"
-            image= {gsImg}
-          />
-          <Project
-            href="http://nicolashermann.com/"
-            title="2022 - Nicola Hermann Portfolio"
-            body="Expérience immersive en webgl pour le portfolio du photographe Nicolas Herman"
-            image={nhImg}
-          />
-        </ul>
-      </section>
-      </main>
+    <section  class="mb-8">
+      <nav class="flex gap-8">
+        <HeaderLink href="/blog" class="text-fluidbase">Journal</HeaderLink>
+      </nav>
+    </section>
 
-    <footer class="grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 border-t border-black pt-8">
-      <section class="w-full mb-8">
-        <p class="text-2xl font-serif">Expertises</p>
+    <section>
+      <h2 class="mb-8 text-fluidbase font-serif">Sélection de projets</h2>
+      <ProjecstList>
+    </section>
+  </main>
+
+    <footer class="grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 border-t border-black pt-8 mt-24">
+      <article class="w-full mb-4">
+        <p class="text-xl font-serif">Expertises</p>
         <ul>
           <li>Direction artistique de projets web</li>
           <li>Développement et design web créatif</li>
           <li>Eco-conception de site web</li>
         </ul>
-      </section>
-      <section class="w-full mb-8">
-        <p class="text-2xl font-serif">Stack</p>
+      </article>
+      <article class="w-full mb-4">
+        <p class="text-xl font-serif">Stack</p>
         <ul>
           <li>JS frameworks : Vue.js, Nuxt, Alpine.js</li>
           <li>Creative tools : Three.js, Webgl, P5js</li>
           <li>Static site generators : 11ty, Astro</li>
           <li>CMS's : Kirby, Strapi, Prismic, Netlify cms</li>
         </ul>
-      </section>
-      <section class="w-full mb-8">
-        <p class="text-2xl font-serif">Intérêts</p>
+      </article>
+      <article class="w-full mb-4">
+        <p class="text-xl font-serif">Intérêts</p>
         <p>Design spéculatif et science-fiction, l'Art numérique, DJ’ing en live et sur radiozai.com, photographie
         </p>
-      </section>
-      <section class="w-full mb-8">
-        <p class="text-2xl font-serif">Me contacter</p>
+      </article>
+      <article class="w-full">
+        <p class="text-xl font-serif">Me contacter</p>
         <a href="https://twitter.com/theo_goedert" target="_blank">Twitter</a>
         <a href="https://www.instagram.com/theogoedert/" target="_blank">Instagram</a>
         <p class="text-base mt-4">Actuellement disponible pour des missions pédagogiques et professionelles</p>
-      </section>
+      </article>
     </footer>
 
     <script>
@@ -92,7 +72,7 @@ import skpImg from '../images/saffronkitchenproject.png';
       }
       function animeHeaderP(){
         animate(
-          'header p',
+          'header section p',
           animeProp,
           animeOptions
         )
@@ -125,7 +105,7 @@ import skpImg from '../images/saffronkitchenproject.png';
 
       inView('footer', ({ target }) => {
         animate(
-        target.querySelectorAll("footer section"),
+        target.querySelectorAll("footer article"),
           {
             opacity: 1,
           },

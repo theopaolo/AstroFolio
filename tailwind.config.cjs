@@ -8,9 +8,9 @@ module.exports = {
         serif: ['Fragment glare', 'serif'],
       },
       fontSize: {
-        dynamicxl: ['clamp(2.5rem, 10vw, 4.5rem)', '1'],
-        dynamicl: ['clamp(1.25rem, 10vw, 3rem)', '1'],
-        dynamic: ['clamp(1rem, 10vw, 2.25rem)', '1.2'],
+        fluidxl: ['clamp(2.5rem, 10vw, 4.5rem)', '1'],
+        fluidl: ['clamp(1.25rem, 10vw, 3rem)', '1'],
+        fluidbase: ['clamp(1rem, 10vw, 2.25rem)', '1.2'],
       },
     },
 	},

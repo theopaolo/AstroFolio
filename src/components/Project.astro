@@ -1,6 +1,5 @@
 ---
-import { Picture } from '@astrojs/image/components';
-
+import { Image } from 'astro:assets'
 export interface Props {
 	title: string;
 	body: string;
@@ -11,10 +10,10 @@ export interface Props {
 const { href, title, body, image} = Astro.props;
 ---
 
-<li class="rounded-lg card-container">
+<!-- <li class="rounded-lg card-container shrink-0 snap-center w-1/4">
 	<a class="project items-center relative block" href={href} target="_blank">
-		<div class="cover rounded-lg card-front" >
-			<Picture src={image} alt={title} widths={[200, 400, 600]} fit="cover" sizes="(max-width: 767px) 100vw, 736px" aspectRatio="1:1"/>
+		<div class="cover rounded-lg card-front aspect-square" >
+			<Image src={image} alt={title} width={800} height={800}/>
 		</div>
 		<div class="description p-4 rounded-lg card-back bg-black text-white">
 			<h3 class="text-xl mb-2 md:text-2xl md:mb-4 ">
@@ -26,4 +25,21 @@ const { href, title, body, image} = Astro.props;
 			<button>Visiter</button>
 		</div>
 	</a>
+</li> -->
+
+<li class="rounded-lg card-container">
+	<div class="project items-center relative block">
+		<div class="cover rounded-lg card-front aspect-square" >
+			<a href={href} target="_blank"><Image src={image} alt={title} width={800} height={800} class="lazy"/></a>
+		</div>
+		<div>
+			<h3 class="text-base mt-2 md:mb-4 ">
+				{title}
+			</h3>
+			<p class="text-base mb-2 md:text-lg md:mb-4 ">
+				{body}
+			</p>
+			<a href={href} target="_blank" class="border-b-2 px-4 py-2 border-black">Visiter</a>
+		</div>
+	</div>
 </li>

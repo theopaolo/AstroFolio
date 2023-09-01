@@ -1,0 +1,128 @@
+/* Register our custom font family and tell the browser where to find it. */
+@font-face {
+    font-family: 'Fragment sans';
+    src: url('/fonts/ppfragment-sansregular-webfont.woff') format('woff'),
+         url('/fonts/ppfragment-sansregular-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Fragment glare';
+    src: url('/fonts/ppfragment-glareregular-webfont.woff') format('woff'),
+         url('/fonts/ppfragment-glareregular-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  header section h1, header section p {
+    opacity: 0;
+  }
+
+  .cover {
+    transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    max-width: unset;
+  }
+
+  .cover img{
+    width: 100%;
+    object-fit: cover;
+    border-radius: .5rem;
+    aspect-ratio: 1/1;
+  }
+
+  .card-container {
+    opacity: 0;
+  }
+
+  .project {
+    position: relative;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform cubic-bezier(0.60, 0.20, 0.4, 0.88) .8s;
+  }
+
+  /* hover and focus-within states */
+  .card-container:hover .project,
+  .card-container:focus-within .project {
+    /* transform: translateX(-100%) rotateY(-180deg); */
+    opacity: 1;
+  }
+
+  .card-front,
+  .card-back {
+    top: 0;
+    left: 0;
+    /* backface-visibility: hidden; */
+  }
+
+  .card-front {
+    /* z-index: 2; */
+  }
+
+  .card-back {
+    transition: opacity cubic-bezier(0.455, 0.03, 0.515, 0.955) 1s;
+
+    /* transform: rotateY(180deg); */
+    position: absolute;
+    /* z-index: 1; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .card-back h3 {
+    transform: translateX(80px);
+  }
+
+  .card-back p{
+    transform: translateX(50px);
+  }
+
+  .card-back button {
+    opacity: 0;
+    border: 1px solid white;
+    width: fit-content;
+    padding: 0.5rem;
+  }
+
+  .card-back button {
+    transition: opacity cubic-bezier(0.455, 0.03, 0.515, 0.955) .5s;
+    border-radius: 2px;
+  }
+
+  .card-back h3, .card-back p {
+    transition: transform cubic-bezier(0.455, 0.03, 0.515, 0.955) .8s;
+  }
+
+  .card-container:hover .card-back h3,
+  .card-container:focus-within .card-back h3 {
+    transition-delay: .1s;
+    transform: translateX(0px);
+  }
+
+  .card-container:hover .card-back p,
+  .card-container:focus-within .card-back p {
+    transition-delay: .2s;
+    transform: translateX(0px);
+  }
+
+  .card-container:hover .card-back button,
+  .card-container:focus-within .card-back button {
+    transition-delay: .8s;
+    opacity: 1;
+  }
+
+  .card-container:hover .card-back{
+    opacity: 1;
+    transition: opacity cubic-bezier(0.455, 0.03, 0.515, 0.955) .5s;
+  }
+
+  footer article {
+    opacity: 0;
+    transform: translateX(-150);
+  }
