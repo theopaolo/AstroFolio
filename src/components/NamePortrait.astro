@@ -1,0 +1,13 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../images/theo.jpeg';
+interface Props { name: string; id: string; href?: string; }
+const { name, id, href } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+<span class="name-portrait" data-name-portrait>
+  <Tag class="portrait-trigger" href={href} type={href ? undefined : 'button'} aria-label={href ? `${name}, accueil` : undefined} aria-description={href ? undefined : 'Afficher ou masquer mon portrait'} aria-expanded={href ? undefined : 'false'} aria-controls={href ? undefined : id}>{name}</Tag>
+  <span class="portrait-position" id={id} aria-hidden="true">
+    <Image class="portrait-image" src={portrait} alt="" width={224} height={224} format="webp" loading="eager" />
+  </span>
+</span>

@@ -1,0 +1,32 @@
+---
+import Icon from './Icon.astro';
+const sliders = [
+  { name: 'speed', label: 'Vitesse', value: 1, max: 2 },
+  { name: 'orbitRadius', label: 'Dérive', value: .7, max: 2 },
+  { name: 'frequency', label: 'Fréquence', value: .7, min: .2, max: 2 },
+  { name: 'intensity', label: 'Intensité', value: .85, max: 1.5 },
+];
+---
+<div class="soft-colors" data-soft-colors>
+  <canvas class="soft-canvas" aria-hidden="true"></canvas>
+  <div class="soft-controls" hidden>
+    <button class="soft-pause" type="button" aria-label="Mettre le fond en pause" aria-pressed="false">
+      <span class="soft-pause-icon"><Icon name="pause" /></span>
+      <span class="soft-play-icon"><Icon name="play" /></span>
+    </button>
+    <button class="soft-toggle" type="button" aria-expanded="false" aria-controls="soft-panel"><Icon name="sliders" /><span>Soft Colors</span></button>
+    <div id="soft-panel" class="soft-panel" role="region" aria-labelledby="soft-panel-title" hidden>
+      <div class="soft-panel-heading"><h2 id="soft-panel-title">Jouer avec le fond</h2><button class="soft-close" type="button" aria-label="Fermer les réglages"><Icon name="close" /></button></div>
+      <label class="soft-palette-label" for="soft-palette">Palette</label>
+      <select id="soft-palette"><option value="blue">Bleu d’origine</option><option value="rose">Rose du jardin</option><option value="mint">Vert tendre</option></select>
+      <div class="soft-sliders">
+        {sliders.map(({name, label, value, min = 0, max}) => <label class="soft-slider" for={`soft-${name}`}><span>{label}<output for={`soft-${name}`}>{String(value).replace('.', ',')}</output></span><input id={`soft-${name}`} data-soft-param={name} type="range" min={min} max={max} step="0.05" value={value} /></label>)}
+      </div>
+      <label class="soft-grain-label"><input type="checkbox" id="soft-grain" checked /> Grain</label>
+      <div class="soft-panel-footer"><button class="soft-reset" type="button">Réinitialiser</button><a href="https://softcolors.ludique.dev/">L’outil complet<Icon /></a></div>
+    </div>
+  </div>
+</div>
+<script>
+  import '../scripts/soft-colors';
+</script>

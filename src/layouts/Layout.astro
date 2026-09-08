@@ -1,24 +1,64 @@
 ---
-export interface Props {
-	title: string;
-}
-
-const { title } = Astro.props;
+import '../styles/site.css';
+import Icon from '../components/Icon.astro';
+import NamePortrait from '../components/NamePortrait.astro';
+interface Props { title: string; description?: string; image?: string; softHero?: boolean; }
+const {
+  title,
+  description = 'Théo Goedert, développeur, designer et enseignant à Lyon. Projets web, expériences personnelles, notes et détours entre l’image, le code et le son.',
+  image = '/social.png',
+  softHero = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="./style/style.css">
-    <script>
-      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-      posthog.init('phc_EyjpHTNH5DBl4pID8bNr9ElMJ5y8xgkmgLMs0WO3Dr',{api_host:'https://app.posthog.com'})
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fff7fb" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/ppfragment-sansregular-webfont.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Théo Goedert, design, code et transmission, avec une sélection de projets web." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('portfolio-theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {}
     </script>
-		<title>{title}</title>
-	</head>
-	<body class="m-4">
-		<slot />
-	</body>
+  </head>
+  <body data-soft-hero={softHero || undefined}>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <header class="site-header cluster" data-justify="between">
+      <div class="wordmark"><NamePortrait name="Théo Goedert" id="portrait-header" href="/" /><span class="wordmark-dot" aria-hidden="true"></span></div>
+      <nav class="cluster" aria-label="Navigation principale">
+        <a href="/#projets">Projets</a>
+        <a href="/#pratique">À propos</a>
+        <a class="nav-garden" href="https://jardin.ludique.dev/">Le jardin<Icon /></a>
+        <a href="/#contact">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Activer le thème sombre" hidden><span class="moon"><Icon name="moon" /></span><span class="sun"><Icon name="sun" /></span></button>
+      </nav>
+    </header>
+    <slot />
+    <footer class="site-footer container cluster" data-justify="between">
+      <p>Théo Goedert, à Lyon et sur le web.</p>
+      <div class="cluster"><a href="https://github.com/theopaolo">GitHub</a><a href="https://bsky.app/profile/theogs.bsky.social">Bluesky</a><a href="https://www.are.na/theo-paolo/channels">Are.na</a><a href="https://www.instagram.com/theogoedert/">Instagram</a></div>
+      <p>Fait avec <a href="https://github.com/theopaolo/piloti">Piloti</a> et Astro.</p>
+    </footer>
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
 </html>

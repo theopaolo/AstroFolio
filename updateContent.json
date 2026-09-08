@@ -1,0 +1,450 @@
+{
+  "shared": {
+    "personal": {
+      "name": "Théo G.S",
+      "contact": {
+        "location": "Lyon, France",
+        "email": "theo@ludique.dev",
+        "phone": "07.61.73.47.04",
+        "website": "theogoedert.com"
+      },
+      "languages": ["Français/Espagnol natif, Anglais courant bilingue"],
+      "education": {
+        "degree": "DNSEP",
+        "institution": "ESAAIX",
+        "year": "2017"
+      },
+      "picture": "./assets/theogoedertportrait.jpeg"
+    },
+    "skills": {
+      "creativeTech": {
+        "animation": ["GSAP", "Framer Motion", "Lenis"],
+        "3D & WebGL": ["Three.js", "Canvas", "Web Audio API"],
+        "immersif": ["View Transition API", "PWA", "SPA"]
+      },
+      "architectureOps": {
+        "frontend": [
+          "TypeScript",
+          "React/Next.js",
+          "Vue.js/Nuxt",
+          "SvelteKit",
+          "Astro",
+          "Lit"
+        ],
+        "backend": ["Node/Deno/Bun", "Hono", "Fastify", "Laravel"],
+        "data": ["PostgreSQL", "Prisma", "Drizzle", "GraphQL"],
+        "infra": ["Docker", "Vercel/Netlify", "GitHub Actions", "Git"]
+      },
+      "qualityInclusion": {
+        "accessibilité": ["RGAA", "HTML sémantique", "Conception inclusive"],
+        "testing": ["Jest", "Vitest", "Playwright"],
+        "qualité": ["ESLint", "Prettier", "TDD/BDD"],
+        "écoConception": [
+          "Sobriété numérique",
+          "SEO technique",
+          "Optimisation performance"
+        ]
+      },
+      "design": {
+        "outils": [
+          "Figma/FigJam",
+          "PenPot",
+          "Storybook",
+          "Lightroom",
+          "Illustrator",
+          "InDesign"
+        ],
+        "systèmes": [
+          "Design Systems",
+          "Design Tokens",
+          "Typographie",
+          "Color Theory",
+          "CubeCSS",
+          "Tailwind CSS"
+        ],
+        "css moderne": ["Container Queries", "CSS Layers", "HTML-to-Print"]
+      },
+      "ecoConception": {
+        "accessibility": [
+          "Normes RGAA d'accessibilité",
+          "Conception inclusive"
+        ],
+        "sustainability": ["Stratégies d'éco-conception"]
+      },
+      "contentCreation": {
+        "podcast": [
+          "Production de podcasts",
+          "Narration sonore",
+          "Montage audio"
+        ],
+        "video": ["Montage vidéo"],
+        "digital": [
+          "Réseaux sociaux",
+          "Communication de marque",
+          "Stratégie de contenu"
+        ]
+      },
+      "teaching": {
+        "technical": [
+          "Développement de programmes pédagogiques",
+          "Animation d'ateliers"
+        ],
+        "projectManagement": ["Agile/Scrum"],
+        "softSkills": ["Mentorat", "Communication"]
+      },
+      "methodologies": {
+        "agile": ["Agile/XP", "Pair Programming", "Design Thinking", "Lean UX"]
+      }
+    },
+    "projects": {
+      "sera_studio": {
+        "name": "Sera Studio E-commerce",
+        "year": "2024",
+        "role": "Tech Lead",
+        "type": "Development",
+        "visible": true,
+        "stack": ["Next.js", "Shopify", "GraphQL"],
+        "description": "Conception et implémentation d'une plateforme e-commerce headless pour une marque de luxe, axée sur la scalabilité et la performance.",
+        "achievements": [
+          "Architecture headless découplée (Next.js + Shopify Storefront API + GraphQL)",
+          "Direction technique : choix d'architecture, code reviews, montée en compétence de l'équipe",
+          "Optimisation des performances (score Lighthouse 95+) et expérience d'achat premium"
+        ]
+      },
+      "greenshoots": {
+        "name": "GreenShoots",
+        "year": "2022",
+        "type": "Development",
+        "visible": true,
+        "stack": ["Kirby CMS", "Vanilla JS"],
+        "description": "Site web éco-responsable pour les initiatives du Pacte Vert européen, vitrine de sobriété numérique.",
+        "achievements": [
+          "Approche de sobriété numérique : poids de page < 500 Ko, hébergement vert",
+          "Optimisation radicale des assets (images, fonts, scripts) pour minimiser l'empreinte carbone"
+        ]
+      },
+      "secret_provence": {
+        "name": "Secret de Provence",
+        "year": "2024",
+        "type": "Development",
+        "visible": true,
+        "stack": ["Next.js", "Directus", "Shadcn UI", "Framer Motion"],
+        "description": "Plateforme de voyage sur-mesure mettant en valeur des séjours exclusifs en Provence, avec design pixel-perfect et animations premium.",
+        "achievements": [
+          "Direction artistique et technique de bout en bout",
+          "Animations immersives (Framer Motion) et transitions fluides pour une expérience haut de gamme",
+          "Architecture headless (Next.js + Directus) pour une gestion de contenu flexible"
+        ]
+      },
+      "worldpressphoto": {
+        "name": "WorldPressPhoto Exhibition",
+        "year": "2021",
+        "type": "Development",
+        "visible": true,
+        "stack": ["Kirby CMS", "Barba.js", "GSAP", "LocoScroll"],
+        "description": "Conception d'une plateforme d'exposition en ligne pour le concours WorldPressPhoto 2019, offrant une expérience virtuelle immersive",
+        "achievements": [
+          "Création d'une présentation dynamique et visuellement engageante des participations au concours"
+        ]
+      },
+      "nicolas_hermann": {
+        "name": "Nicolas Hermann Portfolio",
+        "visible": false,
+        "year": "2022",
+        "type": "Development",
+        "stack": ["Three.js", "GSAP", "Kirby CMS"],
+        "description": "Création d'un portfolio WebGL mettant en valeur la photographie avec des visuels interactifs et des performances optimisées",
+        "achievements": [
+          "Implémentation d'animations et transitions WebGL complexes",
+          "Optimisation du chargement des médias pour une expérience utilisateur fluide"
+        ]
+      },
+      "esaaix": {
+        "name": "ESAAIX Website",
+        "visible": false,
+        "year": "2019",
+        "type": "Development",
+        "stack": ["Kirby CMS", "Figma"],
+        "description": "Développement d'un site web sur mesure pour l'École supérieure d'art d'Aix-en-Provence, axé sur la communication événementielle et l'expression artistique",
+        "achievements": [
+          "Participation au cycle de vie du projet, de l'idéation au lancement"
+        ]
+      }
+    }
+  },
+  "cv_templates": {
+    "education": {
+      "title": "Formation & Développement Web",
+      "summary": "Formateur en développement web expérimenté, passionné par la conception inclusive et les pratiques web durables. Spécialisé dans l'enseignement technique pratique avec un accent sur les frameworks modernes et les bonnes pratiques.",
+      "focus_skills": ["teaching", "architectureOps", "design"],
+      "highlighted_experiences": [
+        "eden_school",
+        "wild_code_school",
+        "ada_tech",
+        "marseille_university"
+      ],
+      "highlighted_projects": ["greenshoots", "worldpressphoto"]
+    },
+    "frontend": {
+      "title": "Design Engineer · Frontend",
+      "summary": "Expert Frontend, 7+ ans d'expérience. Formation Beaux-Arts (DNSEP) et ingénierie logicielle. Je conçois des architectures scalables (Next.js, Headless CMS) avec une esthétique premium et une accessibilité exemplaire (RGAA). Spécialiste expériences immersives (GSAP, Framer Motion) et performance web.",
+      "focus_skills": [
+        "creativeTech",
+        "architectureOps",
+        "qualityInclusion",
+        "design"
+      ],
+      "highlighted_experiences": [
+        "freelance",
+        "novius",
+        "shimsham",
+        "ada_tech"
+      ],
+      "highlighted_projects": [
+        "sera_studio",
+        "secret_provence",
+        "worldpressphoto",
+        "greenshoots"
+      ]
+    },
+    "ejcam": {
+      "title": "Direction artistique · Création de contenu numérique",
+      "summary": "Artiste, développeur et pédagogue, diplômé des Beaux-Arts (DNSEP 2017). Je travaille à l'intersection de la création numérique, de la communication de marque et du développement web, que j'articule avec une pédagogie orientée projet, centrée sur l'expérimentation et la réalité des métiers.",
+      "focus_skills": ["contentCreation", "design", "teaching", "creativeTech"],
+      "highlighted_experiences": ["ejcam", "marseille_university"],
+      "highlighted_projects": ["worldpressphoto", "esaaix"],
+      "custom_experiences": [
+        {
+          "title": "Animateur d'ateliers créatifs",
+          "institution": "ESAAIX / Université Aix-Marseille",
+          "period": "2019 – 2020",
+          "details": [
+            "Atelier « Écritures ludiques et créatives » : jeux vidéo, narration interactive, art numérique",
+            "Animation de sessions pluridisciplinaires pour des publics variés"
+          ]
+        },
+        {
+          "title": "Développeur frontend & Direction artistique",
+          "institution": "Novius – Agence web, Lyon",
+          "period": "2022 – 2024",
+          "details": [
+            "Développement de composants web haute performance pour des clients grands comptes",
+            "Direction artistique et optimisation UI/UX",
+            "Mentorat de développeurs juniors"
+          ]
+        },
+        {
+          "title": "Co-fondateur & Développeur",
+          "institution": "Shimsham – Collectif de design numérique",
+          "period": "2019 – 2022",
+          "details": [
+            "Direction artistique et technique de projets web pour artistes et institutions culturelles",
+            "Clients : WorldPressPhoto, CNC, Institut Français, ESAAIX, CNRS...",
+            "Gestion de projets créatifs de l'idéation à la livraison"
+          ]
+        },
+        {
+          "title": "Résidence de recherche art-science",
+          "institution": "GIPSA-Lab, Grenoble – avec RAADIOCAARGO",
+          "period": "2018 – 2019",
+          "details": [
+            "Recherche à l'intersection de l'art sonore et des sciences cognitives"
+          ]
+        }
+      ]
+    },
+    "creative": {
+      "title": "Art, Pédagogie & Technologies Conviviales",
+      "summary": "Artiste-designer et pédagogue explorant les liens entre art, technologie et convivialité.",
+      "focus_skills": ["teaching", "ecoConception"],
+      "highlighted_experiences": ["marseille_university", "freelance"],
+      "highlighted_projects": ["worldpressphoto", "esaaix"],
+      "custom_experiences": [
+        {
+          "title": "Formateur NetArt",
+          "institution": "Université de Marseille – Master 2 Création Numérique",
+          "period": "2022",
+          "details": [
+            "Conception et animation d’un programme autour de l’art numérique, du code créatif et des installations interactives",
+            "Accompagnement des étudiants dans des projets mêlant art, données et interactivité"
+          ]
+        },
+        {
+          "title": "Animateur Atelier Art & Jeux Vidéo",
+          "institution": "PangPangClub / Lab Gamerz",
+          "period": "2019 - 2020",
+          "details": [
+            "Animation d’ateliers d’expérimentation autour du jeu vidéo comme médium artistique",
+            "Introduction à la création ludique et à la narration interactive pour des publics jeunes et adultes"
+          ]
+        },
+        {
+          "title": "Co-fondateur & Directeur artistique",
+          "institution": "Collectif Shimsham.design",
+          "period": "2019 - 2022",
+          "details": [
+            "Développement de projets web hybrides mêlant art, design et code",
+            "Collaboration avec artistes, festivals et institutions culturelles"
+          ]
+        },
+        {
+          "title": "Membre actif du bureau",
+          "institution": "Radio ZAI",
+          "period": "2017 - Aujourd’hui",
+          "details": [
+            "Participation à la direction artistique et au développement technique de la radio aixoise",
+            "Création sonore, DJing en direct et conception d’identités visuelles et web pour la radio"
+          ]
+        },
+        {
+          "title": "Résident Art-Science",
+          "institution": "GIPSA-Lab Grenoble – Projet RAADIOCAARGO",
+          "period": "2019",
+          "details": [
+            "Recherche interdisciplinaire autour du son, de la perception et de la narration interactive",
+            "Création d’outils explorant les liens entre écoute, machine et imagination"
+          ]
+        },
+        {
+          "title": "Freelance – Fullstack Designer",
+          "institution": "Indépendant",
+          "period": "2019 - Aujourd’hui",
+          "details": [
+            "Création de sites et installations interactives pour artistes, festivals et institutions",
+            "Recherche et expérimentation autour du web écologique et des technologies conviviales"
+          ]
+        }
+      ],
+      "notable_clients": [
+        "WorldPressPhoto",
+        "Institut Français",
+        "CNRS / GISMOMM",
+        "École supérieure d’art d’Aix-en-Provence",
+        "ZIKZAC Festival",
+        "RAADIOCAARGO",
+        "Babelsunce",
+        "Radio ZAI"
+      ]
+    }
+  },
+  "experiences": {
+    "ejcam": {
+      "id": "ejcam",
+      "title": "Intervenant vacataire – TD Podcast & Création de contenu de marque",
+      "institution": "EJCAM – Université Aix-Marseille",
+      "period": "2025 – en cours",
+      "type": "Teaching",
+      "visible": true,
+      "details": [
+        "Encadrement de TD en Master Communication (option Communication de marque)",
+        "Initiation à la production de podcasts : conception éditoriale, enregistrement, montage",
+        "Création de contenu numérique pour les réseaux sociaux et plateformes de diffusion",
+        "Accompagnement de projets étudiants en groupes"
+      ]
+    },
+    "freelance": {
+      "id": "freelance",
+      "title": "Design Engineer · Freelance",
+      "institution": "Indépendant",
+      "period": "2019 - 2025",
+      "type": "Development",
+      "visible": true,
+      "details": [
+        "Conception et développement de projets web sur mesure (luxe, voyage, culture)",
+        "Architecture frontend, direction artistique et accompagnement technique client"
+      ]
+    },
+    "novius": {
+      "id": "novius",
+      "title": "Développeur Frontend & Référent technique",
+      "institution": "Novius",
+      "period": "2022 - 2024",
+      "type": "Development",
+      "visible": true,
+      "location": "Lyon, Auvergne-Rhône-Alpes, France",
+      "contract": "CDI",
+      "details": [
+        "Conception et implémentation d'architectures frontend haute performance pour des clients grands comptes",
+        "Développement de design systems et composants réutilisables (React, Vue.js)",
+        "Mentorat de développeurs juniors et référent technique sur les choix d'architecture",
+        "Optimisation UI/UX et direction artistique des livrables"
+      ]
+    },
+    "shimsham": {
+      "id": "shimsham",
+      "title": "Co-fondateur",
+      "institution": "shimsham",
+      "period": "2019 - 2022",
+      "type": "Development",
+      "visible": true,
+      "details": [
+        "Développeur et Directeur artistique de divers projets web au sein du collectif shimsham",
+        "Gestion de projets créatifs et techniques",
+        "Collaboration avec artistes et institutions culturelles"
+      ]
+    },
+    "wild_code_school": {
+      "id": "wild_code_school",
+      "title": "Formateur GENAI",
+      "institution": "Wild Code School",
+      "period": "2025",
+      "type": "Teaching",
+      "visible": true,
+      "details": [
+        "Encadrement et mentorat des élèves de la Wild Code School en télé-présentiel dans les domaines GenAI et GenAI Marketing"
+      ]
+    },
+    "eden_school": {
+      "id": "eden_school",
+      "title": "Formateur Technique",
+      "institution": "Eden School",
+      "period": "2024 - 2025",
+      "type": "Teaching",
+      "visible": true,
+      "details": [
+        "Élaboration de programmes sur l'accessibilité, le développement durable et les frameworks modernes",
+        "Création d'ateliers pratiques React, Node.js et systèmes de design",
+        "Intégration de projets réels dans les objectifs pédagogiques"
+      ]
+    },
+    "marseille_university": {
+      "id": "marseille_university",
+      "title": "NetArt Formateur",
+      "institution": "Université de Marseille",
+      "period": "2022",
+      "type": "Teaching",
+      "visible": true,
+      "details": [
+        "Enseignement du NetArt aux étudiants M2 Création Numérique",
+        "Développement d'un programme pédagogique alliant art et technologie",
+        "Accompagnement des étudiants dans la création de projets d'art numérique"
+      ]
+    },
+    "ada_tech": {
+      "id": "ada_tech",
+      "title": "Encadrant Pédagogique",
+      "institution": "Ada Tech School",
+      "period": "2024",
+      "type": "Teaching",
+      "visible": true,
+      "details": [
+        "Direction des programmes de formation technique",
+        "Conception d'expériences d'apprentissage par projets",
+        "Accompagnement des étudiants en première année de développement web"
+      ]
+    },
+    "openclassroom": {
+      "id": "openclassroom",
+      "title": "Mentor",
+      "institution": "OpenClassRoom",
+      "period": "2022 - 2024",
+      "type": "Teaching",
+      "visible": true,
+      "details": [
+        "Accompagnement de plus de 50 étudiants dans leurs parcours de certification en développement web",
+        "Mentorat technique personnalisé en one-to-one",
+        "Création de parcours d'apprentissage individualisés"
+      ]
+    }
+  }
+}

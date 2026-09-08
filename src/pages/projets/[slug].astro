@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import { projects, type Project } from '../../data/projects';
+export function getStaticPaths() {
+  return projects.map((project, index) => ({ params: { slug: project.slug }, props: { project, next: projects[(index + 1) % projects.length] } }));
+}
+interface Props { project: Project; next: Project; }
+const { project: p, next } = Astro.props;
+---
+<Layout title={`${p.title} | Théo Goedert`} description={p.summary}>
+  <main id="contenu" class="container project-page">
+    <a class="back-link" href="/#projets">Retour aux projets</a>
+    <header class="project-page-header"><h1>{p.title}</h1><p>{p.summary}</p></header>
+    <Image class="project-cover" src={p.image} alt={p.imageAlt ?? `Le site ${p.title}`} widths={[600, 1000, 1500]} sizes="(max-width: 1500px) 92vw, 1400px" format="webp" loading="eager" fetchpriority="high" />
+    <div class="project-story">
+      <div class="flow"><h2>Le projet</h2>{p.description.map(paragraph => <p>{paragraph}</p>)}{p.url && <a class="text-link" href={p.url} target="_blank" rel="noopener noreferrer">{p.urlLabel ?? 'Visiter le site'}<span class="visually-hidden"> (nouvel onglet)</span><Icon /></a>}{p.reference && <p><a href={p.reference.url}>{p.reference.title}</a></p>}</div>
+      <aside><h2>En collaboration</h2><p class="project-meta">{p.year} / {p.role}</p><dl>{p.credits.map(credit => <><dt>{credit.role}</dt><dd>{credit.name}</dd></>)}</dl></aside>
+    </div>
+    <a class="next-project" href={`/projets/${next.slug}/`}><span>Projet suivant : {next.title}</span><Icon /></a>
+  </main>
+</Layout>

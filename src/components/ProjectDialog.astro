@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { Project } from '../data/projects';
+interface Props { project: Project; }
+const { project: p } = Astro.props;
+---
+<dialog class="project-dialog" id={`dialog-${p.slug}`} aria-labelledby={`title-${p.slug}`}>
+  <div class="dialog-layout">
+    <div class="dialog-image" style={`background:${p.background}`}>
+      <Image src={p.image} alt={p.imageAlt ?? `Vue du site ${p.title}`} width={1100} format="webp" loading="lazy" />
+    </div>
+    <div class="dialog-content flow">
+      <form method="dialog"><button class="close-button" aria-label="Fermer l’aperçu" autofocus><Icon name="close" /></button></form>
+      <h2 id={`title-${p.slug}`}>{p.title}</h2>
+      <p class="project-meta">{p.year} / {p.role}</p>
+      <p class="dialog-summary">{p.summary}</p>
+      <p>{p.description[0]}</p>
+      <div class="dialog-actions stack">
+        {p.url && <a class="text-link" href={p.url} target="_blank" rel="noopener noreferrer">{p.urlLabel ?? 'Visiter le site'}<span class="visually-hidden"> (nouvel onglet)</span><Icon /></a>}
+        <a class="detail-link" href={`/projets/${p.slug}/`}>Le projet et les crédits</a>
+      </div>
+    </div>
+  </div>
+</dialog>
