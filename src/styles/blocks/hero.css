@@ -1,0 +1,98 @@
+/* The full height intro, a plate of Soft Colors waves laid on the paper: --frame
+   of page shows on three sides and the header band on the fourth. Everything
+   inside it sits on the waves, so the block re-points the theme tokens to the
+   indigo ink once and lets the parts inside keep reading --ink, --line and
+   --focus-color as usual.
+
+   The hero isolates, so the z-indexes below are local to it: 1 the copy, 2 the
+   title, 4 the Soft Colors controls, 5 the portrait. */
+
+.hero {
+  --ink: var(--wave-ink);
+  --muted: var(--ink);
+  --accent-ink: var(--ink);
+  --focus-color: var(--ink);
+  --line: rgb(from var(--wave-line) r g b / .28);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  /* The header, the plate and the paper under it add up to a screenful, less the
+     sliver of the next section that shows there is more below. */
+  min-height: clamp(620px, calc(94svh - var(--header-height) - 2 * var(--frame)), 880px);
+  margin: var(--frame);
+  padding-top: 24px;
+  overflow: clip;
+  color: var(--ink);
+  border-radius: clamp(16px, 1.7vw, 26px);
+  background:
+    radial-gradient(ellipse at 40% 40%, #b2bdec, transparent 65%),
+    radial-gradient(ellipse at 100% 80%, #7883d9, transparent 60%),
+    #8d99e4;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-intro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 3rem 7rem;
+  text-align: center;
+}
+
+/* Above the copy, so the portrait can hang over it. */
+.hero h1 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  line-height: 1.04;
+  text-wrap: wrap;
+}
+
+.intro-line { display: block; }
+
+.hero-dot { color: var(--accent-ink); }
+
+.hero-copy {
+  max-width: 35rem;
+  margin-top: 2rem;
+}
+
+.hero-lead {
+  margin-bottom: 1rem;
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  line-height: 1.32;
+}
+
+.hero-copy > p + p {
+  max-width: 48ch;
+  margin-inline: auto;
+  color: var(--muted);
+}
+
+@media (max-width: 950px) {
+  .hero h1 { font-size: clamp(2.8rem, 7.5vw, 4.5rem); }
+}
+
+@media (max-width: 650px) {
+  .hero { min-height: max(700px, calc(94svh - var(--header-height) - 2 * var(--frame))); }
+
+  .hero-intro { padding-block: 2rem 5.5rem; }
+
+  .hero h1 { font-size: clamp(2.8rem, 11vw, 4.4rem); }
+
+  .hero-copy { margin-top: 1.8rem; }
+
+  .hero-lead {
+    max-width: 27ch;
+    margin-inline: auto;
+    font-size: 1.3rem;
+  }
+}

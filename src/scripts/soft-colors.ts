@@ -1,12 +1,15 @@
 import { fragmentSource, vertexSource } from './soft-colors-shader';
 
-const palettes = {
-  blue: ['#5a60d3', '#dceef8', '#e2e8ff'],
-  rose: ['#b26caa', '#fff0f5', '#eee0fa'],
-  mint: ['#548c89', '#e7f6dd', '#d9edee'],
-};
-const defaults = { speed: 1, orbitRadius: .7, frequency: .7, intensity: .85 };
-type Parameter = keyof typeof defaults;
+/* The hero offers a palette, and SoftColors.astro holds those three. Everything
+   else is fixed here, at the values that read best behind the title. Soft
+   Colors, the tool listed further down the page, is where they all move. */
+const speed = 1;
+const frequency = .75;
+const orbitRadius = 1;
+const intensity = .85;
+const grainAmount = .01;
+const mouseInfluence = .3;
+
 
 function oklab(hex: string) {
   const value = parseInt(hex.slice(1), 16);
@@ -24,15 +27,10 @@ function mountSoftColors(stage: HTMLElement) {
   const hero = stage.closest<HTMLElement>('.hero')!;
   const canvas = stage.querySelector<HTMLCanvasElement>('canvas')!;
   const controls = stage.querySelector<HTMLElement>('.soft-controls')!;
-  const panel = stage.querySelector<HTMLElement>('.soft-panel')!;
-  const toggle = stage.querySelector<HTMLButtonElement>('.soft-toggle')!;
   const pause = stage.querySelector<HTMLButtonElement>('.soft-pause')!;
-  const select = stage.querySelector<HTMLSelectElement>('select')!;
-  const grain = stage.querySelector<HTMLInputElement>('#soft-grain')!;
-  const sliders = [...stage.querySelectorAll<HTMLInputElement>('[data-soft-param]')];
+  const palette = [...stage.querySelectorAll<HTMLInputElement>('input[name="soft-palette"]')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const pointer = matchMedia('(hover: hover) and (pointer: fine)');
-  const params = { ...defaults };
   const abort = new AbortController();
   const { signal } = abort;
   let gl: WebGLRenderingContext | null;
@@ -61,15 +59,10 @@ function mountSoftColors(stage: HTMLElement) {
     cancelAnimationFrame(frame);
     frame = 0;
     previousTime = 0;
-    stage.dataset.running = 'false';
-  }
-
-  function moving() {
-    return !paused && (params.speed > 0 || Math.abs(targetX - mouseX) + Math.abs(targetY - mouseY) > .0001);
   }
 
   function schedule() {
-    if (!ready || lost || !visible || document.hidden || frame || (!dirty && !moving())) return;
+    if (!ready || lost || !visible || document.hidden || frame || (!dirty && paused)) return;
     frame = requestAnimationFrame(draw);
   }
 
@@ -83,7 +76,7 @@ function mountSoftColors(stage: HTMLElement) {
     const delta = previousTime ? Math.min((timestamp - previousTime) / 1000, .1) : 0;
     previousTime = timestamp;
     if (!paused) {
-      phase += delta * params.speed;
+      phase += delta * speed;
       const ease = 1 - Math.exp(-8 * delta);
       mouseX += (targetX - mouseX) * ease;
       mouseY += (targetY - mouseY) * ease;
@@ -92,23 +85,21 @@ function mountSoftColors(stage: HTMLElement) {
     gpu.uniform2f(locations.mouse, mouseX, mouseY);
     gpu.drawArrays(gpu.TRIANGLES, 0, 3);
     dirty = false;
-    stage.dataset.running = String(moving());
-    if (!moving()) previousTime = 0;
+    if (paused) previousTime = 0;
     schedule();
   }
 
-  function setPalette() {
-    const colors = palettes[select.value as keyof typeof palettes] ?? palettes.blue;
-    gpu.uniform3fv(locations.waveColors, new Float32Array([...colors, colors[0]].flatMap(oklab)));
-  }
-
   function syncUniforms() {
-    setPalette();
-    gpu.uniform1f(locations.frequency, params.frequency);
-    gpu.uniform1f(locations.intensity, params.intensity);
-    gpu.uniform1f(locations.orbitRadius, params.orbitRadius);
-    gpu.uniform1f(locations.grainAmount, grain.checked ? .01 : 0);
-    gpu.uniform1f(locations.mouseInfluence, .3);
+    /* Markup ships one radio checked and the browser may restore another on a
+       back navigation. Either way one is, so the fallback is only for safety. */
+    const checked = palette.find(input => input.checked) ?? palette[0];
+    const colors = checked.dataset.colors!.split(' ');
+    gpu.uniform3fv(locations.waveColors, new Float32Array([...colors, colors[0]].flatMap(oklab)));
+    gpu.uniform1f(locations.frequency, frequency);
+    gpu.uniform1f(locations.intensity, intensity);
+    gpu.uniform1f(locations.orbitRadius, orbitRadius);
+    gpu.uniform1f(locations.grainAmount, grainAmount);
+    gpu.uniform1f(locations.mouseInfluence, mouseInfluence);
     dirty = true;
     schedule();
   }
@@ -159,10 +150,10 @@ function mountSoftColors(stage: HTMLElement) {
       ready = true;
       canvas.hidden = false;
       controls.hidden = false;
-      const headerEntrance = document.querySelector('.site-header')?.getAnimations()
+      const headerEntrance = document.querySelector('.site-header')?.getAnimations({ subtree: true })
         .find(animation => animation instanceof CSSAnimation && animation.animationName === 'header-enter');
-      for (const button of [pause, toggle]) {
-        for (const animation of button.getAnimations()) {
+      for (const control of controls.children) {
+        for (const animation of control.getAnimations()) {
           if (!headerEntrance) animation.finish();
           else if (headerEntrance.startTime !== null) animation.startTime = headerEntrance.startTime;
           else animation.currentTime = headerEntrance.currentTime ?? 0;
@@ -181,12 +172,6 @@ function mountSoftColors(stage: HTMLElement) {
     } finally { shaders.forEach(shader => gpu.deleteShader(shader)); }
   }
 
-  function closePanel(restoreFocus = false) {
-    panel.hidden = true;
-    toggle.setAttribute('aria-expanded', 'false');
-    if (restoreFocus) toggle.focus({ preventScroll: true });
-  }
-
   function syncPause() {
     stage.dataset.paused = String(paused);
     pause.setAttribute('aria-pressed', String(paused));
@@ -195,49 +180,8 @@ function mountSoftColors(stage: HTMLElement) {
     schedule();
   }
 
-  toggle.addEventListener('click', () => {
-    panel.hidden = !panel.hidden;
-    toggle.setAttribute('aria-expanded', String(!panel.hidden));
-    if (!panel.hidden) {
-      const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
-      const topLimit = Math.max(12, headerBottom + 12);
-      panel.style.maxHeight = `${Math.max(0, innerHeight - topLimit - 12)}px`;
-      const anchor = controls.getBoundingClientRect();
-      const { width, height } = panel.getBoundingClientRect();
-      panel.style.left = `${Math.max(12, Math.min(anchor.right - width, innerWidth - width - 12))}px`;
-      panel.style.top = `${Math.max(topLimit, Math.min(anchor.top - height - 12, innerHeight - height - 12))}px`;
-    }
-  }, { signal });
-  stage.querySelector('.soft-close')!.addEventListener('click', () => closePanel(true), { signal });
   pause.addEventListener('click', () => { paused = !paused; syncPause(); }, { signal });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !panel.hidden) closePanel(true);
-  }, { signal });
-  document.addEventListener('pointerdown', event => {
-    if (event.target instanceof Node && !controls.contains(event.target)) closePanel();
-  }, { signal });
-  controls.addEventListener('focusout', event => {
-    if (event.relatedTarget instanceof Node && !controls.contains(event.relatedTarget)) closePanel();
-  }, { signal });
-  window.addEventListener('scroll', () => closePanel(), { passive: true, signal });
-  window.addEventListener('resize', () => closePanel(), { signal });
-  select.addEventListener('change', syncUniforms, { signal });
-  grain.addEventListener('change', syncUniforms, { signal });
-  sliders.forEach(input => input.addEventListener('input', () => {
-    params[input.dataset.softParam as Parameter] = Number(input.value);
-    input.closest('label')!.querySelector('output')!.value = input.value.replace('.', ',');
-    syncUniforms();
-  }, { signal }));
-  stage.querySelector('.soft-reset')!.addEventListener('click', () => {
-    Object.assign(params, defaults);
-    select.value = 'blue';
-    grain.checked = true;
-    sliders.forEach(input => {
-      input.value = String(params[input.dataset.softParam as Parameter]);
-      input.closest('label')!.querySelector('output')!.value = input.value.replace('.', ',');
-    });
-    syncUniforms();
-  }, { signal });
+  palette.forEach(input => input.addEventListener('change', syncUniforms, { signal }));
 
   hero.addEventListener('pointermove', event => {
     if (paused || reduced.matches || !pointer.matches || event.pointerType !== 'mouse' || controls.contains(event.target as Node)) return;
@@ -253,7 +197,6 @@ function mountSoftColors(stage: HTMLElement) {
     event.preventDefault();
     lost = true;
     stop();
-    closePanel();
     canvas.hidden = true;
     controls.hidden = true;
     stage.dataset.ready = 'false';

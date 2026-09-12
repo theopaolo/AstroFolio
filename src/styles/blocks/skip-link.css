@@ -1,0 +1,13 @@
+/* Sits above everything and stays off screen until it takes focus. */
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  padding: .6rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: none; }

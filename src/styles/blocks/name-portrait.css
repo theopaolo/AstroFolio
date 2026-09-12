@@ -1,0 +1,69 @@
+/* The portrait that appears next to the name. site.ts follows the pointer with a
+   spring and writes the transform on .portrait-position inline; the CSS holds the
+   resting offset and the reveal. */
+
+.name-portrait {
+  --portrait-size: 112px;
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.portrait-trigger {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-decoration: none;
+}
+
+/* Only the standalone trigger is underlined. In the header the name is a link
+   inside the wordmark and carries no line of its own. */
+button.portrait-trigger {
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .1em;
+}
+
+.portrait-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: var(--portrait-size);
+  height: var(--portrait-size);
+  transform: translate3d(0, 44px, 0);
+  pointer-events: none;
+}
+
+.portrait-image {
+  width: var(--portrait-size);
+  height: var(--portrait-size);
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.75) rotate(-8deg);
+  box-shadow: 0 8px 20px rgb(33 22 42 / .18);
+  transition: opacity 140ms ease-out, transform 220ms var(--ease), visibility 0s 220ms;
+}
+
+/* Exception: open. Above the title so it can overlap the line below. */
+.name-portrait[data-open='true'] { z-index: 6; }
+
+.name-portrait[data-open='true'] .portrait-image {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) rotate(-4deg);
+  transition-delay: 0s;
+}
+
+/* Exception: opened from the keyboard, which places the portrait without the
+   spring, so it should not slide either. */
+.name-portrait[data-keyboard='true'] .portrait-position,
+.name-portrait[data-keyboard='true'] .portrait-image {
+  transition: none;
+}

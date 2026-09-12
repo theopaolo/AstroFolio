@@ -1,0 +1,27 @@
+.site-footer {
+  --cluster-space: 1rem;
+  padding-block: 1.7rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+/* The links sit closer together than the three groups of the footer. */
+.site-footer .cluster { --cluster-space: 1.25rem; }
+
+.site-footer a { text-decoration: none; }
+
+@media (max-width: 950px) {
+  .site-footer { justify-content: flex-start; }
+}
+
+@media (max-width: 650px) {
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-footer a:hover { color: var(--accent-ink); }
+}

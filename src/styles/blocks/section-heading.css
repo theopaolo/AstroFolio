@@ -1,0 +1,15 @@
+/* The heading that opens a section, with an optional line under it. */
+
+.section-heading { margin-bottom: 1.5rem; }
+
+.section-heading p {
+  margin-top: .75rem;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+@media (max-width: 650px) {
+  .section-heading h2 { font-size: 1.6rem; }
+
+  .section-heading p { font-size: .9rem; }
+}

@@ -1,0 +1,145 @@
+/* The sticky header: wordmark, nav, theme toggle. It sits on the paper band above
+   the hero plate, never on a background of its own.
+
+   The four --header-* properties are the block's own palette, pointed at the page
+   theme in one place, so the parts inside never have to know which colour they
+   are drawn in. */
+
+.site-header {
+  --cluster-space: 1rem;
+  --header-ink: var(--ink);
+  --header-line: var(--line);
+  --header-hover: var(--accent-ink);
+  --header-surface: var(--surface);
+  position: sticky;
+  top: 0;
+  /* Over the page, under the skip link. The only two page level z-indexes. */
+  z-index: 5;
+  width: 100%;
+  /* Not --header-height: site.ts writes the measured height into that token, and
+     reading it back here would make the header size depend on its own size. */
+  min-height: 68px;
+  padding-inline: var(--gutter);
+  background: var(--paper);
+  border-bottom: 1px solid color-mix(in srgb, var(--header-line) calc(var(--scrolled) * 100%), transparent);
+}
+
+/* --scrolled draws the hairline in as the page starts to move under the header. */
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-scrolled linear both;
+    animation-timeline: scroll();
+    animation-range: 0px var(--header-reveal);
+  }
+}
+
+@keyframes header-scrolled {
+  from { --scrolled: 0; }
+  to { --scrolled: 1; }
+}
+
+.wordmark { font-size: 1.15rem; }
+
+.site-header nav {
+  --cluster-space: clamp(1.1rem, 2.2vw, 2.1rem);
+  font-size: .94rem;
+}
+
+.site-header nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: color-mix(in oklab, var(--header-ink), var(--header-hover) calc(var(--nav-hover) * 100%));
+  text-decoration: none;
+  transition: --nav-hover 280ms var(--ease);
+}
+
+/* The underline is drawn in from the left and retracts to the right. */
+.site-header nav a::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0 var(--underline-inset, 0px);
+  bottom: calc(50% - .78em);
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 100% 50%;
+  transition: transform 340ms var(--ease);
+}
+
+.site-header nav a:focus-visible { --nav-hover: 1; }
+
+.site-header nav a:hover::after,
+.site-header nav a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: 0 50%;
+  transition-duration: 420ms;
+}
+
+/* The garden link ends with an icon the underline should stop short of. */
+.nav-garden {
+  --underline-inset: calc(13px + .35rem);
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.nav-garden svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 420ms var(--ease);
+}
+
+.nav-garden:hover svg { transform: translate(2px, -2px); }
+
+.theme-toggle {
+  display: grid;
+  place-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--header-line);
+  border-radius: 50%;
+  transition: background-color 300ms var(--ease);
+}
+
+.theme-toggle svg { transition: transform 520ms var(--ease); }
+
+.theme-toggle:hover svg { transform: rotate(-20deg); }
+
+/* Both icons share one grid cell and the theme decides which one carries ink. */
+.theme-toggle > span { grid-area: 1 / 1; }
+
+.moon { color: light-dark(currentColor, transparent); }
+
+.sun { color: light-dark(transparent, currentColor); }
+
+@media (max-width: 650px) {
+  .site-header {
+    --cluster-space: .35rem;
+    min-height: 92px;
+    padding-block: .6rem;
+  }
+
+  .wordmark { font-size: 1.05rem; }
+
+  .site-header nav {
+    --cluster-space: .8rem;
+    width: 100%;
+    justify-content: space-between;
+    font-size: .82rem;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: var(--gutter);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-header nav a:hover { --nav-hover: 1; }
+
+  .theme-toggle:hover { background: var(--header-surface); }
+}

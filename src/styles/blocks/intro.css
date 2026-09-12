@@ -1,0 +1,86 @@
+/* The home page entrance, shared by the hero, the header and the Soft Colors
+   controls. The title starts, the lead and the paragraph follow one stagger
+   apart, then the wordmark and the background controls arrive together, the nav
+   links fall one after another, and the theme toggle closes the row.
+
+   Only the no-preference side is written out. Piloti's reset already cuts every
+   animation and transition to 0.01ms under prefers-reduced-motion, with
+   !important, so blocks never repeat that. Here the guard is still needed: these
+   animations hold their first frame through a one second delay, which the reset
+   does not shorten. */
+
+@media (prefers-reduced-motion: no-preference) {
+  body[data-soft-hero] {
+    --intro-delay: 1000ms;
+    --intro-stagger: 120ms;
+    --intro-duration: 600ms;
+    --intro-controls-delay: calc(var(--intro-delay) + var(--intro-stagger) + var(--intro-stagger) + var(--intro-duration));
+    /* The nav's own clock, started one beat after the wordmark. */
+    --intro-nav-delay: calc(var(--intro-controls-delay) + 90ms);
+    --intro-nav-stagger: 70ms;
+    --intro-nav-hold: 130ms;
+    --intro-ease: cubic-bezier(.25, .4, .25, 1);
+  }
+
+  .hero h1,
+  .hero-copy > p {
+    animation: intro-enter var(--intro-duration) var(--intro-delay) var(--intro-ease) backwards;
+  }
+
+  .hero-copy > .hero-lead {
+    animation-delay: calc(var(--intro-delay) + var(--intro-stagger));
+  }
+
+  .hero-copy > p + p {
+    animation-delay: calc(var(--intro-delay) + var(--intro-stagger) + var(--intro-stagger));
+  }
+
+  /* The nav element itself never moves: its children carry the animation, so the
+     row falls link by link instead of as one block. */
+  body[data-soft-hero] :is(.wordmark, .site-header nav > *) {
+    animation: header-enter 560ms var(--intro-controls-delay) var(--intro-ease) backwards;
+  }
+
+  body[data-soft-hero] .site-header nav > * {
+    animation-delay: calc(var(--intro-nav-delay) + var(--nav-step, 0) * var(--intro-nav-stagger));
+  }
+
+  body[data-soft-hero] .site-header nav > :nth-child(2) { --nav-step: 1; }
+
+  body[data-soft-hero] .site-header nav > :nth-child(3) { --nav-step: 2; }
+
+  body[data-soft-hero] .site-header nav > :nth-child(4) { --nav-step: 3; }
+
+  /* The toggle is not a link. It waits a beat longer than the stagger and closes
+     the header. */
+  body[data-soft-hero] .site-header .theme-toggle {
+    animation-delay: calc(var(--intro-nav-delay) + 3 * var(--intro-nav-stagger) + var(--intro-nav-hold));
+  }
+
+  /* soft-colors.ts starts these on the header's clock once WebGL is ready. */
+  .soft-controls > * {
+    animation: controls-enter 500ms var(--intro-controls-delay) var(--intro-ease) backwards;
+  }
+
+  /* Exception: the page opened away from the top, or the skip link has focus.
+     Nothing should be waiting to appear. */
+  :is(body[data-intro-skip], body:has(.skip-link:focus))
+    :is(.wordmark, .site-header nav > *, .hero h1, .hero-copy > p, .soft-controls > *) {
+    animation: none;
+  }
+}
+
+@keyframes intro-enter {
+  from { opacity: 0; visibility: hidden; transform: translateY(20px); filter: blur(8px); }
+  to { opacity: 1; visibility: visible; transform: none; filter: blur(0); }
+}
+
+@keyframes header-enter {
+  from { opacity: 0; visibility: hidden; transform: translateY(-14px); filter: blur(6px); }
+  to { opacity: 1; visibility: visible; transform: none; filter: blur(0); }
+}
+
+@keyframes controls-enter {
+  from { opacity: 0; visibility: hidden; transform: translateY(60px); }
+  to { opacity: 1; visibility: visible; transform: none; }
+}

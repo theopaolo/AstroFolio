@@ -1,0 +1,43 @@
+/* "Un peu plus sur moi": a short intro with the notes beside it. */
+
+.practice-section {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+  background: linear-gradient(to bottom in oklab, var(--tint-2) 45%, var(--tint-3));
+}
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 10%;
+}
+
+.practice-intro h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+
+.practice-intro > p {
+  max-width: 40ch;
+  margin-top: 1.25rem;
+  color: var(--muted);
+}
+
+/* The notes are a flow; the block only sets the rhythm. */
+.about-notes { --flow-space: 1.75rem; }
+
+.about-notes h3 {
+  margin-bottom: .65rem;
+  font-size: 1.15rem;
+}
+
+@media (max-width: 950px) {
+  .practice-grid { gap: 6%; }
+}
+
+@media (max-width: 650px) {
+  .practice-section { padding-block: 4rem; }
+
+  .practice-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .practice-intro > p { max-width: 45ch; }
+}

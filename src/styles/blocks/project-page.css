@@ -1,0 +1,239 @@
+/* A single project: the plate from the index, opened.
+
+   The header is the plate's ground run to the full width of the screen, in the
+   project's own colour, carrying the same six things the plate carried: title,
+   print, summary, caption, control strip, and the print itself pulled up so it
+   sits half on the project's ground and half on the page, the way it sits in
+   its mat on the index. view-transitions.css and site.ts carry those six
+   between the two pages.
+
+   Then the story and the credits on the page's own paper, and a rail of the
+   other projects, each in its colour, so one project leads to the next without
+   going back through the grid. */
+
+.project-page {
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.project-opening {
+  /* How far the cover rises into the header's bottom margin. The header spends
+     it as padding and the cover takes it back. */
+  --cover-lift: clamp(2.5rem, 5vw, 5.5rem);
+}
+
+.project-hero {
+  /* The page's own accent and focus colours are chosen against paper, and this
+     band is not paper. Both are pointed at the project's ink instead, so the
+     underline that draws on hover and the ring that lands on focus are legible
+     on all seven grounds. */
+  --accent-ink: currentColor;
+  --focus-color: var(--project-ink);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  /* The lift, and a gap on top of it, so the print lands clear of the control
+     strip rather than on its edge. */
+  padding-bottom: calc(var(--cover-lift) + clamp(1.25rem, 2.5vw, 2.25rem));
+  color: var(--project-ink);
+  background: var(--project-bg);
+}
+
+.project-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  row-gap: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+.back-link {
+  grid-column: 1 / -1;
+  width: fit-content;
+  font-size: .95rem;
+}
+
+.project-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+}
+
+/* Everything the old preview said, on the side the old preview said it: the
+   summary, the line of facts under it, and the link out to the live site, which
+   is what most visitors came for. */
+.project-hero-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: .9rem;
+  padding-bottom: .4rem;
+}
+
+.project-lead {
+  max-width: 32ch;
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  line-height: 1.3;
+}
+
+/* The block's own colour is chosen against paper. Here it is the project's ink,
+   held back a little rather than tinted. */
+.project-hero .project-meta {
+  color: inherit;
+  opacity: .7;
+}
+
+/* The plate's control strip, at the size a band this wide can carry. */
+.project-strip {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 4px;
+}
+
+.project-strip span {
+  flex: 1;
+  max-width: 96px;
+  height: 8px;
+  background: var(--patch);
+}
+
+.project-cover {
+  display: block;
+  width: 100%;
+  max-height: 80vh;
+  margin-top: calc(var(--cover-lift) * -1);
+  object-fit: cover;
+  border-radius: var(--radius-card);
+}
+
+.project-story {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 10%;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.project-story .flow {
+  --flow-space: 1.25rem;
+  max-width: 65ch;
+}
+
+.project-story h2 { font-size: 1.7rem; }
+
+.project-story dl { margin-top: 1.5rem; }
+
+.project-story dt {
+  margin-top: 1.2rem;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+/* The rail. Small plates, same parts in the same order, so a project page ends
+   the way the index reads. Wider than the screen on a phone, where it scrolls. */
+.project-rail {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.project-rail h2 {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.project-rail ul {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(190px, 1fr);
+  gap: clamp(.75rem, 1.4vw, 1.25rem);
+  margin-top: 1.25rem;
+  padding-bottom: .75rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity;
+}
+
+.project-rail li { scroll-snap-align: start; }
+
+/* Reversed like the plates: the title reads first and sits last. */
+.project-rail a {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: .5rem;
+  text-decoration: none;
+}
+
+.rail-ground {
+  padding: 6%;
+  color: var(--project-ink);
+  background: var(--project-bg);
+  border-radius: 6px;
+  transition: transform 320ms var(--ease);
+}
+
+.rail-frame {
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* Height from the ratio rather than from the file: the seven images are every
+   shape, one of them twice as tall as it is wide. */
+.rail-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.5;
+  object-fit: cover;
+}
+
+.rail-note {
+  margin-top: .55em;
+  font-size: .72rem;
+  line-height: 1.25;
+}
+
+.rail-bar {
+  display: flex;
+  gap: 2px;
+  margin-top: .55em;
+}
+
+.rail-bar span {
+  width: 12px;
+  height: 4px;
+  background: var(--patch);
+}
+
+.rail-title {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  font-size: 1.05rem;
+}
+
+.rail-title svg {
+  width: .58em;
+  height: .58em;
+  transition: transform 320ms var(--ease);
+}
+
+@media (max-width: 650px) {
+  .project-hero-inner {
+    grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+  }
+
+  .project-story {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .back-link,
+  .project-hero .text-link {
+    transition: opacity 280ms var(--ease);
+  }
+
+  .back-link:hover,
+  .project-hero .text-link:hover { opacity: .68; }
+
+  .project-rail a:hover .rail-ground { transform: translateY(-5px); }
+
+  .project-rail a:hover .rail-title svg { transform: translate(2px, -2px); }
+}

@@ -1,0 +1,62 @@
+/* One document opening into the next.
+
+   A plate on the index and the header of the project page it opens are two
+   drawings of the same project: the same ground, the same print, the same
+   title, the same caption, the same control strip. Naming those six parts on
+   both sides of a navigation is what makes the browser carry them across
+   instead of cutting from one page to the other. The rail at the foot of a
+   project page is a third drawing of the same thing, so project to project
+   travels the same way.
+
+   site.ts does the naming, one project at a time: a name may belong to only one
+   rendered element per document, and seven plates would otherwise all answer to
+   plate-print at once.
+
+   Firefox ignores this at-rule and has neither of the two events site.ts
+   listens for, so it navigates plainly. Nothing is lost but the animation. */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* Named one by one rather than through (*), which is a later addition than the
+   transitions themselves and would leave the browsers that shipped first on the
+   default quarter second.
+
+   Slower than the page under them, so the parts are still travelling once the
+   new page has settled: what carries over should read as the thing that moved,
+   not as one of two pages fading. */
+::view-transition-group(plate-ground),
+::view-transition-group(plate-print),
+::view-transition-group(plate-title),
+::view-transition-group(plate-note),
+::view-transition-group(plate-summary),
+::view-transition-group(plate-bar) {
+  animation-duration: 460ms;
+  animation-timing-function: var(--ease);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+}
+
+/* The print is one photograph at two sizes and two crops: 1.62 to 1 in the
+   plate's mat, whatever the cover asks for on the page. Left alone each
+   snapshot is stretched into the shape of the other on the way, which shows on
+   a face. Filling the travelling box and cropping the way both ends crop keeps
+   the photograph's own proportions the whole trip. */
+::view-transition-old(plate-print),
+::view-transition-new(plate-print) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Asked for less movement: the parts are still paired, so the browser still
+   knows what became what, but nothing travels. */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}

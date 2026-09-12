@@ -1,0 +1,54 @@
+/* "À côté": personal projects, in grids that get roomier as the list shortens. */
+
+.elsewhere-section {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom in oklab, var(--tint-3) 55%, var(--paper));
+}
+
+.elsewhere-grid { --grid-space: 3rem; }
+
+.side-project-grid {
+  --grid-min: 18rem;
+  --grid-space: 2rem;
+  margin-bottom: 1rem;
+}
+
+.elsewhere-link {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.elsewhere-preview {
+  display: block;
+  width: min(100%, 15rem);
+  height: auto;
+  aspect-ratio: 8 / 5;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.elsewhere-link h3 { font-size: 1.65rem; }
+
+.elsewhere-link p {
+  max-width: 48ch;
+  margin-block: 1rem;
+  color: var(--muted);
+}
+
+.elsewhere-link > span {
+  font-size: .94rem;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+@media (max-width: 650px) {
+  .elsewhere-section { padding-bottom: 2.5rem; }
+
+  .elsewhere-grid,
+  .side-project-grid { --grid-space: .75rem; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .elsewhere-link:hover h3 { color: var(--accent-ink); }
+}

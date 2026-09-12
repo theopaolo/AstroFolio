@@ -1,0 +1,72 @@
+/* The site's design decisions. Piloti's settings load first, this file changes
+   what the portfolio does differently. */
+
+:root {
+  /* Both themes live in one place. light-dark() reads color-scheme, which the
+     theme toggle sets on :root through data-theme. Anything that opts out of the
+     page theme, the Soft Colors panel being the one case, must not read these
+     tokens: it would get the light side whatever the page is doing. */
+  color-scheme: light dark;
+
+  --font-sans: 'Fragment Sans', sans-serif;
+
+  /* The garden palette: rose paper, violet ink, pink accent. */
+  --paper: light-dark(#fff7fb, #181420);
+  --ink: light-dark(#5c4b75, #e6e0f0);
+  --muted: light-dark(#755981, #bbaac6);
+  --surface: light-dark(#fadcf1, #3a2f44);
+  --line: light-dark(#dab8d2, #5e4f6b);
+  --accent: light-dark(#ff66c4, #ffa8d4);
+  --accent-ink: light-dark(#893468, #ffa8d4);
+
+  /* Section backgrounds: paper pulled towards three hues, so the page drifts from
+     indigo to rose as it scrolls. The light theme steps down in lightness, the
+     dark theme steps up. */
+  --tint-1: light-dark(
+    oklch(from var(--paper) calc(l - .028) .03 277),
+    oklch(from var(--paper) calc(l + .032) .045 277)
+  );
+  --tint-2: light-dark(
+    oklch(from var(--paper) calc(l - .032) .034 316),
+    oklch(from var(--paper) calc(l + .035) .05 316)
+  );
+  --tint-3: light-dark(
+    oklch(from var(--paper) calc(l - .034) .04 346),
+    oklch(from var(--paper) calc(l + .038) .058 346)
+  );
+
+  /* Indigo ink for the hero, which sits over the Soft Colors waves. Neither theme
+     changes it: the waves are the same in both. */
+  --wave-ink: #181d3b;
+  --wave-line: rgb(32 38 75 / .22);
+
+  --container: 88rem;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  /* The paper left around the hero, so the waves read as a plate laid on the page
+     rather than as the page itself. */
+  --frame: clamp(8px, .9vw, 16px);
+
+  /* Close enough for the first paint. site.ts then measures the header and writes
+     the real height here, so anchors and the hero padding follow it. */
+  --header-height: 68px;
+  /* Scroll distance over which the header's hairline fades in. */
+  --header-reveal: 96px;
+
+  /* Project cards and covers. The other radii belong to one block each and stay
+     in that block. */
+  --radius-card: 10px;
+
+  --focus-color: var(--ink);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark'] { color-scheme: dark; }
+
+/* The phone header wraps onto two rows. */
+@media (max-width: 650px) {
+  :root {
+    --header-height: 96px;
+    --header-reveal: 72px;
+  }
+}

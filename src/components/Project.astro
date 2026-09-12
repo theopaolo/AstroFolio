@@ -4,16 +4,66 @@ import Icon from './Icon.astro';
 import type { Project } from '../data/projects';
 interface Props { project: Project; index: number; }
 const { project: p, index } = Astro.props;
+
+/* Seven plates make one rhythm. project-grid.css reads data-plate to place the
+   plate in the field and data-scale to size its title and crop its image, so
+   those two attributes are all the block needs from the index. An eighth
+   project starts the rhythm again.
+
+   Each plate also says how wide it gets, so the browser downloads the file the
+   layout asks for instead of the widest one: `field` is its share of the twelve
+   column field, `fold` its share once the field folds into two columns under
+   950px, where plates 0, 3 and 6 run the full width. */
+const plates = [
+  { scale: 'l', field: '53vw', fold: '92vw' },
+  { scale: 's', field: '30vw', fold: '45vw' },
+  { scale: 'm', field: '37vw', fold: '45vw' },
+  { scale: 'm', field: '45vw', fold: '92vw' },
+  { scale: 's', field: '30vw', fold: '45vw' },
+  { scale: 'l', field: '53vw', fold: '45vw' },
+  { scale: 'l', field: '61vw', fold: '92vw' },
+] as const;
+const plate = index % plates.length;
+const { scale, field, fold } = plates[plate];
 ---
-<li class="project-card" style={`--project-bg:${p.background};--project-ink:${p.foreground}`}>
-  <a class="project-link" href={`/projets/${p.slug}/`} data-project={p.slug}>
-    <div class="project-image">
-      <Image src={p.image} alt={p.imageAlt ?? `Aperçu du site ${p.title}`} widths={[400, 700, 1100]} sizes="(max-width: 650px) 92vw, (max-width: 950px) 46vw, 30vw" format="webp" loading={index < 3 ? 'eager' : 'lazy'} />
-      <span class="project-open"><Icon /><span class="visually-hidden">Découvrir le projet</span></span>
-    </div>
-    <div class="project-caption">
-      <div class="cluster" data-justify="between"><h3>{p.title}</h3><span class="project-year">{p.year}</span></div>
-      <p>{p.category}</p>
-    </div>
+{/* The slug is here three times over and each one is a different job: id is
+    where the project page's back link lands, data-project-card is how site.ts
+    finds the plate to name for a view transition, and data-project is what
+    ProjectTheme.astro's hover rules match on. */}
+<li class="project-plate" id={p.slug} data-project-card={p.slug} data-plate={plate} data-scale={scale} data-palette={p.palette.join(',')} style={`--project-bg:${p.background};--project-ink:${p.foreground}`}>
+  {/* The title is written first, so the link reads title, category, year,
+      summary. The block turns the column around to put the title back under
+      the plate. */}
+  <a class="plate-link" href={`/projets/${p.slug}/`} data-project={p.slug}>
+    <h3 class="plate-title" data-vt="title">{p.title}<Icon /></h3>
+    <figure class="plate-ground" data-vt="ground">
+      {/* Every part of the plate has a counterpart in the header of the project
+          page, and data-vt is the pairing. site.ts hands the six of them their
+          names for the length of the trip, so the plate becomes the page rather
+          than giving way to it. */}
+      <div class="plate-frame">
+        <Image src={p.image} alt={p.imageAlt ?? `Aperçu du site ${p.title}`} widths={[420, 640, 900, 1250, 1680]} sizes={`(max-width: 650px) 92vw, (max-width: 950px) ${fold}, ${field}`} format="webp" loading={index < 3 ? 'eager' : 'lazy'} data-vt="print" />
+      </div>
+      {/* All three are the print's caption, so all three are inside the one the
+          figure is allowed: a figcaption may open or close a figure, never sit
+          in the middle of it. */}
+      <figcaption>
+        <div class="plate-note" data-vt="note">
+          <span>{p.category}</span>
+          {p.year && <span class="plate-year">{p.year}</span>}
+        </div>
+        {/* The colour control strip a printed proof carries in its margin. The
+            palette opens with the ground this strip is printed on, so that one
+            is left out: it would be a gap in the row. */}
+        <div class="plate-bar" data-vt="bar" aria-hidden="true">
+          {p.palette.slice(1).map((colour, i) => <span style={`--patch:${colour};--patch-index:${i}`}></span>)}
+        </div>
+        {/* What the dialog used to charge a click for. It is written in the
+            mat's bottom margin while the plate is picked up, and the margin is
+            there whether or not it is: the grid must not move under the
+            pointer. */}
+        <p class="plate-summary" data-vt="summary">{p.summary}</p>
+      </figcaption>
+    </figure>
   </a>
 </li>

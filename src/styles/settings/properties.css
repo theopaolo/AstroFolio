@@ -1,0 +1,47 @@
+/* Registered properties, so they interpolate and so they hold a usable value
+   before anything animates them. The first two belong to the site header, the
+   rest to the projects section. */
+
+/* How far the page has scrolled past the hero: 0 at the top, 1 once the header
+   sits over the content. Starts at 1, so a browser without scroll-driven
+   animations gets the solid header. */
+@property --scrolled {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+
+/* Nav hover fades through this number rather than through `color`: the header ink
+   already moves with --scrolled, and transitioning `color` would make the nav lag
+   behind it. */
+@property --nav-hover {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/* Whether a project plate is being picked up: 0 at rest, 1 under the pointer or
+   under keyboard focus. The plate spills its colour, lifts its print and tints
+   its title from this one number, so the pointer and the keyboard drive the same
+   gesture, and every part of it moves on the same clock. */
+@property --picked {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+/* The two colours the projects section is painted with while a project is
+   picked, and how much of that paint shows. Registered as colours so they
+   interpolate: crossing from one plate to the next drifts the page from one
+   project to the other instead of cutting. ProjectTheme.astro writes them per
+   project, site.ts writes the scrolled version. */
+@property --section-ground { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --section-shade { syntax: '<color>'; inherits: true; initial-value: transparent; }
+
+/* 0 on the page's own paper, .3 while a plate passes the middle of the screen,
+   1 under the pointer. */
+@property --coat-strength {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}

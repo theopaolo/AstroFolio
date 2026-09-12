@@ -1,0 +1,50 @@
+/* Bare elements. Everything with a class belongs in a block. */
+
+html {
+  scroll-behavior: smooth;
+  /* Anchors land under the sticky header rather than behind it. */
+  scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--line) var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-1);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+h2 { font-size: clamp(1.65rem, 2.8vw, 2.5rem); }
+
+h3 { font-size: 1.4rem; }
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+}
+
+button { color: inherit; }
+
+::selection {
+  color: #442746;
+  background: #f5a6d9;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 5px;
+}
+
+/* Blocks set their own display, so hidden needs the weight to win. */
+[hidden] { display: none !important; }

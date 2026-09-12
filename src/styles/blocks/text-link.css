@@ -1,0 +1,15 @@
+/* Underlined link with a trailing arrow. On the project pages and the 404. */
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  width: fit-content;
+  padding-block: .3rem;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .text-link:hover { color: var(--accent-ink); }
+}

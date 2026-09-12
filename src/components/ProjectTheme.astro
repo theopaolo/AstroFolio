@@ -1,0 +1,36 @@
+---
+import { projects } from '../data/projects';
+
+/* Pointing at a plate repaints the whole section in that project's colour.
+   CSS cannot read a custom property off a descendant, so the pairing has to be
+   written out: one rule per project, matched on the slug the link already
+   carries in data-project. project-grid.css does the rest from the names these
+   rules set.
+
+   The pointer only. Keyboard focus drives everything on the plate itself, but
+   not this: Tab is how someone crosses the grid on their way somewhere else,
+   and repainting the page under them once per press turns travelling through
+   the section into seven full repaints. The plate's own gesture and the focus
+   ring already say where they are.
+
+   Behind prefers-reduced-motion for the same reason. Piloti's reset cuts every
+   transition to 0.01ms there, so the repaint would land as a hard cut on every
+   pointer move, which is worse than the animation for someone who asked for
+   less of it. And behind the pointer query the rest of the gesture uses, so a
+   tap on a touch screen does not leave the section repainted. */
+/* The ground the project is printed in, and the palette's first extracted
+   colour, which is what gives that ground its depth in project-grid.css. */
+const paint = (p: (typeof projects)[number]) => [
+  `--section-ground:${p.palette[0]}`,
+  `--section-shade:${p.palette[2]}`,
+  `--section-ink:${p.foreground}`,
+  '--coat-strength:1',
+].join(';');
+
+const css = [
+  '@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine){',
+  ...projects.map(p => `.projects-section:has(.plate-link[data-project="${p.slug}"]:hover){${paint(p)}}`),
+  '}',
+].join('\n');
+---
+<style is:inline set:html={css} />

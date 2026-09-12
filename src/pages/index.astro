@@ -1,56 +1,67 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Project from '../components/Project.astro';
-import ProjectDialog from '../components/ProjectDialog.astro';
-import NamePortrait from '../components/NamePortrait.astro';
-import SoftColors from '../components/SoftColors.astro';
 import Icon from '../components/Icon.astro';
+import NamePortrait from '../components/NamePortrait.astro';
+import Project from '../components/Project.astro';
+import ProjectTheme from '../components/ProjectTheme.astro';
+import SoftColors from '../components/SoftColors.astro';
 import { projects } from '../data/projects';
+import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Théo Goedert | Design, code et transmission" softHero>
   <main id="contenu">
     <section class="hero" aria-labelledby="intro-title">
       <div class="hero-inner container">
       <div class="hero-intro">
-      <h1 id="intro-title" aria-label="Bonjour, moi c’est Théo."><span class="intro-line">Bonjour,</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span></h1>
+      <h1 id="intro-title"><span class="intro-line">Salut !</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span></h1>
       <div class="hero-copy">
-        <p class="hero-lead">Je suis développeur, designer et enseignant.<br />Je vis à Lyon.</p>
-        <p>Je fabrique des sites, des outils et des expériences interactives. Le web est aussi un endroit où j’aime apprendre, expérimenter et me perdre un peu.</p>
+        <p class="hero-lead">Bienvenue sur mon site ! Ici, je partage mes réalisations, mes outils et quelques expérimentations, mêlant code, textes et couleurs.</p>
       </div>
       </div>
       </div>
       <SoftColors />
     </section>
-    <div class="container">
     <section id="projets" class="projects-section" aria-labelledby="projects-title">
-      <div class="section-heading"><h2 id="projects-title">Quelques réalisations</h2></div>
+      <ProjectTheme />
+      <div class="container">
+      <div class="section-heading"><h2 id="projects-title">Selection de projets</h2></div>
       <ul class="project-grid" role="list">{projects.map((project, index) => <Project project={project} index={index} />)}</ul>
+      </div>
     </section>
     <section id="pratique" class="practice-section" aria-labelledby="practice-title">
-      <div class="practice-intro"><h2 id="practice-title">Un peu plus sur moi</h2><p>J’ai étudié à l’École supérieure d’art d’Aix-en-Provence, où j’ai obtenu mon DNSEP en 2017. Le code a pris sa place dans ma pratique, à côté de l’image et du son.</p><p>Je garde un intérêt pour les outils qu’on peut comprendre, modifier et partager. L’accessibilité et la sobriété numérique font partie des questions que je me pose en les construisant.</p></div>
-      <div class="about-notes">
-        <article><h3>Des projets en collectif</h3><p>J’ai cofondé <a href="https://shimsham.design/">Shimsham</a> en 2019. J’y travaille sur des projets web avec des artistes, des designers et des institutions culturelles.</p></article>
-        <article><h3>Enseigner</h3><p>J’enseigne le développement web et la création numérique. J’ai notamment donné des cours à Ada Tech School, Eden School, l’Université d’Aix-Marseille et Wild Code School : développement web, net art, podcasts et usages de l’IA.</p></article>
-        <article><h3>Et aussi</h3><p>Je mixe et participe à <a href="https://radiozai.com/">Radio ZAI</a>. Avec le collectif RAADIOCAARGO, j’ai mené une résidence art-science au GIPSA-Lab, autour du son et de la perception. La photographie, la science-fiction et les promenades sur le web ne sont jamais très loin.</p></article>
+      <div class="container practice-grid">
+      <div class="practice-intro"><h2 id="practice-title">Approches</h2>
+        <p>Travailler dans la tech c'est aussi participer à des coûts écologique importants. Dans ce sens j'esssai de faire au mieux pour en reduire l'impact en favorisant des architecture simple, maintenable et robust.</p>
+        <p>Je m'intéresse à l'autonomie du web et contribue à des projets open-sources.</p>
+      </div>
+      <div class="about-notes flow">
+        <p>Avec <a href="https://shimsham.design/">Shimsham</a>, on travaille sur des projets pour associations, institutions culturelles, festivals, artistes, pme.</p>
+        <article><h3>Transmettre</h3><p>Je transmets mes passions pour le développement web et la création numérique en école, à la fac et en centre de formation.</p></article>
+      </div>
       </div>
     </section>
     <section class="elsewhere-section" aria-labelledby="elsewhere-title">
-      <div class="section-heading"><h2 id="elsewhere-title">À côté</h2><p>Des outils personnels et des expériences qui suivent mes curiosités.</p></div>
+      <div class="container">
+      <div class="section-heading"><h2 id="elsewhere-title">Sidequests</h2><p>J’entretiens plusieurs projets annexes : des outils personnels et des expériences interactives.</p></div>
       <div class="grid side-project-grid">
-        <a class="elsewhere-link" href="https://colorcatchers.co/"><div class="cluster" data-justify="between"><h3>Color Catchers</h3><Icon /></div><p>Un outil pour extraire des palettes de couleurs à partir de photos, les garder et les partager.</p><span>colorcatchers.co</span></a>
-        <a class="elsewhere-link" href="https://promissansfautes.fr/"><div class="cluster" data-justify="between"><h3>Promis Sans Fautes</h3><Icon /></div><p>Un éditeur et correcteur de texte pensé pour les personnes dyslexiques et dysorthographiques.</p><span>promissansfautes.fr</span></a>
-        <a class="elsewhere-link" href="https://softcolors.ludique.dev/"><div class="cluster" data-justify="between"><h3>Soft Colors</h3><Icon /></div><p>Une petite expérience autour des dégradés, des textures et du mouvement. On change les réglages et on regarde ce qui se passe.</p><span>softcolors.ludique.dev</span></a>
+        <a class="elsewhere-link" href="https://app.colorcatchers.co/"><img class="elsewhere-preview" src="/images/side-projects/color-catchers.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Color Catchers</h3><Icon /></div><p>Un outil pour extraire des palettes de couleurs du monde réel et contribuer à une archive collective.</p><span>app.colorcatchers.co</span></a>
+        <a class="elsewhere-link" href="https://promissansfautes.fr/"><img class="elsewhere-preview" src="/images/side-projects/promis-sans-fautes.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Promis Sans Fautes</h3><Icon /></div><p>Un éditeur et correcteur de texte pensé pour les personnes dyslexiques et dysorthographiques.</p><span>promissansfautes.fr</span></a>
+        <a class="elsewhere-link" href="https://softcolors.ludique.dev/"><img class="elsewhere-preview" src="/images/side-projects/soft-colors.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Soft Colors</h3><Icon /></div><p>Une application à côté de Color Catchers pour fabriquer des dégradés, des textures et du mouvement.</p><span>softcolors.ludique.dev</span></a>
+      </div>
+      <div class="grid side-project-grid">
+        <a class="elsewhere-link" href="https://audiosphere.vercel.app/"><img class="elsewhere-preview" src="/images/side-projects/audiosphere.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Audiosphere</h3><Icon /></div><p>Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>.</p><span>audiosphere.vercel.app</span></a>
+        <a class="elsewhere-link" href="https://sound01.netlify.app/"><img class="elsewhere-preview" src="/images/side-projects/sound01.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Sound01</h3><Icon /></div><p>Une pièce sonore générative à écouter dans le navigateur, inspirée de Ryoji Ikeda.</p><span>sound01.netlify.app</span></a>
       </div>
       <div class="grid elsewhere-grid">
-        <a class="elsewhere-link" href="https://jardin.ludique.dev/"><div class="cluster" data-justify="between"><h3>Le jardin numérique</h3><Icon /></div><p>Mes notes, mes lectures et mes dérives sur le web. Les idées y restent parfois inachevées, et j’y reviens à mon rythme.</p><span>jardin.ludique.dev</span></a>
-        <a class="elsewhere-link" href="https://github.com/theopaolo/piloti"><div class="cluster" data-justify="between"><h3>Piloti</h3><Icon /></div><p>Le petit framework CSS que je développe et que j’utilise ici. Une manière de garder mes bases de travail lisibles et de les partager.</p><span>Le code sur GitHub</span></a>
+        <a class="elsewhere-link" href="https://jardin.ludique.dev/"><img class="elsewhere-preview" src="/images/side-projects/jardin.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Le jardin numérique</h3><Icon /></div><p>Mes notes, idées et dérives sur le web.</p><span>jardin.ludique.dev</span></a>
+        <a class="elsewhere-link" href="https://github.com/theopaolo/piloti"><img class="elsewhere-preview" src="/images/side-projects/piloti.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Piloti</h3><Icon /></div><p>Mon framework CSS, basé sur la méthodologie CUBE CSS.</p><span>Le code sur GitHub</span></a>
+      </div>
       </div>
     </section>
     <section id="contact" class="contact-section" aria-labelledby="contact-title">
-      <h2 id="contact-title">M’écrire</h2>
-      <a class="contact-email" href="mailto:theo@ludique.dev">theo@ludique.dev</a>
+      <div class="container cluster contact-inner">
+        <h2 id="contact-title">M’écrire</h2>
+        <a class="contact-email" href="mailto:theo@ludique.dev">theo@ludique.dev</a>
+      </div>
     </section>
-    </div>
   </main>
-  {projects.map(project => <ProjectDialog project={project} />)}
 </Layout>

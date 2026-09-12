@@ -1,0 +1,9 @@
+/* Fragment Sans is the only face on the site, in one weight.
+   Layout.astro preloads the file. */
+@font-face {
+  font-family: 'Fragment Sans';
+  src: url('/fonts/ppfragment-sansregular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

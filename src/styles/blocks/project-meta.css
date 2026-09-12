@@ -1,0 +1,6 @@
+/* Category, year and role, under a project's summary. */
+
+.project-meta {
+  color: var(--muted);
+  font-size: .85rem;
+}
