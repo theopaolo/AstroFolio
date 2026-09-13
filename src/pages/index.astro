@@ -6,6 +6,32 @@ import ProjectTheme from '../components/ProjectTheme.astro';
 import SoftColors from '../components/SoftColors.astro';
 import { projects } from '../data/projects';
 import Layout from '../layouts/Layout.astro';
+
+// Color Catchers and GitHub block framing, so their previews use screenshots.
+const sidequests = [
+  { title: 'Soft Colors', url: 'https://softcolors.ludique.dev/', label: 'softcolors.ludique.dev', image: 'soft-colors', frame: true,
+    summary: 'Une application à côté de Color Catchers pour fabriquer des dégradés, des textures et du mouvement.',
+    background: '#6670d8', foreground: '#eef0ff' },
+  { title: 'Audiosphere', url: 'https://audiosphere.vercel.app/', label: 'audiosphere.vercel.app', image: 'audiosphere', frame: true,
+    summary: 'Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>.',
+    background: '#182838', foreground: '#c9e6ea' },
+  { title: 'Sound01', url: 'https://sound01.netlify.app/', label: 'sound01.netlify.app', image: 'sound01', frame: true,
+    summary: 'Une pièce sonore générative à écouter dans le navigateur, inspirée de Ryoji Ikeda.',
+    background: '#0c0c0c', foreground: '#e9c46a' },
+  { title: 'Color Catchers', url: 'https://app.colorcatchers.co/', label: 'app.colorcatchers.co', image: 'color-catchers', frame: false,
+    summary: 'Un outil pour extraire des palettes de couleurs du monde réel et contribuer à une archive collective.',
+    background: '#262626', foreground: '#f4a259' },
+  { title: 'Promis Sans Fautes', url: 'https://promissansfautes.fr/', label: 'promissansfautes.fr', image: 'promis-sans-fautes', frame: true,
+    summary: 'Un éditeur et correcteur de texte pensé pour les personnes dyslexiques et dysorthographiques.',
+    background: '#e3ebf1', foreground: '#1e2b38' },
+  { title: 'Le jardin numérique', url: 'https://jardin.ludique.dev/', label: 'jardin.ludique.dev', image: 'jardin', frame: true,
+    summary: 'Mes notes, idées et dérives sur le web.',
+    background: '#fbeef6', foreground: '#5c4b75' },
+  { title: 'Piloti', url: 'https://github.com/theopaolo/piloti', label: 'Le code sur GitHub', image: 'piloti', frame: false,
+    summary: 'Mon framework CSS, basé sur la méthodologie CUBE CSS.',
+    background: '#eef5ef', foreground: '#1f6b3a' },
+];
+const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
 ---
 <Layout title="Théo Goedert | Design, code et transmission" softHero>
   <main id="contenu">
@@ -42,18 +68,32 @@ import Layout from '../layouts/Layout.astro';
     <section class="elsewhere-section" aria-labelledby="elsewhere-title">
       <div class="container">
       <div class="section-heading"><h2 id="elsewhere-title">Sidequests</h2><p>J’entretiens plusieurs projets annexes : des outils personnels et des expériences interactives.</p></div>
-      <div class="grid side-project-grid">
-        <a class="elsewhere-link" href="https://app.colorcatchers.co/"><img class="elsewhere-preview" src="/images/side-projects/color-catchers.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Color Catchers</h3><Icon /></div><p>Un outil pour extraire des palettes de couleurs du monde réel et contribuer à une archive collective.</p><span>app.colorcatchers.co</span></a>
-        <a class="elsewhere-link" href="https://promissansfautes.fr/"><img class="elsewhere-preview" src="/images/side-projects/promis-sans-fautes.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Promis Sans Fautes</h3><Icon /></div><p>Un éditeur et correcteur de texte pensé pour les personnes dyslexiques et dysorthographiques.</p><span>promissansfautes.fr</span></a>
-        <a class="elsewhere-link" href="https://softcolors.ludique.dev/"><img class="elsewhere-preview" src="/images/side-projects/soft-colors.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Soft Colors</h3><Icon /></div><p>Une application à côté de Color Catchers pour fabriquer des dégradés, des textures et du mouvement.</p><span>softcolors.ludique.dev</span></a>
-      </div>
-      <div class="grid side-project-grid">
-        <a class="elsewhere-link" href="https://audiosphere.vercel.app/"><img class="elsewhere-preview" src="/images/side-projects/audiosphere.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Audiosphere</h3><Icon /></div><p>Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>.</p><span>audiosphere.vercel.app</span></a>
-        <a class="elsewhere-link" href="https://sound01.netlify.app/"><img class="elsewhere-preview" src="/images/side-projects/sound01.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Sound01</h3><Icon /></div><p>Une pièce sonore générative à écouter dans le navigateur, inspirée de Ryoji Ikeda.</p><span>sound01.netlify.app</span></a>
-      </div>
-      <div class="grid elsewhere-grid">
-        <a class="elsewhere-link" href="https://jardin.ludique.dev/"><img class="elsewhere-preview" src="/images/side-projects/jardin.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Le jardin numérique</h3><Icon /></div><p>Mes notes, idées et dérives sur le web.</p><span>jardin.ludique.dev</span></a>
-        <a class="elsewhere-link" href="https://github.com/theopaolo/piloti"><img class="elsewhere-preview" src="/images/side-projects/piloti.webp" width="640" height="400" alt="" loading="lazy" decoding="async" /><div class="cluster" data-justify="between"><h3>Piloti</h3><Icon /></div><p>Mon framework CSS, basé sur la méthodologie CUBE CSS.</p><span>Le code sur GitHub</span></a>
+      <div class="sidequest-table" data-sidequests>
+        <ul class="sidequest-hand" role="list">
+          {sidequests.map((s, i) => (
+            <li class="sidequest-card" style={`--card-bg:${s.background};--card-ink:${s.foreground};--card-tilt:${tilts[i]}deg`}>
+              <a class="sidequest-link" href={s.url} data-sidequest>
+                <img class="sidequest-preview" src={`/images/side-projects/${s.image}.webp`} width="640" height="400" alt="" loading="lazy" decoding="async" />
+                <div class="cluster" data-justify="between"><h3>{s.title}</h3><Icon /></div>
+                <p set:html={s.summary} />
+                <span>{s.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        {/* The cards remain the links; the mirrored stage is presentational. */}
+        <div class="sidequest-stage" inert>
+          {sidequests.map((s, i) => (
+            <figure class="stage-figure" data-live={i === 0 ? '' : undefined}>
+              <div class="stage-window">
+                {s.frame
+                  ? <iframe data-src={s.url} title={s.title} sandbox="allow-scripts allow-same-origin"></iframe>
+                  : <img src={`/images/side-projects/${s.image}.webp`} width="640" height="400" alt="" loading="lazy" decoding="async" />}
+              </div>
+              <figcaption><span set:html={s.summary} /><span class="stage-domain">{s.label}</span></figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
       </div>
     </section>

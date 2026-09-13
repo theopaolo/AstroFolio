@@ -260,3 +260,29 @@ if (projectsSection && !reducedMotion.matches) {
   }, { rootMargin: '-42% 0px -42% 0px' });
   plates.forEach(plate => band.observe(plate));
 }
+
+// Load a preview only after its card remains selected for 150ms.
+const table = document.querySelector<HTMLElement>('[data-sidequests]');
+if (table && precisePointer.matches && window.matchMedia('(min-width: 951px)').matches) {
+  const figures = [...table.querySelectorAll<HTMLElement>('.stage-figure')];
+  let hold = 0;
+  const show = (index: number) => {
+    figures.forEach((figure, i) => figure.toggleAttribute('data-live', i === index));
+    clearTimeout(hold);
+    hold = window.setTimeout(() => {
+      const frame = figures[index].querySelector<HTMLIFrameElement>('iframe[data-src]');
+      if (!frame) return;
+      frame.src = frame.dataset.src!;
+      delete frame.dataset.src;
+    }, 150);
+  };
+  table.querySelectorAll<HTMLElement>('[data-sidequest]').forEach((link, i) => {
+    link.addEventListener('pointerenter', () => show(i));
+    link.addEventListener('focus', () => show(i));
+  });
+  new IntersectionObserver((entries, observer) => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    show(0);
+    observer.disconnect();
+  }, { rootMargin: '400px 0px' }).observe(table);
+}

@@ -1,54 +1,218 @@
-/* "À côté": personal projects, in grids that get roomier as the list shortens. */
-
 .elsewhere-section {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom in oklab, var(--tint-3) 55%, var(--paper));
 }
 
-.elsewhere-grid { --grid-space: 3rem; }
-
-.side-project-grid {
-  --grid-min: 18rem;
-  --grid-space: 2rem;
-  margin-bottom: 1rem;
+.sidequest-table {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
 }
 
-.elsewhere-link {
-  padding-block: 1.5rem;
-  border-top: 1px solid var(--line);
+.sidequest-hand {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2vw, 2rem) clamp(1rem, 1.6vw, 1.5rem);
+  padding: .5rem;
+}
+
+.sidequest-card {
+  position: relative;
+  transition: --picked 460ms var(--ease);
+}
+
+.sidequest-card:hover,
+.sidequest-card:has(:focus-visible) { z-index: 1; }
+
+.sidequest-link {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  padding: .55rem .55rem .85rem;
+  color: var(--card-ink);
+  background: var(--card-bg);
+  border: 1px solid color-mix(in oklab, var(--card-ink) 35%, var(--card-bg));
+  border-radius: var(--radius-card);
   text-decoration: none;
+  transform: rotate(calc(var(--card-tilt) * (1 - var(--picked))))
+    translateY(calc(var(--picked) * -10px))
+    scale(calc(1 + var(--picked) * .035));
+  box-shadow: 0 calc(var(--picked) * 14px) calc(var(--picked) * 28px) calc(var(--picked) * -10px)
+    light-dark(rgb(from var(--ink) r g b / .35), rgb(0 0 0 / .55));
 }
 
-.elsewhere-preview {
+.sidequest-link > * { padding-inline: .25rem; }
+
+.sidequest-preview {
   display: block;
-  width: min(100%, 15rem);
+  width: 100%;
   height: auto;
+  padding: 0;
   aspect-ratio: 8 / 5;
-  margin-bottom: 1rem;
-  border-radius: 4px;
+  border-radius: calc(var(--radius-card) - 4px);
+  object-fit: cover;
 }
 
-.elsewhere-link h3 { font-size: 1.65rem; }
-
-.elsewhere-link p {
-  max-width: 48ch;
-  margin-block: 1rem;
-  color: var(--muted);
+.sidequest-link .cluster {
+  --cluster-space: .5rem;
+  flex-wrap: nowrap;
+  align-items: flex-start;
 }
 
-.elsewhere-link > span {
-  font-size: .94rem;
+.sidequest-link h3 {
+  font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+  line-height: 1.15;
+}
+
+.sidequest-link svg {
+  flex: none;
+  width: .9em;
+  height: .9em;
+  transform: translate(calc(var(--picked) * .16em), calc(var(--picked) * -.16em));
+}
+
+.sidequest-link p {
+  color: color-mix(in oklab, var(--card-ink) 82%, var(--card-bg));
+  font-size: .92rem;
+  line-height: 1.45;
+}
+
+.sidequest-link > span {
+  font-size: .9rem;
   text-decoration: underline;
   text-underline-offset: .25em;
+}
+
+.sidequest-stage {
+  position: sticky;
+  top: calc(var(--header-height) + 1.5rem);
+  display: grid;
+}
+
+.stage-figure {
+  grid-area: 1 / 1;
+  display: none;
+  opacity: 0;
+  transition: opacity 460ms var(--ease), display 460ms allow-discrete;
+}
+
+.stage-figure[data-live] {
+  display: block;
+  opacity: 1;
+
+  @starting-style { opacity: 0; }
+}
+
+/* Render framed sites at desktop width inside the scaled preview. */
+.stage-window {
+  container-type: size;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.stage-window iframe {
+  display: block;
+  width: 200cqw;
+  height: 200cqh;
+  border: 0;
+  scale: .5;
+  transform-origin: 0 0;
+}
+
+.stage-window img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stage-figure figcaption {
+  max-width: 60ch;
+  margin-top: .8rem;
+  color: var(--muted);
+  font-size: .96rem;
+  line-height: 1.45;
+}
+
+.stage-domain {
+  display: block;
+  margin-top: .25rem;
+  color: var(--ink);
+}
+
+@keyframes card-deal {
+  from {
+    opacity: 0;
+    translate: 0 36px;
+    rotate: 4deg;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sidequest-card {
+      animation: card-deal linear both;
+      animation-timeline: view();
+      animation-range: entry 20px entry 260px;
+    }
+  }
+}
+
+/* Keep card captions available to assistive technology beside the visual stage. */
+@media (min-width: 951px) and (hover: hover) and (pointer: fine) {
+  .sidequest-link :is(p, span) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 950px), (hover: none), (pointer: coarse) {
+  .sidequest-table { grid-template-columns: 1fr; }
+
+  .sidequest-hand { grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+
+  .sidequest-stage { display: none; }
 }
 
 @media (max-width: 650px) {
   .elsewhere-section { padding-bottom: 2.5rem; }
 
-  .elsewhere-grid,
-  .side-project-grid { --grid-space: .75rem; }
+  .sidequest-hand {
+    grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+  }
+
+  .sidequest-link {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    gap: .3rem .8rem;
+    align-items: start;
+    padding: .6rem;
+    transform: rotate(calc(var(--card-tilt) * .5 * (1 - var(--picked))))
+      translateY(calc(var(--picked) * -10px));
+  }
+
+  .sidequest-preview { grid-row: 1 / 4; }
+
+  .sidequest-link p { font-size: .88rem; }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .elsewhere-link:hover h3 { color: var(--accent-ink); }
+  .sidequest-card:hover { --picked: 1; }
 }
+
+.sidequest-card:has(.sidequest-link:focus-visible) { --picked: 1; }
