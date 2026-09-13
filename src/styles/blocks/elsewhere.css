@@ -1,5 +1,5 @@
 .elsewhere-section {
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
   background: linear-gradient(to bottom in oklab, var(--tint-3) 55%, var(--paper));
 }
 

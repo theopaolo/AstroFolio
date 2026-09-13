@@ -23,11 +23,8 @@
   padding-top: 24px;
   overflow: clip;
   color: var(--ink);
-  border-radius: clamp(16px, 1.7vw, 26px);
-  background:
-    radial-gradient(ellipse at 40% 40%, #b2bdec, transparent 65%),
-    radial-gradient(ellipse at 100% 80%, #7883d9, transparent 60%),
-    #8d99e4;
+  border-radius: var(--radius-plate);
+  background: var(--wave-paint);
 }
 
 .hero-inner {

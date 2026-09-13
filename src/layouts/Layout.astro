@@ -47,15 +47,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <a href="/#projets">Projets</a>
         <a href="/#pratique">À propos</a>
         <a class="nav-garden" href="https://jardin.ludique.dev/">Le jardin<Icon /></a>
-        <a href="/#contact">Contact</a>
+        <a href="#contact">Contact</a>
         <button class="theme-toggle" type="button" aria-label="Activer le thème sombre" hidden><span class="moon"><Icon name="moon" /></span><span class="sun"><Icon name="sun" /></span></button>
       </nav>
     </header>
     <slot />
-    <footer class="site-footer container cluster" data-justify="between">
-      <p>Théo Goedert, à Lyon et sur le web.</p>
-      <div class="cluster"><a href="https://github.com/theopaolo">GitHub</a><a href="https://bsky.app/profile/theogs.bsky.social">Bluesky</a><a href="https://www.are.na/theo-paolo/channels">Are.na</a><a href="https://www.instagram.com/theogoedert/">Instagram</a></div>
-      <p>Fait avec <a href="https://github.com/theopaolo/piloti">Piloti</a> et Astro.</p>
+    <footer id="contact" class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-contact">
+          <h2>M’écrire</h2>
+          <a class="footer-email" href="mailto:theo@ludique.dev">theo@ludique.dev</a>
+        </div>
+        <div class="footer-meta cluster" data-justify="between">
+          <p>Théo Goedert, à Lyon et sur le web.</p>
+          <div class="cluster"><a href="https://github.com/theopaolo">GitHub</a><a href="https://bsky.app/profile/ludique.dev">Bluesky</a><a href="https://www.are.na/theo-paolo/channels">Are.na</a><a href="https://www.instagram.com/theogoedert/">Instagram</a></div>
+          <p>Fait avec <a href="https://github.com/theopaolo/piloti">Piloti</a> et Astro.</p>
+        </div>
+      </div>
     </footer>
     <script>
       import '../scripts/site';

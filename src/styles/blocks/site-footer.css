@@ -1,27 +1,78 @@
+/* The footer is the hero's bookend: a plate of the same indigo, laid on the paper
+   with the same frame and radius, so the page closes the way it opened. Writing
+   is the one thing the end of the page asks for, so the address gets the size,
+   and the rest of the footer sits under it on one line.
+
+   Like the hero, the plate keeps its palette in both themes, so it re-points the
+   theme tokens to the indigo ink once. */
+
 .site-footer {
-  --cluster-space: 1rem;
-  padding-block: 1.7rem;
-  border-top: 1px solid var(--line);
+  --ink: var(--wave-ink);
+  --muted: rgb(from var(--wave-ink) r g b / .72);
+  --accent-ink: var(--ink);
+  --focus-color: var(--ink);
+  --line: rgb(from var(--wave-line) r g b / .35);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(360px, 46svh, 520px);
+  margin: var(--frame);
+  padding-block: clamp(2.5rem, 4vw, 4rem) clamp(1.25rem, 2vw, 1.75rem);
+  color: var(--ink);
+  font-size: .9rem;
+  border-radius: var(--radius-plate);
+  background: var(--wave-paint);
+}
+
+.footer-inner {
+  display: grid;
+  gap: clamp(3rem, 7vw, 7rem);
+}
+
+.footer-contact {
+  display: grid;
+  gap: .6rem;
+}
+
+.footer-contact h2 { font-size: 1.15rem; }
+
+/* One step under the hero title. Wraps anywhere rather than leave the plate on
+   a phone too narrow for it. */
+.footer-email {
+  justify-self: start;
+  font-size: clamp(2rem, 8.5vw, 5.2rem);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  text-underline-offset: .14em;
+  text-decoration-color: rgb(from var(--ink) r g b / .35);
+  transition: text-decoration-color 300ms var(--ease);
+}
+
+.footer-meta {
+  --cluster-space: 1rem 2rem;
+  padding-top: 1rem;
   color: var(--muted);
-  font-size: .82rem;
+  border-top: 1px solid var(--line);
 }
 
-/* The links sit closer together than the three groups of the footer. */
-.site-footer .cluster { --cluster-space: 1.25rem; }
+/* The links sit closer together than the three groups of the row. */
+.footer-meta .cluster { --cluster-space: 1.25rem; }
 
-.site-footer a { text-decoration: none; }
-
-@media (max-width: 950px) {
-  .site-footer { justify-content: flex-start; }
-}
+.footer-meta a { text-decoration: none; }
 
 @media (max-width: 650px) {
-  .site-footer {
+  .site-footer { min-height: 0; }
+
+  .footer-inner { gap: 3rem; }
+
+  .footer-meta {
     flex-direction: column;
     align-items: flex-start;
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .site-footer a:hover { color: var(--accent-ink); }
+  .footer-email:hover { text-decoration-color: currentColor; }
+
+  .footer-meta a:hover { color: var(--ink); }
 }

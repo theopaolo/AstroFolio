@@ -35,8 +35,13 @@
     oklch(from var(--paper) calc(l + .038) .058 346)
   );
 
-  /* Indigo ink for the hero, which sits over the Soft Colors waves. Neither theme
-     changes it: the waves are the same in both. */
+  /* The indigo plate: the hero, under the Soft Colors waves, and the footer that
+     closes the page the way the hero opened it. Neither theme changes these: the
+     waves are the same in both. */
+  --wave-paint:
+    radial-gradient(ellipse at 40% 40%, #b2bdec, transparent 65%),
+    radial-gradient(ellipse at 100% 80%, #7883d9, transparent 60%),
+    #8d99e4;
   --wave-ink: #181d3b;
   --wave-line: rgb(32 38 75 / .22);
 
@@ -52,8 +57,9 @@
   /* Scroll distance over which the header's hairline fades in. */
   --header-reveal: 96px;
 
-  /* Project cards and covers. The other radii belong to one block each and stay
-     in that block. */
+  /* The two plates, and the project cards and covers. The other radii belong to
+     one block each and stay in that block. */
+  --radius-plate: clamp(16px, 1.7vw, 26px);
   --radius-card: 10px;
 
   --focus-color: var(--ink);
