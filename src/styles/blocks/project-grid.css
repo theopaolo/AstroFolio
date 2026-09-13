@@ -1,54 +1,9 @@
-/* Quelques réalisations.
-
-   Each project is a plate: the project's colour is the ground, the image sits
-   on it inside a mat, and the mat's lower margin carries the category and the
-   year in the project's own ink, the way a print carries its caption. The title
-   steps out of the plate onto the page, set in the page's ink and sized by how
-   much room the plate takes, so the section carries on the type scale the hero
-   opens with instead of restarting it small.
-
-   The plates lie on a twelve column field. Every row starts on the first
-   column and none of them fills its twelve, so the left edge stays firm while
-   the empty column walks inward, from the eighth to the sixth to the fifth.
-   The air is part of the composition rather than what is left over once three
-   equal cards have been placed.
-
-   Seven plates make one rhythm. Project.astro writes the position in the
-   rhythm on data-plate and the plate's weight on data-scale; an eighth project
-   starts the rhythm again. Both attributes go quiet below 950px, where the
-   field folds into pairs and then into one column.
-
-   Pointing at a plate repaints the section in that project's colour and picks
-   the plate up off the sheet: it lifts, tips half a degree, casts a shadow into
-   the space it left, its print stirs in its mat, its caption draws its rule and
-   its summary is written in the mat's bottom margin. Each plate also arrives as
-   it comes onto the screen. A touch screen has no pointer to repaint with, so
-   there the section takes the colour of whichever plate is passing the middle
-   of the screen, at a third of the strength. There is no gesture to reveal a
-   summary with either, so there the summary is simply printed.
-
-   Two mechanisms. The section theme rides on --section-ground, --section-shade,
-   --section-ink and --coat-strength, which ProjectTheme.astro sets per project,
-   because CSS cannot read a custom property off a descendant; site.ts writes the
-   scrolled version of the first three under them. Everything on the plate itself
-   rides on --picked, one number the pointer and the keyboard both drive, so every
-   part of the gesture moves on the same clock.
-
-   Colours come from the project data: --project-bg and --project-ink set inline
-   by Project.astro for the plate, the palette for the strip, and two of that
-   palette through ProjectTheme.astro for the section. */
-
 .projects-section {
-  /* Nothing picked: the section keeps the page's own ink, and the coat below
-     falls back to whatever site.ts wrote while scrolling, or to nothing. The
-     seven palettes that replace them are in ProjectTheme.astro. */
   --section-ground: var(--scroll-ground, transparent);
   --section-shade: var(--scroll-shade, transparent);
   --coat-strength: var(--scroll-strength, 0);
   --section-ink: var(--ink);
   position: relative;
-  /* So the coat below lands between this background and the content, rather
-     than behind the whole page. */
   isolation: isolate;
   padding-top: 2rem;
   padding-bottom: clamp(1rem, 2vw, 2rem);
@@ -58,10 +13,6 @@
     var(--tint-1) 50%,
     var(--tint-2)
   );
-  /* One clock for the section, the same 460ms the plates run on. The coat below
-     reads these while they interpolate and needs no transition of its own, so
-     crossing from one plate to the next drifts the page from one project's
-     colour to the other instead of cutting. */
   transition:
     color 460ms var(--ease),
     --coat-strength 460ms var(--ease),
@@ -69,16 +20,6 @@
     --section-shade 460ms var(--ease);
 }
 
-/* The project's colour, laid over the section's own ground and under everything
-   standing on it. Two stops and a
-   hand's width apart in the same way --tint-1 and --tint-2 are: the ground the
-   project is printed in, and the same ground carrying a seventh of the darkest
-   colour in its palette. Read as one colour with a little depth in it, not as a
-   gradient.
-
-   Upright and measured against the viewport, like every other section ground on
-   this page. Stretched over the section, which is several screens tall, the two
-   stops would drift so far apart that the ramp would start to show. */
 .projects-section::before {
   content: "";
   position: absolute;
@@ -97,7 +38,6 @@
 .project-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  /* Plates hang from their own top, which is what makes the drops below read. */
   align-items: start;
   column-gap: clamp(1rem, 1.8vw, 1.75rem);
   row-gap: clamp(2rem, 3.4vw, 3.25rem);
@@ -107,11 +47,7 @@
   position: relative;
   grid-column: var(--plate-column, auto);
   margin-top: var(--plate-drop, 0);
-  /* Which way the plate tips when it is picked up. Alternated below, so no two
-     plates in a row lean the same way. */
   --plate-tilt: 0.55deg;
-  /* One clock: --picked drives the lift, the print, the caption rule and the
-     control strip, so every part of the gesture moves together. */
   transition: --picked 460ms var(--ease);
 }
 
@@ -119,8 +55,6 @@
   --plate-tilt: -0.55deg;
 }
 
-/* The rhythm. Three rows of two and a last plate on its own, each row a column
-   short of the full twelve. */
 .project-plate[data-plate="0"] {
   --plate-column: 1 / span 7;
 }
@@ -146,8 +80,6 @@
   --plate-column: 1 / span 8;
 }
 
-/* Three weights: how wide the plate is decides how big its title is set and how
-   deep its image is cropped. */
 .project-plate[data-scale="l"] {
   --title-size: clamp(1.9rem, 2.9vw, 2.5rem);
   --note-size: 0.95rem;
@@ -166,8 +98,6 @@
   --plate-ratio: 1.18;
 }
 
-/* Reversed, so the link still reads title first while the title sits under the
-   plate. Nothing inside takes focus on its own, so nothing gets out of order. */
 .plate-link {
   display: flex;
   flex-direction: column-reverse;
@@ -199,24 +129,18 @@
   aspect-ratio: var(--plate-ratio);
   object-fit: cover;
   object-position: center;
-  /* The print stirs in its mat, just enough to say it is loose. The frame clips
-     the top, so nothing leaves the plate. */
   transform: translateY(calc(var(--picked) * -4px));
 }
 
 .plate-note {
   display: flex;
   align-items: center;
-  /* One gap each side of the rule below. */
   gap: 0.8rem;
   margin-top: 0.85em;
   font-size: var(--note-size);
   line-height: 1.3;
 }
 
-/* The rule a caption gets on a proof sheet, drawn from the category across to
-   the year. It takes the leftover width at every size, which is what holds the
-   two ends apart while it is not there. */
 .plate-note::after {
   content: "";
   order: 1;
@@ -233,18 +157,12 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* The colour control strip. Four patches pulled out of the project's own image,
-   sitting in the mat's margin the way a proof carries its reference colours. */
 .plate-bar {
   display: flex;
   gap: 3px;
   margin-top: 0.7em;
 }
 
-/* Each patch reads the same clock as everything else, an eighth of a turn behind
-   the one before it, so the strip fills left to right on the way in and empties
-   right to left on the way out. No transition of its own: --picked is already
-   moving, and its own would only chase it. */
 .plate-bar span {
   --patch-phase: clamp(
     0,
@@ -259,14 +177,6 @@
   transform-origin: bottom;
 }
 
-/* The project in one sentence, which used to cost a click. Two lines of room in
-   the mat's bottom margin, held whether or not the summary is showing: the grid
-   must not move under the pointer that is picking a plate up. Empty it reads as
-   the deeper bottom margin a mounted print has anyway.
-
-   Three lines would fit the longest of them whole at every width, and would
-   leave a hand of empty mat under the six others. Two lines and an ellipsis on
-   the one that overruns. */
 .plate-summary {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -280,16 +190,12 @@
   transform: translateY(calc((1 - var(--picked)) * 5px));
 }
 
-/* The title stands on the page rather than on the plate, so it takes the page's
-   ink and not the project's. */
 .plate-title {
   font-size: var(--title-size);
   line-height: 1.08;
   color: inherit;
 }
 
-/* The arrow is set with the title, on its line and at its size. Piloti's reset
-   makes every svg a block, which would drop it under the title. */
 .plate-title svg {
   display: inline-block;
   width: 0.52em;
@@ -302,17 +208,10 @@
   );
 }
 
-/* Both ways in. The keyboard gets the whole gesture, not a rectangle. */
 .project-plate:has(.plate-link:focus-visible) {
   --picked: 1;
 }
 
-/* Each plate arrives as it reaches the screen.
-
-   The range is measured in pixels, not in percentages of the entry: a plate
-   seven columns wide is taller than the screen, and a percentage range would
-   leave it half arrived for the whole time it is in view. 300px of scroll,
-   whatever the plate. */
 @keyframes plate-arrival {
   from {
     opacity: 0;
@@ -334,15 +233,12 @@
   }
 }
 
-/* Two columns, and the field keeps a full width plate every third one so the
-   rhythm survives the fold. */
 @media (max-width: 950px) {
   .project-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
     row-gap: clamp(2rem, 4vw, 3rem);
   }
 
-  /* Written with the attribute, so these outweigh the seven rules above. */
   .project-grid .project-plate[data-plate] {
     --title-size: clamp(1.3rem, 2.6vw, 1.7rem);
     --note-size: 0.85rem;
@@ -389,8 +285,6 @@
     padding: 3.5%;
   }
 
-  /* One column, so a third line costs the grid nothing and the two longest
-     summaries are read whole. */
   .plate-summary {
     -webkit-line-clamp: 3;
     height: auto;
@@ -403,8 +297,6 @@
   }
 }
 
-/* No pointer, so no gesture to hold the summary back behind. It is printed, and
-   the room the pointer version reserves for it is room it is already using. */
 @media (hover: none), (pointer: coarse) {
   .plate-summary {
     opacity: 1;

@@ -8,9 +8,6 @@ const syncTheme = () => {
 };
 if (themeButton) {
   themeButton.hidden = false;
-  /* The button starts hidden, so its entrance animation is created here rather
-     than at load and its delay would count from this moment. The wordmark holds
-     the header's real clock, and the button joins it. */
   const wordmarkEntrance = document.querySelector('.wordmark')?.getAnimations()
     .find(animation => animation instanceof CSSAnimation && animation.animationName === 'header-enter');
   if (wordmarkEntrance?.startTime != null) {
@@ -33,8 +30,7 @@ if (header) {
   }).observe(header);
 }
 
-// Opening the page away from the top (anchor link, restored scroll) skips the entrance.
-// One-way on purpose: the flag is never removed, so scrolling back up never replays it.
+// Do not replay the entrance after anchor navigation or restored scroll.
 const skipIntro = () => {
   if (window.scrollY > 4) document.body.dataset.introSkip = '';
 };
@@ -45,25 +41,7 @@ window.addEventListener('pageshow', skipIntro);
 const precisePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-/* One project crosses from the index to its page and back.
-
-   A plate on the index, the header of a project page and a card in that page's
-   rail are three drawings of the same project, and each of them marks its six
-   parts with data-vt. Handing those parts their view transition names on both
-   sides of a navigation is what makes the browser carry them across.
-
-   One project at a time: a name may belong to only one rendered element in a
-   document, and seven plates would all answer to plate-print at once. The one
-   that gets the names is the project the navigation is about, which is the
-   project being opened, or, on the way back to the index, the one being left.
-
-   pageswap writes that slug down before the document goes, pagereveal reads it
-   on the other side. Through sessionStorage rather than through the history
-   entry, because the entry is only readable where the Navigation API is, and
-   these two events shipped elsewhere without it.
-
-   Firefox has neither event and ignores @view-transition, so it navigates
-   plainly and none of this runs. */
+// View-transition names must be unique, so only the navigating project gets them.
 type PageEvent = Event & {
   viewTransition?: ViewTransition | null;
   activation?: { entry?: { url: string } | null } | null;
@@ -83,10 +61,7 @@ const clearParts = () => {
     .forEach(part => { part.style.viewTransitionName = ''; });
 };
 
-/* Where the navigation is headed. The history entry says so wherever it is
-   readable; where it is not, the last link pressed says so, and the second and
-   a half is there so that a back button pressed long afterwards does not get
-   answered with a stale address. */
+// `activation.entry` is unavailable in some browsers, so retain the latest click briefly.
 let pressed = { url: '', at: -Infinity };
 document.addEventListener('click', event => {
   const link = (event.target as Element | null)?.closest?.('a[href]');
@@ -100,7 +75,6 @@ listen('pageswap', event => {
   if (!event.viewTransition) return;
   const heading = event.activation?.entry?.url
     ?? (performance.now() - pressed.at < 1500 ? pressed.url : undefined);
-  // Opening a project, or leaving one for anywhere else.
   const crossing = projectSlug(heading) ?? projectSlug(location.href);
   if (!crossing) return;
   try { sessionStorage.setItem(CROSSING, crossing); } catch {}
@@ -110,8 +84,6 @@ listen('pageswap', event => {
 listen('pagereveal', event => {
   if (!event.viewTransition) return;
   let crossing: string | null = null;
-  // Read once and spent: the next navigation that has something to carry will
-  // write its own, and a leftover would name a plate nothing is arriving into.
   try {
     crossing = sessionStorage.getItem(CROSSING);
     sessionStorage.removeItem(CROSSING);
@@ -144,7 +116,7 @@ document.querySelectorAll<HTMLElement>('[data-name-portrait]').forEach(wrapper =
   const animate = (time: number) => {
     let remaining = Math.min((time - lastTime) / 1000, .05);
     lastTime = time;
-    // Match the React portrait's spring: stiffness 120, damping 25.
+    // Match the original portrait spring.
     while (remaining > 0) {
       const step = Math.min(remaining, 1 / 120);
       velocityX += ((targetX - currentX) * 120 - velocityX * 25) * step;
@@ -229,17 +201,7 @@ document.querySelectorAll<HTMLElement>('[data-name-portrait]').forEach(wrapper =
   reducedMotion.addEventListener('change', () => { position(); setOpen(false); });
   precisePointer.addEventListener('change', () => { position(); setOpen(false); });
 });
-
-
-/* Without a pointer the projects section would sit still, which is every touch
-   screen and every visitor who only scrolls. So the plate passing the middle of
-   the screen hands the section its colour, at a fraction of the strength the
-   pointer gets: project-grid.css reads --scroll-ground and --scroll-shade as the
-   coat's fallback, and ProjectTheme.astro's rules override them under the
-   pointer.
-
-   Nothing is cleared on the way out: the last colour stays until another plate
-   takes the band, which keeps it from flickering off between two rows. */
+// On touch screens, the first plate crossing the viewport center colors the section.
 const projectsSection = document.querySelector<HTMLElement>('.projects-section');
 if (projectsSection && !reducedMotion.matches) {
   const plates = [...document.querySelectorAll<HTMLElement>('.project-plate')];
@@ -249,9 +211,6 @@ if (projectsSection && !reducedMotion.matches) {
       const plate = entry.target as HTMLElement;
       if (entry.isIntersecting) inBand.add(plate); else inBand.delete(plate);
     }
-    // Rows hold two plates and both cross the band together, so the one that
-    // leads takes it: the left one, which is where every row starts. Picking the
-    // nearest to the middle instead would let the two swap as you scroll.
     const palette = plates.find(plate => inBand.has(plate))?.dataset.palette?.split(',');
     if (!palette) return;
     projectsSection.style.setProperty('--scroll-ground', palette[0]);

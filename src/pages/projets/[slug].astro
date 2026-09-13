@@ -6,8 +6,6 @@ import { projects, type Project } from '../../data/projects';
 export function getStaticPaths() {
   return projects.map((project, index) => ({
     params: { slug: project.slug },
-    /* The rail at the foot of the page, opening on the project that follows
-       this one and running back round to the one before it. */
     props: { project, others: [...projects.slice(index + 1), ...projects.slice(0, index)] },
   }));
 }
@@ -16,9 +14,6 @@ const { project: p, others } = Astro.props;
 ---
 <Layout title={`${p.title} | Théo Goedert`} description={p.summary}>
   <main id="contenu" class="project-page">
-    {/* The header and the cover together are what the plate on the index turns
-        into, so they are what carries the project's slug and the data-vt marks
-        site.ts names. The rail below carries the other projects' own. */}
     <div class="project-opening" data-project-card={p.slug} style={`--project-bg:${p.background};--project-ink:${p.foreground}`}>
       <header class="project-hero" data-vt="ground">
         <div class="container project-hero-inner">
@@ -34,9 +29,6 @@ const { project: p, others } = Astro.props;
           </div>
         </div>
       </header>
-      {/* Pulled up into the header's bottom margin, so the print sits half on
-          the project's ground and half on the page, the way it sits in its mat
-          on the index. */}
       <div class="container">
         <Image class="project-cover" src={p.image} alt={p.imageAlt ?? `Le site ${p.title}`} widths={[600, 1000, 1500]} sizes="(max-width: 1500px) 92vw, 1400px" format="webp" loading="eager" fetchpriority="high" data-vt="print" />
       </div>

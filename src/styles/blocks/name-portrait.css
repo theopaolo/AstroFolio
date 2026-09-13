@@ -1,7 +1,3 @@
-/* The portrait that appears next to the name. site.ts follows the pointer with a
-   spring and writes the transform on .portrait-position inline; the CSS holds the
-   resting offset and the reveal. */
-
 .name-portrait {
   --portrait-size: 112px;
   position: relative;
@@ -19,8 +15,6 @@
   text-decoration: none;
 }
 
-/* Only the standalone trigger is underlined. In the header the name is a link
-   inside the wordmark and carries no line of its own. */
 button.portrait-trigger {
   text-decoration: underline;
   text-decoration-color: var(--line);
@@ -51,7 +45,6 @@ button.portrait-trigger {
   transition: opacity 140ms ease-out, transform 220ms var(--ease), visibility 0s 220ms;
 }
 
-/* Exception: open. Above the title so it can overlap the line below. */
 .name-portrait[data-open='true'] { z-index: 6; }
 
 .name-portrait[data-open='true'] .portrait-image {
@@ -61,8 +54,6 @@ button.portrait-trigger {
   transition-delay: 0s;
 }
 
-/* Exception: opened from the keyboard, which places the portrait without the
-   spring, so it should not slide either. */
 .name-portrait[data-keyboard='true'] .portrait-position,
 .name-portrait[data-keyboard='true'] .portrait-image {
   transition: none;

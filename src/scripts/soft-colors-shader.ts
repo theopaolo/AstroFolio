@@ -38,9 +38,7 @@ vec3 oklabToLinear(vec3 lab) {
     );
 }
 
-// The one conversion that genuinely varies per pixel: the blended result on its
-// way back out to the framebuffer.
-vec3 fromBlend(vec3 lab) {
+    vec3 fromBlend(vec3 lab) {
     return linearToSrgb(oklabToLinear(lab));
 }
 
@@ -110,7 +108,7 @@ vec3 sampleWaves(vec2 uv, float t) {
 
 
 void main() {
-  // Keep the portfolio text readable even at the darkest wave settings.
+  // Preserve text contrast over dark waves.
   vec3 linear = clamp(oklabToLinear(sampleWaves(vUv, time)), 0.0, 1.0);
   float luminance = dot(linear, vec3(0.2126, 0.7152, 0.0722));
   float lift = clamp((0.265 - luminance) / max(1.0 - luminance, 0.0001), 0.0, 1.0);

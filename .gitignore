@@ -2,6 +2,12 @@
 dist/
 .astro/
 .output/
+output/
+
+# local tool output
+.impeccable/
+.playwright-cli/
+.sisyphus/
 
 # dependencies
 node_modules/

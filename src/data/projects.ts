@@ -11,10 +11,7 @@ export interface Project {
   slug: string; title: string; year?: string; category: string; role: string;
   summary: string; description: string[]; image: ImageMetadata;
   background: string; foreground: string;
-  /* Five colours read off the project's own image, opening with the ground and
-     the ink above. The plate prints them as a control strip and the section
-     paints itself with them while the project is picked. Change background or
-     foreground and change the first two here with them. */
+  // Five colors sampled from the project image for the plate and section theme.
   palette: [string, string, string, string, string];
   url?: string;
   imageAlt?: string; urlLabel?: string;

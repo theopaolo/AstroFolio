@@ -1,12 +1,3 @@
-/* The full height intro, a plate of Soft Colors waves laid on the paper: --frame
-   of page shows on three sides and the header band on the fourth. Everything
-   inside it sits on the waves, so the block re-points the theme tokens to the
-   indigo ink once and lets the parts inside keep reading --ink, --line and
-   --focus-color as usual.
-
-   The hero isolates, so the z-indexes below are local to it: 1 the copy, 2 the
-   title, 4 the Soft Colors controls, 5 the portrait. */
-
 .hero {
   --ink: var(--wave-ink);
   --muted: var(--ink);
@@ -16,8 +7,6 @@
   position: relative;
   isolation: isolate;
   display: flex;
-  /* The header, the plate and the paper under it add up to a screenful, less the
-     sliver of the next section that shows there is more below. */
   min-height: clamp(620px, calc(94svh - var(--header-height) - 2 * var(--frame)), 880px);
   margin: var(--frame);
   padding-top: 24px;
@@ -44,7 +33,6 @@
   text-align: center;
 }
 
-/* Above the copy, so the portrait can hang over it. */
 .hero h1 {
   position: relative;
   z-index: 2;
@@ -66,12 +54,6 @@
   margin-bottom: 1rem;
   font-size: clamp(1.3rem, 1.8vw, 1.6rem);
   line-height: 1.32;
-}
-
-.hero-copy > p + p {
-  max-width: 48ch;
-  margin-inline: auto;
-  color: var(--muted);
 }
 
 @media (max-width: 950px) {

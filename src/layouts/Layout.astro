@@ -2,11 +2,10 @@
 import '../styles/site.css';
 import Icon from '../components/Icon.astro';
 import NamePortrait from '../components/NamePortrait.astro';
-interface Props { title: string; description?: string; image?: string; softHero?: boolean; }
+interface Props { title: string; description?: string; softHero?: boolean; }
 const {
   title,
   description = 'Théo Goedert, développeur, designer et enseignant à Lyon. Projets web, expériences personnelles, notes et détours entre l’image, le code et le son.',
-  image = '/social.png',
   softHero = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -27,7 +26,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={new URL('/social.png', Astro.site)} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Théo Goedert, design, code et transmission, avec une sélection de projets web." />

@@ -1,15 +1,3 @@
-/* Portfolio styles, CUBE CSS on top of Piloti.
-
-   settings     design decisions, Piloti's first and this site's overrides after
-   reset        Piloti's reset
-   base         bare element styles
-   compositions Piloti's layout primitives: container, cluster, grid, stack, flow
-   components   the site's blocks, one file each in blocks/
-   utilities    single job classes
-
-   Piloti's own base layer stays out: it sizes headings from its type scale and
-   letter-spaces h1, both of which this site decides per block. */
-
 @layer settings, reset, base, compositions, components, utilities;
 
 @import 'piloti/settings.css' layer(settings);
@@ -21,7 +9,6 @@
 @import './settings/properties.css';
 @import './settings/tokens.css' layer(settings);
 @import './base/global.css' layer(base);
-/* Unlayered: @view-transition is a document level at-rule, not a cascade of
-   its own, and the pseudo elements it styles sit outside every layer. */
+/* Document-level view-transition rules stay outside cascade layers. */
 @import './base/view-transitions.css';
 @import './blocks/index.css' layer(components);

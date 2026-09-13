@@ -1,8 +1,5 @@
 import { fragmentSource, vertexSource } from './soft-colors-shader';
 
-/* The hero offers a palette, and SoftColors.astro holds those three. Everything
-   else is fixed here, at the values that read best behind the title. Soft
-   Colors, the tool listed further down the page, is where they all move. */
 const speed = 1;
 const frequency = .75;
 const orbitRadius = 1;
@@ -90,8 +87,6 @@ function mountSoftColors(stage: HTMLElement) {
   }
 
   function syncUniforms() {
-    /* Markup ships one radio checked and the browser may restore another on a
-       back navigation. Either way one is, so the fallback is only for safety. */
     const checked = palette.find(input => input.checked) ?? palette[0];
     const colors = checked.dataset.colors!.split(' ');
     gpu.uniform3fv(locations.waveColors, new Float32Array([...colors, colors[0]].flatMap(oklab)));
