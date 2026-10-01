@@ -5,7 +5,7 @@ import NamePortrait from '../components/NamePortrait.astro';
 interface Props { title: string; description?: string; softHero?: boolean; }
 const {
   title,
-  description = 'Théo Goedert, développeur et designer indépendant. Création de sites web et d’outils numériques, seul ou avec le collectif Shim Sham.',
+  description = 'Théo Goedert, développeur, designer et enseignant à Lyon. Projets web, expériences personnelles, notes et détours entre l’image, le code et le son.',
   softHero = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -43,9 +43,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <header class="site-header cluster" data-justify="between">
       <div class="wordmark"><NamePortrait name="Théo Goedert" id="portrait-header" href="/" /></div>
       <nav class="cluster" aria-label="Navigation principale">
+        <a href="/#sidequests">Sidequests</a>
         <a href="/#projets">Réalisations</a>
-        <a href="/#accompagnement">Approche</a>
-        <a class="nav-garden" href="https://shimsham.design/">Shim Sham<Icon /></a>
+        <a class="nav-garden" href="https://jardin.ludique.dev/">Le jardin<Icon /></a>
         <a href="#contact">Contact</a>
         <button class="theme-toggle" type="button" aria-label="Activer le thème sombre" hidden><span class="moon"><Icon name="moon" /></span><span class="sun"><Icon name="sun" /></span></button>
       </nav>
@@ -58,9 +58,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           <a class="footer-email" href="mailto:theo@ludique.dev">theo@ludique.dev</a>
         </div>
         <div class="footer-meta cluster" data-justify="between">
-          <p>Théo Goedert</p>
+          <p>Théo Goedert, à Lyon et sur le web.</p>
           <div class="cluster"><a href="https://github.com/theopaolo">GitHub</a><a href="https://bsky.app/profile/ludique.dev">Bluesky</a><a href="https://www.are.na/theo-paolo/channels">Are.na</a><a href="https://www.instagram.com/theogoedert/">Instagram</a></div>
-          <p>Membre du collectif <a href="https://shimsham.design/">Shim Sham</a>.</p>
+          <p>Fait avec <a href="https://github.com/theopaolo/piloti">Piloti</a> et Astro.</p>
         </div>
       </div>
     </footer>

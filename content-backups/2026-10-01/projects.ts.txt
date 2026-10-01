@@ -46,7 +46,7 @@ export const projects: Project[] = [
     category: 'Mode et boutique en ligne', role: 'Développement web',
     summary: 'Une boutique en ligne qui réunit collections de vêtements et récits de savoir-faire textiles.',
     description: [
-      'Le site de Sera réunit une boutique de vêtements et des récits sur le tissage, la broderie et les collaborations artistiques du studio.',
+      'Le site de Sera présente les collections du studio et les savoir-faire textiles qui les accompagnent. La boutique côtoie des récits consacrés au tissage, à la broderie et aux collaborations artistiques.',
       'J’ai participé au développement du site avec N. Zonca et Stéphane Kouchian, sur un design de Laand Studio.',
     ],
     image: sera, imageAlt: 'La page d’accueil de Sera, avec deux photographies de la collection',
@@ -63,8 +63,8 @@ export const projects: Project[] = [
     category: 'Exposition en ligne', role: 'Webdesign et direction technique',
     summary: 'Une exposition en ligne réunissant les travaux de 42 photographes.',
     description: [
-      'Pendant la pandémie, cette exposition en ligne permettait de présenter les travaux des photographes malgré les annulations d’expositions en salle.',
-      'Une chronologie réunit 42 photographes, trois projets au long cours et neuf récits numériques. Des entretiens audio et des vidéos du jury accompagnent les photographies. J’ai participé au webdesign et assuré la direction technique du projet.',
+      'Face aux expositions annulées pendant la pandémie, une exposition en ligne rend les travaux des photographes accessibles au-delà des salles et des frontières.',
+      'Une chronologie réunit 42 photographes, trois projets au long cours et neuf récits numériques. Des entretiens audio et des vidéos du jury prolongent la découverte des images. J’ai participé au webdesign et assuré la direction technique du projet.',
     ],
     image: worldPressPhoto, background: '#df071b', foreground: '#ffffff',
     palette: ['#df071b', '#ffffff', '#0c0c0c', '#4b4c4c', '#939493'],
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     summary: 'Le site d’une association de cuisine et de formation à Athènes.',
     description: [
       'À Athènes, Saffron Kitchen Project accompagne les personnes réfugiées et vulnérables à travers la cuisine. L’association propose des repas et des formations aux métiers de la restauration.',
-      'Nous avons accompagné l’association dès ses débuts. J’ai pris en charge le webdesign et la direction technique, avec Nadine RS pour l’identité visuelle et Milena Walter pour les illustrations.',
+      'Nous l’avons accompagnée dès ses débuts, de son langage visuel à son site web. J’ai pris en charge le webdesign et la direction technique, en dialogue avec l’identité de Nadine RS et les illustrations de Milena Walter.',
     ],
     image: saffron, background: '#07453a', foreground: '#ffe019',
     palette: ['#002311', '#ffe019', '#e5194c', '#ff8000', '#ffffff'],
@@ -99,7 +99,7 @@ export const projects: Project[] = [
     summary: 'Dix initiatives écologiques européennes racontées sur un site éco-conçu.',
     description: [
       'Green Shoots documente des initiatives écologiques dans dix pays de l’Union européenne : protection des milieux marins, alimentation, énergie et transports.',
-      'J’ai développé le site avec Max Franklin. Pour limiter sa consommation, nous avons compressé les images, limité les animations et réalisé une version statique, hébergée sur un serveur alimenté en énergie verte.',
+      'Avec Max Franklin, j’ai développé un site dont les choix techniques prolongent le sujet. Images compressées, animations limitées, version statique et hébergement alimenté en énergie verte : la sobriété guide la fabrication comme la consultation.',
     ],
     image: greenShoots, background: '#FFF1DB', foreground: 'hsl(120, 90%, 25%)',
     palette: ['#002800', '#8F911B', '#FF3C00', '#FFF1DB', '#F57953'],
@@ -116,7 +116,7 @@ export const projects: Project[] = [
     summary: 'Un portfolio photographique dont la navigation utilise la 3D.',
     description: [
       'Un portfolio pour explorer les séries du photographe Nicolas Hermann dans une expérience WebGL.',
-      'J’ai développé la navigation en 3D, les transitions et le chargement des médias. Le design est signé Siloé Nouyrit.',
+      'Le développement fait dialoguer navigation, transitions et chargement des médias pour laisser la place aux photographies. Le design est signé Siloé Nouyrit.',
     ],
     image: nicolas, background: '#292d2d', foreground: '#f6f3ef',
     palette: ['#161616', '#f6f3ef', '#343434', '#6b6b6b', '#acacac'],

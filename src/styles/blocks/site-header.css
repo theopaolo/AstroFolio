@@ -113,7 +113,7 @@
   .wordmark { font-size: 1.05rem; }
 
   .site-header nav {
-    --cluster-space: .8rem;
+    --cluster-space: .5rem;
     width: 100%;
     justify-content: space-between;
     font-size: .82rem;

@@ -36,7 +36,7 @@ const { project: p, others } = Astro.props;
     <div class="container">
       <div class="project-story">
         <div class="flow"><h2>Le projet</h2>{p.description.map(paragraph => <p>{paragraph}</p>)}{p.reference && <p><a href={p.reference.url}>{p.reference.title}</a></p>}</div>
-        <aside><h2>En collaboration</h2><dl>{p.credits.map(credit => <><dt>{credit.role}</dt><dd>{credit.name}</dd></>)}</dl></aside>
+        <aside><h2>En collaboration</h2><dl>{p.credits.map(credit => <><dt>{credit.role}</dt><dd>{credit.url ? <a href={credit.url}>{credit.name}</a> : credit.name}</dd></>)}</dl></aside>
       </div>
       <nav class="project-rail" aria-labelledby="rail-title">
         <h2 id="rail-title">Les autres projets</h2>

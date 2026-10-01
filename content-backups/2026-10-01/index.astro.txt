@@ -10,7 +10,7 @@ import Layout from '../layouts/Layout.astro';
 // Color Catchers and GitHub block framing, so their previews use screenshots.
 const sidequests = [
   { title: 'Soft Colors', url: 'https://softcolors.ludique.dev/', label: 'softcolors.ludique.dev', image: 'soft-colors', frame: true,
-    summary: 'Un outil pour composer des dégradés et des textures animées.',
+    summary: 'Une application à côté de Color Catchers pour fabriquer des dégradés, des textures et du mouvement.',
     background: '#6670d8', foreground: '#eef0ff' },
   { title: 'Audiosphere', url: 'https://audiosphere.vercel.app/', label: 'audiosphere.vercel.app', image: 'audiosphere', frame: true,
     summary: 'Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>.',
@@ -28,45 +28,27 @@ const sidequests = [
     summary: 'Mes notes, idées et dérives sur le web.',
     background: '#fbeef6', foreground: '#5c4b75' },
   { title: 'Piloti', url: 'https://github.com/theopaolo/piloti', label: 'Le code sur GitHub', image: 'piloti', frame: false,
-    summary: 'Une base de styles réutilisable pour construire mes interfaces web.',
+    summary: 'Mon framework CSS, basé sur la méthodologie CUBE CSS.',
     background: '#eef5ef', foreground: '#1f6b3a' },
 ];
 const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
 ---
-<Layout title="Théo Goedert | Design et développement web" softHero>
+<Layout title="Théo Goedert | Design, code et transmission" softHero>
   <main id="contenu">
     <section class="hero" aria-labelledby="intro-title">
       <div class="hero-inner container">
       <div class="hero-intro">
-      <h1 id="intro-title"><span class="intro-line">Salut,</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span></h1>
+      <h1 id="intro-title"><span class="intro-line">Salut !</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span></h1>
       <div class="hero-copy">
-        <p class="hero-lead">Développeur et designer, je conçois des sites web et des outils numériques.</p>
+        <p class="hero-lead">Holà, bienvenus ! Ici, je vous présente mes expérimentations et commandes dans un mélange coloré de code, de formes et de grilles.</p>
       </div>
       </div>
       </div>
       <SoftColors />
     </section>
-    <section id="accompagnement" class="practice-section" aria-labelledby="practice-title">
-      <div class="container">
-        <h2 id="practice-title">Design et développement</h2>
-        <div class="practice-grid">
-          <p class="practice-lead">Sites vitrines, boutiques en ligne et expériences interactives.</p>
-          <div class="practice-body flow">
-            <p>La plupart de mes commandes sont réalisées avec Nadine Rotem-Stibbe au sein de <a href="https://shimsham.design/">Shim Sham</a>, notre collectif de direction artistique et de création numérique.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="projets" class="projects-section" aria-labelledby="projects-title">
-      <ProjectTheme />
-      <div class="container">
-      <div class="section-heading"><h2 id="projects-title">Réalisations</h2><p style="color:inherit">En cours : <a href="https://apses.ludique.dev/">refonte du site de l’APSES</a> (préproduction).</p></div>
-      <ul class="project-grid" role="list">{projects.map((project, index) => <Project project={project} index={index} />)}</ul>
-      </div>
-    </section>
     <section id="sidequests" class="elsewhere-section" aria-labelledby="elsewhere-title">
       <div class="container">
-      <div class="section-heading"><h2 id="elsewhere-title">Explorations</h2><p>Des outils maison et des expériences autour de la couleur, du son et de la lecture.</p></div>
+      <div class="section-heading"><h2 id="elsewhere-title">Sidequests</h2><p>J’entretiens plusieurs projets annexes : des outils personnels et des expériences interactives.</p></div>
       <div class="sidequest-table" data-sidequests>
         <ul class="sidequest-hand" role="list">
           {sidequests.map((s, i) => (
@@ -94,6 +76,13 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
           ))}
         </div>
       </div>
+      </div>
+    </section>
+    <section id="projets" class="projects-section" aria-labelledby="projects-title">
+      <ProjectTheme />
+      <div class="container">
+      <div class="section-heading"><h2 id="projects-title">Commandes</h2></div>
+      <ul class="project-grid" role="list">{projects.map((project, index) => <Project project={project} index={index} />)}</ul>
       </div>
     </section>
   </main>
