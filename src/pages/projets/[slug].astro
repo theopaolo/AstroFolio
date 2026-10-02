@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import { projects, type Project } from '../../data/projects';
@@ -11,8 +11,49 @@ export function getStaticPaths() {
 }
 interface Props { project: Project; others: Project[] }
 const { project: p, others } = Astro.props;
+const title = `${p.title} : ${p.category} | Théo Goedert`;
+const description = `${p.summary} ${p.role} : Théo Goedert.`;
+const image = await getImage({ src: p.image, width: 1200, height: 630, fit: 'cover', format: 'jpeg' });
+const imageAlt = p.imageAlt ?? `Aperçu du site ${p.title}`;
+const siteUrl = new URL('/', Astro.site).href;
+const pageUrl = new URL(`/projets/${p.slug}/`, Astro.site).href;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: 'fr',
+      isPartOf: { '@id': `${siteUrl}#website` },
+      mainEntity: { '@id': `${pageUrl}#project` },
+      breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+    },
+    {
+      '@type': 'CreativeWork',
+      '@id': `${pageUrl}#project`,
+      name: p.title,
+      description: p.summary,
+      url: p.url,
+      image: new URL(image.src, Astro.site).href,
+      contributor: { '@type': 'Person', '@id': `${siteUrl}#theo`, name: 'Théo Goedert', url: siteUrl },
+      creditText: p.credits.map(credit => `${credit.role} : ${credit.name}`).join('. '),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: p.title, item: pageUrl },
+      ],
+    },
+  ],
+};
 ---
-<Layout title={`${p.title} | Théo Goedert`} description={p.summary}>
+<Layout title={title} description={description} image={{ src: image.src, width: 1200, height: 630, alt: imageAlt }}>
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <main id="contenu" class="project-page">
     <div class="project-opening" data-project-card={p.slug} style={`--project-bg:${p.background};--project-ink:${p.foreground}`}>
       <header class="project-hero" data-vt="ground">

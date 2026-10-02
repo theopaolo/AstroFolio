@@ -7,6 +7,49 @@ import SoftColors from '../components/SoftColors.astro';
 import { projects } from '../data/projects';
 import Layout from '../layouts/Layout.astro';
 
+const title = 'Développeur web et designer à Lyon | Théo Goedert';
+const siteUrl = new URL('/', Astro.site).href;
+const personId = `${siteUrl}#theo`;
+const websiteId = `${siteUrl}#website`;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: 'Théo Goedert',
+      url: siteUrl,
+      jobTitle: ['Développeur web', 'Designer'],
+      homeLocation: { '@type': 'City', name: 'Lyon' },
+      email: 'theo@ludique.dev',
+      sameAs: [
+        'https://github.com/theopaolo',
+        'https://bsky.app/profile/ludique.dev',
+        'https://www.are.na/theo-paolo/channels',
+        'https://www.instagram.com/theogoedert/',
+      ],
+      memberOf: { '@type': 'Organization', name: 'Shim Sham', url: 'https://shimsham.design/' },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: siteUrl,
+      name: 'Théo Goedert',
+      inLanguage: 'fr',
+      author: { '@id': personId },
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${siteUrl}#webpage`,
+      url: siteUrl,
+      name: title,
+      inLanguage: 'fr',
+      isPartOf: { '@id': websiteId },
+      mainEntity: { '@id': personId },
+    },
+  ],
+};
+
 // Color Catchers and GitHub block framing, so their previews use screenshots.
 const sidequests = [
   { title: 'Soft Colors', url: 'https://softcolors.ludique.dev/', label: 'softcolors.ludique.dev', image: 'soft-colors', frame: true,
@@ -33,14 +76,15 @@ const sidequests = [
 ];
 const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
 ---
-<Layout title="Théo Goedert | Design et développement web" softHero>
+<Layout title={title} softHero>
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <main id="contenu">
     <section class="hero" aria-labelledby="intro-title">
       <div class="hero-inner container">
       <div class="hero-intro">
-      <h1 id="intro-title"><span class="intro-line">Salut,</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span></h1>
+      <h1 id="intro-title"><span class="intro-line">Salut,</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span><span class="hero-lead">Développeur web et designer indépendant à Lyon</span></h1>
       <div class="hero-copy">
-        <p class="hero-lead">Développeur et designer, je conçois des sites web et des outils numériques.</p>
+        <p class="hero-lead">Je conçois des sites web et des outils numériques, à Lyon et à distance.</p>
       </div>
       </div>
       </div>

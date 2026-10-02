@@ -16,6 +16,7 @@ Vérifier puis prévisualiser la version de production :
 ```sh
 npm run check
 npm run build
+python3 scripts/check_seo.py
 npm run preview
 ```
 
@@ -33,3 +34,5 @@ Le contenu et les liens restent accessibles sans JavaScript. Le script client aj
 `npm run build` génère le site dans `dist/`.
 
 Le `Dockerfile` construit le site puis le sert avec nginx sur le port 8080. Dans Coolify, sélectionner le Dockerfile à la racine et exposer le port 8080. Le mode site statique de Coolify peut aussi publier directement `dist/`.
+
+Après publication, déclarer `https://www.theogoedert.com/sitemap.xml` dans Google Search Console et inspecter l’accueil ainsi qu’une page projet. Vérifier les redirections HTTPS et du domaine sans `www` vers `www` dans Coolify. Le contrôle SEO local utilise Python 3, sans dépendance, et vérifie le HTML généré dans `dist/`.
