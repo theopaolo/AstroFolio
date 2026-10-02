@@ -10,7 +10,7 @@ Le bas de l’introduction ne contient que les commandes Soft Colors et pause, s
 
 L’animation utilise uniquement le mode vagues du shader d’origine, sans ajouter Three.js au portfolio. Le rendu est limité à 30 images par seconde et 1,3 million de pixels. Il s’arrête hors écran, dans un onglet masqué et en pause. La préférence de réduction des mouvements affiche une image fixe que l’utilisateur peut animer volontairement. Un dégradé CSS reste visible sans JavaScript ou sans WebGL.
 
-Le portfolio présente six réalisations en cartes colorées, sur trois colonnes sur ordinateur, deux sur tablette et une sur téléphone. Les informations de rôle et d’année sont visibles avant d’ouvrir les détails. Les crédits restent accessibles sur les pages projet. Chromogram ouvre la sélection et précise que le jeu se consulte sur smartphone.
+Le portfolio présente huit réalisations en cartes colorées, sur trois colonnes sur ordinateur, deux sur tablette et une sur téléphone. Les informations de rôle et d’année sont visibles avant d’ouvrir les détails. Les crédits restent accessibles sur les pages projet. Chromogram ouvre la sélection et précise que le jeu se consulte sur smartphone.
 
 L’introduction reprend le rythme du prototype React : le titre commence à 100 ms, le sous-titre à 220 ms et le paragraphe à 340 ms. Chaque groupe remonte de 20 px et devient net en 600 ms. À 940 ms, la navigation descend et les commandes du fond remontent, ensemble sur 500 ms. La réduction des mouvements affiche tout immédiatement. Le contenu est visible par défaut et la navigation reste accessible dès que la page défile. Les cartes ouvrent un aperçu natif avec fermeture clavier et restitution du focus. Leur lien mène à une vraie page si JavaScript est désactivé.
 

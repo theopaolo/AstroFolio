@@ -2,6 +2,7 @@ import type { ImageMetadata } from 'astro';
 import chromogram from '../images/chromogram.jpg';
 import greenShoots from '../images/green-shoots.png';
 import labomobile from '../images/labomobile.png';
+import malBajja from '../images/malbajja.webp';
 import nicolas from '../images/nicolasherman.png';
 import saffron from '../images/saffronkitchenproject.png';
 import sera from '../images/sera-studio.webp';
@@ -39,6 +40,27 @@ export const projects: Project[] = [
       { name: 'Stéphane Kouchian', role: 'Conception, design et programmation' },
       { name: 'Sandrine Nugue / CNAP', role: 'Typographie Infini' },
       { name: 'MRAC Occitanie, Sérignan', role: 'Musée' },
+    ],
+  },
+  {
+    slug: 'mal-bajja', title: 'Mal-Bajja', year: '2025',
+    category: 'Archive participative', role: 'Carte interactive',
+    summary: 'Une archive en ligne qui cartographie les récits et les souvenirs de Birżebbuġa, à Malte.',
+    description: [
+      'Mal-Bajja rassemble l’histoire de Birżebbuġa, une ville du sud-est de Malte. Le site réunit des récits oraux, des documents d’archive et des vidéos, accompagne un parcours de promenade à faire en autonomie et invite les habitants à envoyer leurs histoires et leurs photos.',
+      'Sur un projet porté par Samira Damato, Nadine Rotem-Stibbe a conçu le design et réalisé le site sur Webflow. J’ai développé la carte interactive. On y filtre les lieux et les archives, et chaque point ouvre son récit, avec vidéos et textes, en anglais ou en maltais.',
+    ],
+    image: malBajja, imageAlt: 'La carte de Mal-Bajja, avec les lieux et les archives de Birżebbuġa',
+    background: '#97abd1', foreground: '#1c3d52',
+    palette: ['#97abd1', '#1c3d52', '#ffea97', '#f6f6f6', '#ced0ce'],
+    url: 'https://www.mal-bajja.com/home-en',
+    reference: { title: 'Le projet sur le site de Nadine Rotem-Stibbe', url: 'https://nadiners.com/project/malbajja.html' },
+    credits: [
+      { name: 'Samira Damato', role: 'Concept et direction' },
+      { name: 'Nadine Rotem-Stibbe', role: 'Design et développement Webflow' },
+      { name: 'Théo Goedert', role: 'Carte interactive' },
+      { name: 'Benjamin Zammit', role: 'Vidéo et montage' },
+      { name: 'Yasmin Kuymizakis', role: 'Musique et son' },
     ],
   },
   {
@@ -98,7 +120,7 @@ export const projects: Project[] = [
     category: 'Récits et écoconception', role: 'Développement web',
     summary: 'Dix initiatives écologiques européennes racontées sur un site éco-conçu.',
     description: [
-      'Green Shoots documente des initiatives écologiques dans dix pays de l’Union européenne : protection des milieux marins, alimentation, énergie et transports.',
+      'Green Shoots documente des initiatives écologiques dans dix pays de l’Union européenne : protection des milieux marins, alimentation, énergie et transports.',
       'J’ai développé le site avec Max Franklin. Pour limiter sa consommation, nous avons compressé les images, limité les animations et réalisé une version statique, hébergée sur un serveur alimenté en énergie verte.',
     ],
     image: greenShoots, background: '#FFF1DB', foreground: 'hsl(120, 90%, 25%)',

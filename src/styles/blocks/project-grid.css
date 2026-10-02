@@ -79,6 +79,9 @@
 .project-plate[data-plate="6"] {
   --plate-column: 1 / span 8;
 }
+.project-plate[data-plate="7"] {
+  --plate-column: 6 / span 7;
+}
 .project-plate[data-scale="l"] {
   --title-size: clamp(1.9rem, 2.9vw, 2.5rem);
   --note-size: 0.95rem;
@@ -246,7 +249,7 @@
   }
 
   .project-grid
-    .project-plate:is([data-plate="0"], [data-plate="3"], [data-plate="6"]) {
+    .project-plate:is([data-plate="0"], [data-plate="3"], [data-plate="6"], [data-plate="7"]) {
     --title-size: clamp(1.7rem, 3.4vw, 2.2rem);
     --plate-ratio: 1.75;
     --plate-column: 1 / span 6;

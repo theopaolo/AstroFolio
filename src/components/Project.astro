@@ -13,6 +13,7 @@ const plates = [
   { scale: 's', field: '30vw', fold: '45vw' },
   { scale: 'l', field: '53vw', fold: '45vw' },
   { scale: 'l', field: '61vw', fold: '92vw' },
+  { scale: 'l', field: '53vw', fold: '92vw' },
 ] as const;
 const plate = index % plates.length;
 const { scale, field, fold } = plates[plate];

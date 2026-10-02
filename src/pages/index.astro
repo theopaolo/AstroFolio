@@ -63,12 +63,12 @@ const sidequests = [
   { title: 'Soft Colors', url: 'https://softcolors.ludique.dev/', label: 'softcolors.ludique.dev', image: 'soft-colors', frame: true,
     summary: 'Un outil pour composer des dégradés et des textures animées.',
     background: '#6670d8', foreground: '#eef0ff' },
+  { title: 'Carnet de dev', url: 'https://carnet.ludique.dev/', label: 'carnet.ludique.dev', image: 'carnet', frame: true,
+    summary: 'Mes cours et fiches de développement web : Docker, UX, SEO, documentation, agentic coding.',
+    background: '#181c26', foreground: '#d9c9f2' },
   { title: 'Audiosphere', url: 'https://audiosphere.vercel.app/', label: 'audiosphere.vercel.app', image: 'audiosphere', frame: true,
     summary: 'Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>.',
     background: '#182838', foreground: '#c9e6ea' },
-  { title: 'Sound01', url: 'https://sound01.netlify.app/', label: 'sound01.netlify.app', image: 'sound01', frame: true,
-    summary: 'Une pièce sonore générative à écouter dans le navigateur, inspirée de Ryoji Ikeda.',
-    background: '#0c0c0c', foreground: '#e9c46a' },
   { title: 'Color Catchers', url: 'https://app.colorcatchers.co/', label: 'app.colorcatchers.co', image: 'color-catchers', frame: false,
     summary: 'Un outil pour extraire des palettes de couleurs du monde réel et contribuer à une archive collective.',
     background: '#262626', foreground: '#f4a259' },
@@ -78,11 +78,14 @@ const sidequests = [
   { title: 'Le jardin numérique', url: 'https://jardin.ludique.dev/', label: 'jardin.ludique.dev', image: 'jardin', frame: true,
     summary: 'Mes notes, idées et dérives sur le web.',
     background: '#fbeef6', foreground: '#5c4b75' },
+  { title: 'Besace', url: 'https://besace.ludique.dev/', label: 'besace.ludique.dev', image: 'besace', frame: true,
+    summary: 'Mes signets rangés par thème : design web, sobriété numérique, web ludique.',
+    background: '#2a2b2f', foreground: '#c6dcaf' },
   { title: 'Piloti', url: 'https://github.com/theopaolo/piloti', label: 'Le code sur GitHub', image: 'piloti', frame: false,
     summary: 'Une base de styles réutilisable pour construire mes interfaces web.',
     background: '#eef5ef', foreground: '#1f6b3a' },
 ];
-const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
+const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8, 2.2];
 ---
 <Layout title={title} softHero>
   <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
@@ -106,7 +109,7 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
           <div class="practice-body flow">
             <p>J’accompagne des associations, des structures culturelles, des artistes et des PME, à Lyon comme à distance. La plupart de ces projets se construisent au sein de <a href="https://shimsham.design/">Shim Sham</a>, mon collectif de direction artistique et de création numérique, qui réunit les compétences de plusieurs collaborateurs selon les besoins.</p>
             <p>Je contribue doucement à <a href="https://joinmobilizon.org/">Mobilizon</a>, une alternative libre à Facebook pour organiser des événements et animer des groupes.</p>
-            <p>Enfin, j’aime transmettre ce métier : j’interviens dans des écoles, à l’université et en centre de formation.</p>
+            <p>Enfin, j’aime <a href="https://carnet.ludique.dev/">transmettre ce métier</a> : j’interviens dans des écoles, à l’université et en centre de formation.</p>
           </div>
         </div>
       </div>
@@ -137,7 +140,7 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
     </section>
     <section id="sidequests" class="elsewhere-section" aria-labelledby="elsewhere-title">
       <div class="container">
-      <div class="section-heading"><h2 id="elsewhere-title">Explorations</h2><p>Des outils maison et des expériences autour de la couleur, du son et de la lecture.</p></div>
+      <div class="section-heading"><h2 id="elsewhere-title">Explorations</h2><p>Des outils maison et des expériences autour de la couleur, du son, de la lecture et de l’enseignement.</p></div>
       <div class="sidequest-table" data-sidequests>
         <ul class="sidequest-hand" role="list">
           {sidequests.map((s, i) => (
