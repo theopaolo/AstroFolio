@@ -170,7 +170,7 @@
 
 /* Keep card captions available to assistive technology beside the visual stage. */
 @media (min-width: 951px) and (hover: hover) and (pointer: fine) {
-  .sidequest-link :is(p, span) {
+  .sidequest-hand .sidequest-link :is(p, span) {
     position: absolute;
     width: 1px;
     height: 1px;

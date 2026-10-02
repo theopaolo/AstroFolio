@@ -79,7 +79,6 @@
 .project-plate[data-plate="6"] {
   --plate-column: 1 / span 8;
 }
-
 .project-plate[data-scale="l"] {
   --title-size: clamp(1.9rem, 2.9vw, 2.5rem);
   --note-size: 0.95rem;

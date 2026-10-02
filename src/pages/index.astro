@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from '../components/Icon.astro';
 import NamePortrait from '../components/NamePortrait.astro';
 import Project from '../components/Project.astro';
@@ -6,6 +7,7 @@ import ProjectTheme from '../components/ProjectTheme.astro';
 import SoftColors from '../components/SoftColors.astro';
 import { projects } from '../data/projects';
 import Layout from '../layouts/Layout.astro';
+import apses from '../images/apses.png';
 
 const title = 'Développeur web et designer à Lyon | Théo Goedert';
 const siteUrl = new URL('/', Astro.site).href;
@@ -50,6 +52,12 @@ const schema = {
   ],
 };
 
+const ongoing = [
+  { title: 'APSES', url: 'https://apses.ludique.dev/', image: apses, status: 'En préproduction', tilt: 1.6,
+    summary: 'Refonte du site de l’Association des professeurs de sciences économiques et sociales.',
+    background: '#e8e5fa', foreground: '#3b2a8f' },
+];
+
 // Color Catchers and GitHub block framing, so their previews use screenshots.
 const sidequests = [
   { title: 'Soft Colors', url: 'https://softcolors.ludique.dev/', label: 'softcolors.ludique.dev', image: 'soft-colors', frame: true,
@@ -82,9 +90,9 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
     <section class="hero" aria-labelledby="intro-title">
       <div class="hero-inner container">
       <div class="hero-intro">
-      <h1 id="intro-title"><span class="intro-line">Salut,</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span><span class="hero-lead">Développeur web et designer indépendant à Lyon</span></h1>
+      <h1 id="intro-title"><span class="intro-line">Salut,</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span></h1>
       <div class="hero-copy">
-        <p class="hero-lead">Je conçois des sites web et des outils numériques, à Lyon et à distance.</p>
+        <p class="hero-lead">Designer et développeur web à Lyon, je crée des sites, des outils et des expériences interactives.</p>
       </div>
       </div>
       </div>
@@ -92,11 +100,13 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
     </section>
     <section id="accompagnement" class="practice-section" aria-labelledby="practice-title">
       <div class="container">
-        <h2 id="practice-title">Design et développement</h2>
+        <h2 id="practice-title">Design et développement web</h2>
         <div class="practice-grid">
-          <p class="practice-lead">Sites vitrines, boutiques en ligne et expériences interactives.</p>
+          <p class="practice-lead">Je conçois des sites internet rapides et simples d’utilisation. L’apparence et l’expérience comptent tout autant que la qualité et la robustesse du code.</p>
           <div class="practice-body flow">
-            <p>La plupart de mes commandes sont réalisées avec Nadine Rotem-Stibbe au sein de <a href="https://shimsham.design/">Shim Sham</a>, notre collectif de direction artistique et de création numérique.</p>
+            <p>J’accompagne des associations, des structures culturelles, des artistes et des PME, à Lyon comme à distance. La plupart de ces projets se construisent au sein de <a href="https://shimsham.design/">Shim Sham</a>, mon collectif de direction artistique et de création numérique, qui réunit les compétences de plusieurs collaborateurs selon les besoins.</p>
+            <p>Je contribue doucement à <a href="https://joinmobilizon.org/">Mobilizon</a>, une alternative libre à Facebook pour organiser des événements et animer des groupes.</p>
+            <p>Enfin, j’aime transmettre ce métier : j’interviens dans des écoles, à l’université et en centre de formation.</p>
           </div>
         </div>
       </div>
@@ -104,8 +114,25 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8];
     <section id="projets" class="projects-section" aria-labelledby="projects-title">
       <ProjectTheme />
       <div class="container">
-      <div class="section-heading"><h2 id="projects-title">Réalisations</h2><p style="color:inherit">En cours : <a href="https://apses.ludique.dev/">refonte du site de l’APSES</a> (préproduction).</p></div>
+      <div class="section-heading"><h2 id="projects-title">Réalisations</h2></div>
       <ul class="project-grid" role="list">{projects.map((project, index) => <Project project={project} index={index} />)}</ul>
+      </div>
+    </section>
+    <section id="en-cours" class="ongoing-section" aria-labelledby="ongoing-title">
+      <div class="container">
+      <div class="section-heading"><h2 id="ongoing-title">Sur le feu</h2><p>Des commandes en cours, déjà consultables en préproduction.</p></div>
+      <ul class="ongoing-list" role="list">
+        {ongoing.map(o => (
+          <li class="sidequest-card" style={`--card-bg:${o.background};--card-ink:${o.foreground};--card-tilt:${o.tilt}deg`}>
+            <a class="sidequest-link" href={o.url}>
+              <Image class="sidequest-preview" src={o.image} alt="" widths={[320, 640]} sizes="(max-width: 650px) 6rem, 20rem" format="webp" loading="lazy" />
+              <div class="cluster" data-justify="between"><h3>{o.title}</h3><Icon /></div>
+              <p>{o.summary}</p>
+              <span>{o.status}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
       </div>
     </section>
     <section id="sidequests" class="elsewhere-section" aria-labelledby="elsewhere-title">
