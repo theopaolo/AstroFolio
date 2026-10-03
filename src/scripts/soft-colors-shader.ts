@@ -19,7 +19,8 @@ uniform float frequency;
 uniform float intensity;
 uniform float orbitRadius;
 uniform float grainAmount;
-vec3 linearToSrgb(vec3 c) {
+uniform float displayP3;
+vec3 linearToEncodedRgb(vec3 c) {
     c = max(c, 0.0);
     return mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c));
 }
@@ -39,7 +40,7 @@ vec3 oklabToLinear(vec3 lab) {
 }
 
     vec3 fromBlend(vec3 lab) {
-    return linearToSrgb(oklabToLinear(lab));
+    return linearToEncodedRgb(oklabToLinear(lab));
 }
 
 float hash21(vec2 p) {
@@ -108,11 +109,23 @@ vec3 sampleWaves(vec2 uv, float t) {
 
 
 void main() {
+  vec3 lab = sampleWaves(vUv, time);
+  lab.yz *= mix(1.0, 1.18, displayP3);
+  vec3 linear = oklabToLinear(lab);
+  if (displayP3 > 0.5) {
+    // Convert linear sRGB to linear Display P3 before clipping.
+    linear = vec3(
+      dot(linear, vec3(0.822461969, 0.177538031, 0.0)),
+      dot(linear, vec3(0.033194199, 0.966805801, 0.0)),
+      dot(linear, vec3(0.017082631, 0.072397441, 0.910519929))
+    );
+  }
   // Preserve text contrast over dark waves.
-  vec3 linear = clamp(oklabToLinear(sampleWaves(vUv, time)), 0.0, 1.0);
-  float luminance = dot(linear, vec3(0.2126, 0.7152, 0.0722));
+  linear = clamp(linear, 0.0, 1.0);
+  vec3 weights = mix(vec3(0.2126, 0.7152, 0.0722), vec3(0.228974565, 0.691738522, 0.079286914), displayP3);
+  float luminance = dot(linear, weights);
   float lift = clamp((0.265 - luminance) / max(1.0 - luminance, 0.0001), 0.0, 1.0);
-  vec3 color = linearToSrgb(mix(linear, vec3(1.0), lift));
+  vec3 color = linearToEncodedRgb(mix(linear, vec3(1.0), lift));
   float staticGrain = hash21(vUv * resolution * 0.5) * 2.0 - 1.0;
   float movingGrain = hash21(vUv * resolution * 0.5 + fract(time) * 91.7) * 2.0 - 1.0;
   color += mix(staticGrain, movingGrain, 0.6) * grainAmount;

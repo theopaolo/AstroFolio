@@ -28,6 +28,7 @@ function mountSoftColors(stage: HTMLElement) {
   const palette = [...stage.querySelectorAll<HTMLInputElement>('input[name="soft-palette"]')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const pointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const wideGamut = matchMedia('(color-gamut: p3)');
   const abort = new AbortController();
   const { signal } = abort;
   let gl: WebGLRenderingContext | null;
@@ -87,6 +88,10 @@ function mountSoftColors(stage: HTMLElement) {
   }
 
   function syncUniforms() {
+    if ('drawingBufferColorSpace' in gpu) {
+      try { gpu.drawingBufferColorSpace = wideGamut.matches ? 'display-p3' : 'srgb'; } catch {}
+    }
+    gpu.uniform1f(locations.displayP3, gpu.drawingBufferColorSpace === 'display-p3' ? 1 : 0);
     const checked = palette.find(input => input.checked) ?? palette[0];
     const colors = checked.dataset.colors!.split(' ');
     gpu.uniform3fv(locations.waveColors, new Float32Array([...colors, colors[0]].flatMap(oklab)));
@@ -141,7 +146,7 @@ function mountSoftColors(stage: HTMLElement) {
       const position = gpu.getAttribLocation(program, 'position');
       gpu.enableVertexAttribArray(position);
       gpu.vertexAttribPointer(position, 2, gpu.FLOAT, false, 0, 0);
-      locations = Object.fromEntries(['time', 'resolution', 'mouse', 'mouseInfluence', 'waveColors', 'frequency', 'intensity', 'orbitRadius', 'grainAmount'].map(name => [name, gpu.getUniformLocation(program!, name)]));
+      locations = Object.fromEntries(['time', 'resolution', 'mouse', 'mouseInfluence', 'waveColors', 'frequency', 'intensity', 'orbitRadius', 'grainAmount', 'displayP3'].map(name => [name, gpu.getUniformLocation(program!, name)]));
       ready = true;
       canvas.hidden = false;
       controls.hidden = false;
@@ -177,6 +182,7 @@ function mountSoftColors(stage: HTMLElement) {
 
   pause.addEventListener('click', () => { paused = !paused; syncPause(); }, { signal });
   palette.forEach(input => input.addEventListener('change', syncUniforms, { signal }));
+  wideGamut.addEventListener('change', syncUniforms, { signal });
 
   hero.addEventListener('pointermove', event => {
     if (paused || reduced.matches || !pointer.matches || event.pointerType !== 'mouse' || controls.contains(event.target as Node)) return;

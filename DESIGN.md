@@ -2,6 +2,8 @@
 
 Le jardin constitue la référence visuelle. Fond rose clair #fff7fb, texte violet #5c4b75, accent rose #ff66c4, Fragment Sans. Le thème sombre reprend les couleurs du jardin. Toutes les fontes restent sans empattements.
 
+Sur les écrans Display P3, la chroma de l’accent rose, des fonds de projets et des bandes de palette augmente de 12 %. Celle des vagues, de leur dégradé de secours et des sélecteurs de palette augmente de 18 %. Les teintes et la luminosité OKLCH restent identiques. Le shader convertit ses couleurs vers Display P3 avant de limiter les canaux et conserve son seuil de luminance pour le texte. Le rendu sRGB reste la base lorsque l’écran ou le navigateur ne prend pas en charge ces couleurs.
+
 L’introduction utilise le rendu de Soft Colors en pleine largeur. Le nom, la navigation et les textes sont en indigo sur les vagues bleues et leur grain. Les réglages initiaux sont : vitesse 1, dérive 0,7, fréquence 0,7 et intensité 0,85. La luminosité des zones les plus sombres est limitée pour conserver un contraste lisible. Le reste du site retrouve les couleurs du jardin.
 
 Le bouton Soft Colors se trouve en bas à droite de l’introduction. Son panneau est fermé par défaut et propose trois palettes, les quatre réglages de mouvement, le grain et une réinitialisation. Une commande de pause reste accessible à côté du bouton. Les réglages de l’outil complet restent sur softcolors.ludique.dev. Le panneau respecte les limites de la fenêtre et se ferme par Échap, au clic extérieur ou au défilement.

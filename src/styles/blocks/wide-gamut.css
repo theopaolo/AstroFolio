@@ -1,0 +1,42 @@
+@supports (color: oklch(from red l calc(c * 1.12) h)) {
+  @media (color-gamut: p3) {
+    :root {
+      --accent: light-dark(
+        oklch(from #ff66c4 l calc(c * 1.12) h),
+        oklch(from #ffa8d4 l calc(c * 1.12) h)
+      );
+      --wave-paint:
+        radial-gradient(ellipse at 40% 40%, oklch(from #b2bdec l calc(c * 1.18) h), transparent 65%),
+        radial-gradient(ellipse at 100% 80%, oklch(from #7883d9 l calc(c * 1.18) h), transparent 60%),
+        oklch(from #8d99e4 l calc(c * 1.18) h);
+    }
+
+    .plate-ground,
+    .project-hero,
+    .rail-ground {
+      background: oklch(from var(--project-bg) l calc(c * 1.12) h);
+    }
+
+    .plate-bar span,
+    .project-strip span,
+    .rail-bar span {
+      background: oklch(from var(--patch) l calc(c * 1.12) h);
+    }
+
+    .projects-section::before {
+      background: linear-gradient(
+        to bottom in oklab,
+        oklch(from var(--section-ground) l calc(c * 1.12) h),
+        color-mix(in oklab,
+          oklch(from var(--section-ground) l calc(c * 1.12) h),
+          oklch(from var(--section-shade) l calc(c * 1.12) h) 14%)
+      ) fixed;
+    }
+
+    .soft-swatch::before {
+      background: linear-gradient(145deg,
+        oklch(from var(--c1) l calc(c * 1.18) h),
+        oklch(from var(--c3) l calc(c * 1.18) h));
+    }
+  }
+}
