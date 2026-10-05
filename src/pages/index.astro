@@ -6,8 +6,8 @@ import Project from '../components/Project.astro';
 import ProjectTheme from '../components/ProjectTheme.astro';
 import SoftColors from '../components/SoftColors.astro';
 import { projects } from '../data/projects';
-import Layout from '../layouts/Layout.astro';
 import apses from '../images/apses.png';
+import Layout from '../layouts/Layout.astro';
 
 const title = 'Développeur web et designer à Lyon | Théo Goedert';
 const siteUrl = new URL('/', Astro.site).href;
@@ -105,11 +105,11 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8, 2.2];
       <div class="container">
         <h2 id="practice-title">Design et développement web</h2>
         <div class="practice-grid">
-          <p class="practice-lead">Je conçois des sites internet rapides et simples d’utilisation. L’apparence et l’expérience comptent tout autant que la qualité et la robustesse du code.</p>
+          <p class="practice-lead">Je conçois des projets numérique, sites, plateformes, applications. L’apparence et l’expérience comptent autant que la qualité et performance de l'architecture logiciel.</p>
           <div class="practice-body flow">
-            <p>J’accompagne des associations, des structures culturelles, des artistes et des PME, à Lyon comme à distance. La plupart de ces projets se construisent au sein de <a href="https://shimsham.design/">Shim Sham</a>, mon collectif de direction artistique et de création numérique, qui réunit les compétences de plusieurs collaborateurs selon les besoins.</p>
-            <p>Je contribue doucement à <a href="https://joinmobilizon.org/">Mobilizon</a>, une alternative libre à Facebook pour organiser des événements et animer des groupes.</p>
-            <p>Enfin, j’aime <a href="https://carnet.ludique.dev/">transmettre ce métier</a> : j’interviens dans des écoles, à l’université et en centre de formation.</p>
+            <p>J’accompagne des associations, des structures culturelles, des artistes et des PME, à Lyon comme à distance. La plupart de mes projets se construisent au sein de <a href="https://shimsham.design/" target="_blank">ShimSham</a>, mon collectif de direction artistique et de création numérique, qui réunit les compétences de plusieurs collaborateur·i·es selon les besoins du projet.</p>
+            <p>Je contribue doucement à <a href="https://mobilizon.org/" target="_blank">Mobilizon</a>, une alternative libre à Facebook pour organiser des événements et animer des groupes.</p>
+            <p>Enfin, j’aime <a href="https://carnet.ludique.dev/" target="_blank">transmettre ce métier</a> : j’interviens dans des écoles, à l’université et en centre de formation.</p>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8, 2.2];
     </section>
     <section id="en-cours" class="ongoing-section" aria-labelledby="ongoing-title">
       <div class="container">
-      <div class="section-heading"><h2 id="ongoing-title">Sur le feu</h2><p>Des commandes en cours, déjà consultables en préproduction.</p></div>
+      <div class="section-heading"><h2 id="ongoing-title">Dans le four</h2><p>Des commandes en cours consultables en pré-production.</p></div>
       <ul class="ongoing-list" role="list">
         {ongoing.map(o => (
           <li class="sidequest-card" style={`--card-bg:${o.background};--card-ink:${o.foreground};--card-tilt:${o.tilt}deg`}>
@@ -140,7 +140,7 @@ const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8, 2.2];
     </section>
     <section id="sidequests" class="elsewhere-section" aria-labelledby="elsewhere-title">
       <div class="container">
-      <div class="section-heading"><h2 id="elsewhere-title">Explorations</h2><p>Des outils maison et des expériences autour de la couleur, du son, de la lecture et de l’enseignement.</p></div>
+      <div class="section-heading"><h2 id="elsewhere-title">Explorations</h2><p>Des outils et des expériences autour de la couleur, du son, de la lecture et de l’enseignement.</p></div>
       <div class="sidequest-table" data-sidequests>
         <ul class="sidequest-hand" role="list">
           {sidequests.map((s, i) => (
