@@ -34,7 +34,9 @@
   gap: .6rem;
 }
 
-.footer-contact h2 { font-size: 1.15rem; }
+.footer-contact h2 {
+  font-size: 1.15rem;
+}
 
 /* One step under the hero title. Wraps anywhere rather than leave the plate on
    a phone too narrow for it. */
@@ -52,18 +54,25 @@
   --cluster-space: 1rem 2rem;
   padding-top: 1rem;
   color: var(--muted);
-  border-top: 1px solid var(--line);
 }
 
 /* The links sit closer together than the three groups of the row. */
-.footer-meta .cluster { --cluster-space: 1.25rem; }
+.footer-meta .cluster {
+  --cluster-space: 1.25rem;
+}
 
-.footer-meta a { text-decoration: none; }
+.footer-meta a {
+  text-decoration: none;
+}
 
 @media (max-width: 650px) {
-  .site-footer { min-height: 0; }
+  .site-footer {
+    min-height: 0;
+  }
 
-  .footer-inner { gap: 3rem; }
+  .footer-inner {
+    gap: 3rem;
+  }
 
   .footer-meta {
     flex-direction: column;
@@ -72,7 +81,11 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .footer-email:hover { text-decoration-color: currentColor; }
+  .footer-email:hover {
+    text-decoration-color: currentColor;
+  }
 
-  .footer-meta a:hover { color: var(--ink); }
+  .footer-meta a:hover {
+    color: var(--ink);
+  }
 }
