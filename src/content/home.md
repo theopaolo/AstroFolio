@@ -53,7 +53,7 @@ sidequests:
       summary: "Mes notes, idées et dérives sur le web."
       background: "#fbeef6"
       foreground: "#5c4b75"
-      - title: Carnet de dev
+    - title: Carnet de dev
       url: https://carnet.ludique.dev/
       image: /images/side-projects/carnet.webp
       summary: "Mes cours en ligne"
