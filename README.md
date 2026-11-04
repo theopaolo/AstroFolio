@@ -23,7 +23,7 @@ npm run preview
 ## Contenu
 
 - `src/data/projects.ts` contient les projets, descriptions, crédits et liens.
-- `src/pages/index.astro` contient l’introduction, la biographie, les projets personnels et le contact.
+- `src/content/home.md` contient les textes de l’accueil : introduction, biographie, commandes en cours et projets personnels. `src/content.config.ts` valide ses champs au build.
 - `src/images/` et `public/images/side-projects/` contiennent les visuels.
 - `PRODUCT.md` et `DESIGN.md` décrivent le produit et sa direction visuelle.
 

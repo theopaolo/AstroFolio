@@ -26,10 +26,10 @@ const { scale, field, fold } = plates[plate];
         <Image src={p.image} alt={p.imageAlt ?? `Aperçu du site ${p.title}`} widths={[420, 640, 900, 1250, 1680]} sizes={`(max-width: 650px) 92vw, (max-width: 950px) ${fold}, ${field}`} format="webp" loading={index < 3 ? 'eager' : 'lazy'} data-vt="print" />
       </div>
       <figcaption>
-        <div class="plate-note" data-vt="note">
+        <p class="plate-note" data-vt="note">
           <span>{p.category}</span>
           {p.year && <span class="plate-year">{p.year}</span>}
-        </div>
+        </p>
         <div class="plate-bar" data-vt="bar" aria-hidden="true">
           {p.palette.slice(1).map((colour, i) => <span style={`--patch:${colour};--patch-index:${i}`}></span>)}
         </div>

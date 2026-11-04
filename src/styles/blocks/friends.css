@@ -1,0 +1,18 @@
+/* Friends' sites, a plain list after the explorations. */
+
+.friends-section { padding-block: 1rem clamp(3rem, 6vw, 5rem); }
+
+.friends-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: .5rem 2rem;
+}
+
+.friends-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 .6rem;
+}
+
+.friends-list span { color: var(--muted); }

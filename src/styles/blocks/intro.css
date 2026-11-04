@@ -11,11 +11,11 @@
   }
 
   .hero h1,
-  .hero-copy > p {
+  .hero-lead {
     animation: intro-enter var(--intro-duration) var(--intro-delay) var(--intro-ease) backwards;
   }
 
-  .hero-copy > .hero-lead {
+  .hero .hero-lead {
     animation-delay: calc(var(--intro-delay) + var(--intro-stagger));
   }
 
@@ -43,7 +43,7 @@
 
   /* Skip delayed animation after anchor navigation or restored scroll. */
   :is(body[data-intro-skip], body:has(.skip-link:focus))
-    :is(.wordmark, .site-header nav > *, .hero h1, .hero-copy > p, .soft-controls > *) {
+    :is(.wordmark, .site-header nav > *, .hero h1, .hero-lead, .soft-controls > *) {
     animation: none;
   }
 }

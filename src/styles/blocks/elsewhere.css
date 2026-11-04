@@ -55,21 +55,19 @@
   object-fit: cover;
 }
 
-.sidequest-link .cluster {
-  --cluster-space: .5rem;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-}
-
 .sidequest-link h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .5rem;
   font-size: clamp(1.1rem, 1.4vw, 1.3rem);
   line-height: 1.15;
 }
 
 .sidequest-link svg {
   flex: none;
-  width: .9em;
-  height: .9em;
+  width: .8em;
+  height: .8em;
   transform: translate(calc(var(--picked) * .16em), calc(var(--picked) * -.16em));
 }
 

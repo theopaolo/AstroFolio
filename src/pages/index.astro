@@ -1,15 +1,19 @@
 ---
 import { Image } from 'astro:assets';
+import { getEntry, render } from 'astro:content';
 import Icon from '../components/Icon.astro';
 import NamePortrait from '../components/NamePortrait.astro';
 import Project from '../components/Project.astro';
 import ProjectTheme from '../components/ProjectTheme.astro';
 import SoftColors from '../components/SoftColors.astro';
 import { projects } from '../data/projects';
-import apses from '../images/apses.png';
 import Layout from '../layouts/Layout.astro';
 
-const title = 'Développeur web et designer à Lyon | Théo Goedert';
+const home = await getEntry('home', 'home');
+if (!home) throw new Error('src/content/home.md is missing');
+const { Content: Practice } = await render(home);
+const { title, lead, practice, projects: projectsCopy, ongoing, sidequests, friends } = home.data;
+
 const siteUrl = new URL('/', Astro.site).href;
 const personId = `${siteUrl}#theo`;
 const websiteId = `${siteUrl}#website`;
@@ -52,122 +56,90 @@ const schema = {
   ],
 };
 
-const ongoing = [
-  { title: 'APSES', url: 'https://apses.ludique.dev/', image: apses, status: 'En préproduction', tilt: 1.6,
-    summary: 'Refonte du site de l’Association des professeurs de sciences économiques et sociales.',
-    background: '#e8e5fa', foreground: '#3b2a8f' },
-];
-
-// Color Catchers and GitHub block framing, so their previews use screenshots.
-const sidequests = [
-  { title: 'Soft Colors', url: 'https://softcolors.ludique.dev/', label: 'softcolors.ludique.dev', image: 'soft-colors', frame: true,
-    summary: 'Un outil pour composer des dégradés et des textures animées.',
-    background: '#6670d8', foreground: '#eef0ff' },
-  { title: 'Carnet de dev', url: 'https://carnet.ludique.dev/', label: 'carnet.ludique.dev', image: 'carnet', frame: true,
-    summary: 'Mes cours et fiches de développement web : Docker, UX, SEO, documentation, agentic coding.',
-    background: '#181c26', foreground: '#d9c9f2' },
-  { title: 'Audiosphere', url: 'https://audiosphere.vercel.app/', label: 'audiosphere.vercel.app', image: 'audiosphere', frame: true,
-    summary: 'Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>.',
-    background: '#182838', foreground: '#c9e6ea' },
-  { title: 'Color Catchers', url: 'https://app.colorcatchers.co/', label: 'app.colorcatchers.co', image: 'color-catchers', frame: false,
-    summary: 'Un outil pour extraire des palettes de couleurs du monde réel et contribuer à une archive collective.',
-    background: '#262626', foreground: '#f4a259' },
-  { title: 'Promis Sans Fautes', url: 'https://promissansfautes.fr/', label: 'promissansfautes.fr', image: 'promis-sans-fautes', frame: true,
-    summary: 'Un éditeur et correcteur de texte pensé pour les personnes dyslexiques et dysorthographiques.',
-    background: '#e3ebf1', foreground: '#1e2b38' },
-  { title: 'Le jardin numérique', url: 'https://jardin.ludique.dev/', label: 'jardin.ludique.dev', image: 'jardin', frame: true,
-    summary: 'Mes notes, idées et dérives sur le web.',
-    background: '#fbeef6', foreground: '#5c4b75' },
-  { title: 'Besace', url: 'https://besace.ludique.dev/', label: 'besace.ludique.dev', image: 'besace', frame: true,
-    summary: 'Mes signets rangés par thème : design web, sobriété numérique, web ludique.',
-    background: '#2a2b2f', foreground: '#c6dcaf' },
-  { title: 'Piloti', url: 'https://github.com/theopaolo/piloti', label: 'Le code sur GitHub', image: 'piloti', frame: false,
-    summary: 'Une base de styles réutilisable pour construire mes interfaces web.',
-    background: '#eef5ef', foreground: '#1f6b3a' },
-];
 const tilts = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4, -2.8, 2.2];
+const tilt = (i: number) => tilts[i % tilts.length];
 ---
 <Layout title={title} softHero>
   <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <main id="contenu">
     <section class="hero" aria-labelledby="intro-title">
       <div class="hero-inner container">
-      <div class="hero-intro">
-      <h1 id="intro-title"><span class="intro-line">Salut,</span><span class="intro-line">moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></span></h1>
-      <div class="hero-copy">
-        <p class="hero-lead">Designer et développeur web à Lyon, je crée des sites, des outils et des expériences interactives.</p>
-      </div>
-      </div>
+        <h1 id="intro-title">Salut,<br />moi c’est <NamePortrait name="Théo" id="portrait-intro" /><span class="hero-dot">.</span></h1>
+        <p class="hero-lead">{lead}</p>
       </div>
       <SoftColors />
     </section>
     <section id="accompagnement" class="practice-section" aria-labelledby="practice-title">
       <div class="container">
-        <h2 id="practice-title">Design et développement web</h2>
+        <h2 id="practice-title">{practice.title}</h2>
         <div class="practice-grid">
-          <p class="practice-lead">Je conçois des projets numérique, sites, plateformes, applications. L’apparence et l’expérience comptent autant que l'architecture logiciel.</p>
-          <div class="practice-body flow">
-            <p>J’accompagne des associations, des structures culturelles, des artistes et des PME, à Lyon comme à distance. La plupart de mes projets se construisent au sein de <a href="https://shimsham.design/" target="_blank">ShimSham</a>, mon collectif de direction artistique et de création numérique, qui réunit les compétences de plusieurs collaborateur·i·es.</p>
-            <p>Je contribue doucement à l'UX/UI de <a href="https://mobilizon.org/" target="_blank">Mobilizon</a>, une plateforme libre pour organiser des événements et animer des groupes.</p>
-            <p>Enfin, j’aime transmettre et enseigner mes pratiques dans des écoles, à l’université et en centre de formation.</p>
-          </div>
+          <p class="practice-lead">{practice.lead}</p>
+          <div class="practice-body flow"><Practice /></div>
         </div>
       </div>
     </section>
     <section id="projets" class="projects-section" aria-labelledby="projects-title">
       <ProjectTheme />
       <div class="container">
-      <div class="section-heading"><h2 id="projects-title">Réalisations</h2></div>
-      <ul class="project-grid" role="list">{projects.map((project, index) => <Project project={project} index={index} />)}</ul>
+        <header class="section-heading"><h2 id="projects-title">{projectsCopy.title}</h2></header>
+        <ul class="project-grid" role="list">{projects.map((project, index) => <Project project={project} index={index} />)}</ul>
       </div>
     </section>
     <section id="en-cours" class="ongoing-section" aria-labelledby="ongoing-title">
       <div class="container">
-      <div class="section-heading"><h2 id="ongoing-title">Dans le four</h2><p>Des commandes en cours consultables en pré-production.</p></div>
-      <ul class="ongoing-list" role="list">
-        {ongoing.map(o => (
-          <li class="sidequest-card" style={`--card-bg:${o.background};--card-ink:${o.foreground};--card-tilt:${o.tilt}deg`}>
-            <a class="sidequest-link" href={o.url}>
-              <Image class="sidequest-preview" src={o.image} alt="" widths={[320, 640]} sizes="(max-width: 650px) 6rem, 20rem" format="webp" loading="lazy" />
-              <div class="cluster" data-justify="between"><h3>{o.title}</h3><Icon /></div>
-              <p>{o.summary}</p>
-              <span>{o.status}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-      </div>
-    </section>
-    <section id="sidequests" class="elsewhere-section" aria-labelledby="elsewhere-title">
-      <div class="container">
-      <div class="section-heading"><h2 id="elsewhere-title">Explorations</h2><p>Des outils et des expériences autour de la couleur, du son, de la lecture et de l’enseignement.</p></div>
-      <div class="sidequest-table" data-sidequests>
-        <ul class="sidequest-hand" role="list">
-          {sidequests.map((s, i) => (
-            <li class="sidequest-card" style={`--card-bg:${s.background};--card-ink:${s.foreground};--card-tilt:${tilts[i]}deg`}>
-              <a class="sidequest-link" href={s.url} data-sidequest>
-                <img class="sidequest-preview" src={`/images/side-projects/${s.image}.webp`} width="640" height="400" alt="" loading="lazy" decoding="async" />
-                <div class="cluster" data-justify="between"><h3>{s.title}</h3><Icon /></div>
-                <p set:html={s.summary} />
-                <span>{s.label}</span>
+        <header class="section-heading"><h2 id="ongoing-title">{ongoing.title}</h2><p>{ongoing.intro}</p></header>
+        <ul class="ongoing-list" role="list">
+          {ongoing.items.map((o, i) => (
+            <li class="sidequest-card" style={`--card-bg:${o.background};--card-ink:${o.foreground};--card-tilt:${-tilt(i)}deg`}>
+              <a class="sidequest-link" href={o.url}>
+                <Image class="sidequest-preview" src={o.image} alt="" widths={[320, 640]} sizes="(max-width: 650px) 6rem, 20rem" format="webp" loading="lazy" />
+                <h3>{o.title}<Icon /></h3>
+                <p>{o.summary}</p>
+                <span>{o.status}</span>
               </a>
             </li>
           ))}
         </ul>
-        {/* The cards remain the links; the mirrored stage is presentational. */}
-        <div class="sidequest-stage" inert>
-          {sidequests.map((s, i) => (
-            <figure class="stage-figure" data-live={i === 0 ? '' : undefined}>
-              <div class="stage-window">
-                {s.frame
-                  ? <iframe data-src={s.url} title={s.title} sandbox="allow-scripts allow-same-origin"></iframe>
-                  : <img src={`/images/side-projects/${s.image}.webp`} width="640" height="400" alt="" loading="lazy" decoding="async" />}
-              </div>
-              <figcaption><span set:html={s.summary} /><span class="stage-domain">{s.label}</span></figcaption>
-            </figure>
-          ))}
+      </div>
+    </section>
+    <section id="sidequests" class="elsewhere-section" aria-labelledby="elsewhere-title">
+      <div class="container">
+        <header class="section-heading"><h2 id="elsewhere-title">{sidequests.title}</h2><p>{sidequests.intro}</p></header>
+        <div class="sidequest-table" data-sidequests>
+          <ul class="sidequest-hand" role="list">
+            {sidequests.items.map((s, i) => (
+              <li class="sidequest-card" style={`--card-bg:${s.background};--card-ink:${s.foreground};--card-tilt:${tilt(i)}deg`}>
+                <a class="sidequest-link" href={s.url} data-sidequest>
+                  <img class="sidequest-preview" src={s.image} width="640" height="400" alt="" loading="lazy" decoding="async" />
+                  <h3>{s.title}<Icon /></h3>
+                  <p set:html={s.summary} />
+                  <span>{s.label ?? new URL(s.url).host}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          {/* The cards remain the links; the mirrored stage is presentational. */}
+          <div class="sidequest-stage" inert>
+            {sidequests.items.map((s, i) => (
+              <figure class="stage-figure" data-live={i === 0 ? '' : undefined}>
+                <div class="stage-window">
+                  {s.embed
+                    ? <iframe data-src={s.url} title={s.title} sandbox="allow-scripts allow-same-origin"></iframe>
+                    : <img src={s.image} width="640" height="400" alt="" loading="lazy" decoding="async" />}
+                </div>
+                <figcaption><span set:html={s.summary} /><span class="stage-domain">{s.label ?? new URL(s.url).host}</span></figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
+    </section>
+    <section id="voisinage" class="friends-section" aria-labelledby="friends-title">
+      <div class="container">
+        <header class="section-heading"><h2 id="friends-title">{friends.title}</h2><p>{friends.intro}</p></header>
+        <ul class="friends-list" role="list">
+          {friends.items.map(f => <li><a href={f.url}>{f.name}</a> <span>{new URL(f.url).host.replace(/^www\./, '')}</span></li>)}
+        </ul>
       </div>
     </section>
   </main>
