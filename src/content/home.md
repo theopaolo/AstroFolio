@@ -26,26 +26,8 @@ ongoing:
 # embed: false shows the image in the preview, for sites that block iframes.
 sidequests:
   title: Explorations
-  intro: "Des outils et des expériences autour de la couleur, du son, de la lecture et de l’enseignement."
+  intro: "Des outils et expérimentations diverses couleur, son et transmission."
   items:
-    - title: Soft Colors
-      url: https://softcolors.ludique.dev/
-      image: /images/side-projects/soft-colors.webp
-      summary: "Un outil pour composer des dégradés et des textures animées."
-      background: "#6670d8"
-      foreground: "#eef0ff"
-    - title: Carnet de dev
-      url: https://carnet.ludique.dev/
-      image: /images/side-projects/carnet.webp
-      summary: "Mes cours et fiches de développement web : Docker, UX, SEO, documentation, agentic coding."
-      background: "#181c26"
-      foreground: "#d9c9f2"
-    - title: Audiosphere
-      url: https://audiosphere.vercel.app/
-      image: /images/side-projects/audiosphere.webp
-      summary: "Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>."
-      background: "#182838"
-      foreground: "#c9e6ea"
     - title: Color Catchers
       url: https://app.colorcatchers.co/
       image: /images/side-projects/color-catchers.webp
@@ -59,18 +41,30 @@ sidequests:
       summary: "Un éditeur et correcteur de texte pensé pour les personnes dyslexiques et dysorthographiques."
       background: "#e3ebf1"
       foreground: "#1e2b38"
+    - title: Soft colors
+      url: https://softcolors.ludique.dev/
+      image: /images/side-projects/soft-colors.webp
+      summary: "Un outil pour composer des dégradés et des textures animées."
+      background: "#6670d8"
+      foreground: "#eef0ff"
     - title: Le jardin numérique
       url: https://jardin.ludique.dev/
       image: /images/side-projects/jardin.webp
       summary: "Mes notes, idées et dérives sur le web."
       background: "#fbeef6"
       foreground: "#5c4b75"
-    - title: Besace
-      url: https://besace.ludique.dev/
-      image: /images/side-projects/besace.webp
-      summary: "Mes signets rangés par thème : design web, sobriété numérique, web ludique."
-      background: "#2a2b2f"
-      foreground: "#c6dcaf"
+      - title: Carnet de dev
+      url: https://carnet.ludique.dev/
+      image: /images/side-projects/carnet.webp
+      summary: "Mes cours en ligne"
+      background: "#181c26"
+      foreground: "#d9c9f2"
+    - title: Audiosphere
+      url: https://audiosphere.vercel.app/
+      image: /images/side-projects/audiosphere.webp
+      summary: "Une sphère en 3D qui réagit au son. Un clic lance l’écoute et anime les particules qui l’entourent. Avec un texte de Jean Baudrillard, <em>Simulacres et simulation</em>."
+      background: "#182838"
+      foreground: "#c9e6ea"
     - title: Piloti
       url: https://github.com/theopaolo/piloti
       label: Le code sur GitHub
@@ -82,7 +76,7 @@ sidequests:
 
 friends:
   title: Ami·es
-  intro: "Voisinage de personnes chouettes"
+  intro: "Mon voisinage de personnes chouettes"
   items:
     - name: Alexis
       url: https://litl.it/
